@@ -1,0 +1,1 @@
+void deldir(char *path);

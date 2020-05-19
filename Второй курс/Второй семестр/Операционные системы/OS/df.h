@@ -1,0 +1,1 @@
+void delfile(char *path);

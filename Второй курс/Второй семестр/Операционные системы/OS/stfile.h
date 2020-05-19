@@ -1,0 +1,1 @@
+void statfile(char *path);

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "applied_mathematics_1"
+name = "applied_mathematics"
 version = "0.1.0"
 description = "Прикладная математика. Практикум. 2 курс первый семестр"
 authors = ["Arthur Hakimov <verybigfolder@yandex.ru>"]

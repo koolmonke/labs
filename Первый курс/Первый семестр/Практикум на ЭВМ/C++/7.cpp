@@ -1,6 +1,8 @@
 #include <cmath>
 #include <iostream>
+
 using namespace std;
+
 int main() {
   int n, m;
   std::cout << "Enter n,m" << '\n';

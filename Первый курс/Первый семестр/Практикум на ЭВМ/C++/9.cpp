@@ -1,5 +1,7 @@
 #include <iostream>
+
 using namespace std;
+
 int to10base(int *str, short int len) {
   int p = 1, n = 0;
   for (int i = len - 1; i >= 0; i--) {
@@ -8,6 +10,7 @@ int to10base(int *str, short int len) {
   }
   return n;
 }
+
 bool is2base(char *str, short int len) {
   for (int i = 0; i != len; i++) {
     if (str[i] != '1')
@@ -16,12 +19,14 @@ bool is2base(char *str, short int len) {
   }
   return 1;
 }
+
 unsigned long int strlen(char *str) {
   unsigned long int i = 0;
   while (str[i] != '\0')
     ++i;
   return i;
 }
+
 int main() {
   char input[256];
   int inputtoi[256] = {};

@@ -1,6 +1,8 @@
 #include <cmath>
 #include <iostream>
+
 using namespace std;
+
 int main() {
   double a;
   cout << "Введите  a ";

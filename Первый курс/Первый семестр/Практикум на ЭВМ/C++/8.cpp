@@ -29,8 +29,8 @@ int main() {
         printslice(input, start, end);
         cout << " ";
       }
-      cout << "start=" << start << " end=" << end << " size=" <<
-      end-start+1 << " isk=" << isk <<'\n';
+      cout << "start=" << start << " end=" << end << " size=" << end - start + 1
+           << " isk=" << isk << '\n';
       start = i + 1;
       isk = 0;
     }

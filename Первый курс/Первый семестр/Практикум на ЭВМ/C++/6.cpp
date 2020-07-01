@@ -1,5 +1,7 @@
 #include <iostream>
+
 using namespace std;
+
 int main() {
   cout << "Введите порядок матрицы" << '\n';
   int n;

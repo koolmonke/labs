@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+
 using namespace std;
 
 void findandreplace(int *array, int size) {
@@ -11,13 +12,14 @@ void findandreplace(int *array, int size) {
     array[i] = min;
   }
 }
+
 int main() {
   int n;
   cout << "Введите размерность массива" << '\n';
   cin >> n;
   int a[n];
   for (int i = 0; i < n; i++) {
-    std::cout << "Введите " << i + 1 << " элемент массива ";
+    cout << "Введите " << i + 1 << " элемент массива ";
     cin >> a[i];
   }
   findandreplace(a, n);

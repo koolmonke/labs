@@ -1,6 +1,8 @@
 #include <cmath>
 #include <iostream>
+
 using namespace std;
+
 int main() {
   float a, b, c, x_begin, x_end, x_step;
   cout << "Введите a,  b,  c,  X_нач,  X_кон,  dX" << '\n';

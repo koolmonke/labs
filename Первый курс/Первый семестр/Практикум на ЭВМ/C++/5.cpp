@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+
 int main() {
   double s = 1;
   float i = 0.1;

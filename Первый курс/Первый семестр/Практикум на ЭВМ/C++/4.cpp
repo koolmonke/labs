@@ -1,6 +1,8 @@
 #include <cmath>
 #include <iostream>
+
 using namespace std;
+
 int main() {
   int n = 0;
   long double x, eps = 0.000001, arth = 1, res = 1;

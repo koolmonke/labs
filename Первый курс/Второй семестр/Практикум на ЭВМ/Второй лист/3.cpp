@@ -12,6 +12,7 @@ bool lessthan30inlist(list<float> *first) {
   }
   return 0;
 }
+
 list<float> *Deletelessthan30(list<float> *first) {
   if (!first)
     return first;
@@ -36,6 +37,7 @@ list<float> *Deletelessthan30(list<float> *first) {
       return first;
   }
 }
+
 int main(int argc, char const *argv[]) {
   list<float> *listed = 0;
   float buf;

@@ -4,6 +4,7 @@
 #include <cstring>
 #include <ctime>
 #include <iostream>
+
 unsigned int cstring2uint(const char *string) {
   size_t out = 0;
   size_t base10 = 1;
@@ -13,6 +14,7 @@ unsigned int cstring2uint(const char *string) {
   }
   return out;
 }
+
 int main(int argc, char const *argv[]) {
   if (argc != 2) {
     std::cout << "Usage: " << argv[0] << " <unsigned int>" << '\n';

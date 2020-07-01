@@ -1,6 +1,8 @@
 #include "parsetree.hpp"
 #include <iostream>
+
 using namespace std;
+
 int main(int argc, const char *argv[]) {
   Expr *expr = NULL;
   if (argc > 1) {

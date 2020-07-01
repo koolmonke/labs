@@ -1,10 +1,13 @@
 #include <cmath>
 #include <iostream>
+
 using namespace std;
+
 struct point {
   float x;
   float y;
 };
+
 class Triangle {
 private:
   point point1;
@@ -19,6 +22,7 @@ public:
     point2 = j;
     point3 = k;
   }
+
   void move(float byx = 0.0, float byy = 0.0) {
     point1.x += byx;
     point1.y += byy;
@@ -27,6 +31,7 @@ public:
     point3.x += byx;
     point3.y += byy;
   }
+
   void resize(float times) {
     point1.x *= times;
     point1.y *= times;
@@ -35,6 +40,7 @@ public:
     point3.x *= times;
     point3.y *= times;
   }
+
   void movebyangle(int deg) {
     long double rad = (deg * M_PI) / 180;
     point1.x = point1.x * cos(rad) - point1.y * sin(rad);
@@ -44,6 +50,7 @@ public:
     point3.x = point3.x * cos(rad) - point3.y * sin(rad);
     point3.y = point3.x * sin(rad) + point3.y * cos(rad);
   }
+
   void print() {
     std::cout << '(' << point1.x << ',' << point1.y << ')' << '\n';
     std::cout << '(' << point2.x << ',' << point2.y << ')' << '\n';

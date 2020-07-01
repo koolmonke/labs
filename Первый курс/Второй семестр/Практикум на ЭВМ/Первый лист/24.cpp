@@ -10,9 +10,11 @@ std::ostream &operator<<(std::ostream &os, const utf16_t &t) {
   os << t.a << t.b;
   return os;
 }
+
 bool operator==(const utf16_t &l, const utf16_t &r) {
   return (l.a == r.a) && (l.b == r.b);
 }
+
 bool operator!=(const utf16_t &l, const utf16_t &r) {
   return !operator==(l, r);
 }

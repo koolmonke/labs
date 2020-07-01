@@ -1,9 +1,12 @@
 #include <iostream>
+
 using namespace std;
+
 struct list {
   int data;
   list *next;
 };
+
 list *AddFirst(list *first, int in) {
   if (!first) {
     first = new list;
@@ -33,6 +36,7 @@ list *AddLast(list *first, int in) {
     return first;
   }
 }
+
 list *CreateList() {
   int in;
   list *first = 0;
@@ -43,6 +47,7 @@ list *CreateList() {
   } while (in);
   return first;
 }
+
 list *DeleteByNumber(list *first, int numb) {
   list *previous;
   list *current = first;
@@ -65,6 +70,7 @@ list *DeleteByNumber(list *first, int numb) {
   } else
     return first;
 }
+
 void DeleteList(list *first) {
   if (first -> next) {
     list *current = first->next;
@@ -76,6 +82,7 @@ void DeleteList(list *first) {
     }
   }
 }
+
 void PrintList(list *first) {
   list *current = first;
   while (current) {
@@ -84,6 +91,7 @@ void PrintList(list *first) {
   }
   cout << endl;
 }
+
 void Placestodelete(list *listed) {
   list *current = listed;
   int len = 1, todelete = 0;

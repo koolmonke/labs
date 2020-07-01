@@ -1,15 +1,18 @@
 #include <cstring>
 #include <iostream>
+
 struct MARSH {
   char begin[256];
   char end[256];
   int bus;
 };
+
 void printstuct(MARSH t) {
   std::cout << "название начального пункта " << t.begin << '\n';
   std::cout << "название конечного пунка " << t.end << '\n';
   std::cout << "номер маршута " << t.bus << '\n';
 }
+
 int main() {
   const int lenmarshes = 8;
   MARSH marshes[lenmarshes];

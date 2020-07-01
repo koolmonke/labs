@@ -17,6 +17,7 @@ std::ostream &operator<<(std::ostream &os, const table &t) {
     }
   return os;
 }
+
 int checkme() {
   const char exit = 'E';
   const char printlist = 'O';
@@ -42,6 +43,7 @@ int checkme() {
       return 4;
   }
 }
+
 bool findbypage(list<table> *current, int page) {
   bool exist = 0;
   bool localexist;
@@ -59,6 +61,7 @@ bool findbypage(list<table> *current, int page) {
   }
   return exist;
 }
+
 bool findbyword(list<table> *current, const char word[256]) {
   bool exist = 0;
   while (current->next) {
@@ -70,6 +73,7 @@ bool findbyword(list<table> *current, const char word[256]) {
   }
   return exist;
 }
+
 bool checkq() {
   cout << "(y/n)" << '\n';
   while (true) {
@@ -79,6 +83,7 @@ bool checkq() {
       return ans == 'y';
   }
 }
+
 int main() {
   size_t len = 1;
   table buf;

@@ -4,6 +4,7 @@ template <typename T> struct list {
   T data;
   list(T a_data, list *a_next = 0) : next(a_next), data(a_data) {}
 };
+
 template <typename T> list<T> *AddFirst(list<T> *first, T in) {
   if (!first) {
     first = new list<T>(in);
@@ -15,6 +16,7 @@ template <typename T> list<T> *AddFirst(list<T> *first, T in) {
   }
   return first;
 }
+
 template <typename T> list<T> *AddLast(list<T> *first, T in) {
   list<T> *Add = new list<T>(in);
   if (!first)
@@ -27,6 +29,7 @@ template <typename T> list<T> *AddLast(list<T> *first, T in) {
     return first;
   }
 }
+
 template <typename T> list<T> *InsertByNumber(list<T> *first, T in, int numb) {
   list<T> *current = first;
   int i = 0;
@@ -46,6 +49,7 @@ template <typename T> list<T> *InsertByNumber(list<T> *first, T in, int numb) {
   }
   return first;
 }
+
 template <typename T> list<T> *DeleteByValue(list<T> *first, T search) {
   if (!first)
     return first;
@@ -70,6 +74,7 @@ template <typename T> list<T> *DeleteByValue(list<T> *first, T search) {
       return first;
   }
 }
+
 template <typename T> list<T> *DeleteByNumber(list<T> *first, int numb) {
   if (!first)
     return first;
@@ -96,6 +101,7 @@ template <typename T> list<T> *DeleteByNumber(list<T> *first, int numb) {
       return first;
   }
 }
+
 template <typename T>
 void PrintList(list<T> *first, const char sep = ' ', const char end = '\n') {
   if (!first)
@@ -108,6 +114,7 @@ void PrintList(list<T> *first, const char sep = ' ', const char end = '\n') {
   std::cout << end;
   std::cout << std::flush;
 }
+
 template <typename T> bool InList(list<T> *first, T in) {
   if (!first)
     return 0;
@@ -119,7 +126,9 @@ template <typename T> bool InList(list<T> *first, T in) {
   }
   return 0;
 }
+
 template <typename T> bool isEmply(list<T> *first) { return !first; }
+
 template <typename T> void DeleteList(list<T> *first) {
   if (first) {
     list<T> *current = first->next;
@@ -131,6 +140,7 @@ template <typename T> void DeleteList(list<T> *first) {
     }
   }
 }
+
 template <typename T> void Sorted(list<T> *first) {
   list<T> *current = first;
   while (current && current->next) {

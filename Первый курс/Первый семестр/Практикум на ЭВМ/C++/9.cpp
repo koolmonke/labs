@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int to10base(int *str, short int len) {
+int to10base(const int *str, int len) {
   int p = 1, n = 0;
   for (int i = len - 1; i >= 0; i--) {
     n += p * str[i];
@@ -11,17 +11,16 @@ int to10base(int *str, short int len) {
   return n;
 }
 
-bool is2base(char *str, short int len) {
+bool is2base(const char *str, int len) {
   for (int i = 0; i != len; i++) {
-    if (str[i] != '1')
-      if (str[i] != '0')
-        return 0;
+    if (str[i] != '1' && str[i] != '0')
+      return false;
   }
-  return 1;
+  return true;
 }
 
-unsigned long int strlen(char *str) {
-  unsigned long int i = 0;
+size_t strlen(const char *str) {
+  size_t i = 0;
   while (str[i] != '\0')
     ++i;
   return i;

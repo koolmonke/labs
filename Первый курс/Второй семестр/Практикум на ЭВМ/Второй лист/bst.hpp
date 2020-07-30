@@ -40,13 +40,13 @@ class BST {
   }
 
   int mintreeDepth(node *t) {
-    if ((t->right == NULL)&&(t->left == NULL))
+    if ((t->right == NULL) && (t->left == NULL))
       return 0;
     if (t->left == NULL)
-      return mintreeDepth(t->right)+1;
+      return mintreeDepth(t->right) + 1;
     else if (t->right == NULL)
-      return mintreeDepth(t->left)+1;
-    return std::min(mintreeDepth(t->left), mintreeDepth(t->right))+1;
+      return mintreeDepth(t->left) + 1;
+    return std::min(mintreeDepth(t->left), mintreeDepth(t->right)) + 1;
   }
   void PrintTree(node *t, int space) {
     if (t) {
@@ -57,7 +57,6 @@ class BST {
       PrintTree(t->right, space + 5);
     }
   }
-
 
   node *findMin(node *t) {
     if (t == NULL)
@@ -88,7 +87,7 @@ class BST {
       rootval = rightval;
     return rootval;
   }
-  
+
   node *remove(int x, node *t) {
     node *temp;
     if (t == NULL)
@@ -120,7 +119,6 @@ class BST {
     std::cout << t->data << " ";
     inorder(t->right);
   }
-
 
   node *find(node *t, int x) {
     if (t == NULL)

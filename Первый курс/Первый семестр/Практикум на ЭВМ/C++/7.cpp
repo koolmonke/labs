@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-  int n, m;
+  size_t n, m;
   std::cout << "Enter n,m" << '\n';
   cin >> n >> m;
   int a[n][m];

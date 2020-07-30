@@ -72,7 +72,7 @@ list *DeleteByNumber(list *first, int numb) {
 }
 
 void DeleteList(list *first) {
-  if (first -> next) {
+  if (first->next) {
     list *current = first->next;
     while (current->next) {
       delete first;

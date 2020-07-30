@@ -31,7 +31,7 @@ int main(int argc, char const *argv[]) {
   FILE *inputfile = fopen("file_A", "r");
   unsigned int t = 0;
   for (int status = 0; status != -1; status = fscanf(inputfile, "%u", &t)) {
-    if ((t % 8 == 1)&&(std::pow((int)std::sqrt(t), 2) == t))
+    if ((t % 8 == 1) && (std::pow((int)std::sqrt(t), 2) == t))
       count++;
   }
   std::cout << '\n';

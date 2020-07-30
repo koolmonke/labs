@@ -1,6 +1,6 @@
+#include "linkedlist.h"
 #include <cstring>
 #include <iostream>
-#include "linkedlist.h"
 using namespace std;
 
 struct table {
@@ -12,9 +12,9 @@ struct table {
 std::ostream &operator<<(std::ostream &os, const table &t) {
   os << "Слово " << t.word << '\n';
   os << "Страницы ";
-    for (size_t i = 0; i < t.amountofpages; i++) {
-      os << t.pages[i] << ' ';
-    }
+  for (size_t i = 0; i < t.amountofpages; i++) {
+    os << t.pages[i] << ' ';
+  }
   return os;
 }
 
@@ -79,14 +79,14 @@ bool checkq() {
   while (true) {
     char ans;
     cin >> ans;
-    if ((ans == 'y') || (ans == 'y'))
-      return ans == 'y';
+    if (ans == 'y')
+      return true;
   }
 }
 
 int main() {
   size_t len = 1;
-  table buf;
+  table buf = table{};
   list<table> *current = 0;
   list<table> *listed = new list<table>(buf);
   bool emplylist = 1;

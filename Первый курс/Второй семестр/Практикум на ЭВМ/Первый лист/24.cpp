@@ -1,6 +1,6 @@
+#include "linkedlist.h"
 #include <cstdio>
 #include <iostream>
-#include "linkedlist.h"
 struct utf16_t {
   unsigned char a;
   unsigned char b;

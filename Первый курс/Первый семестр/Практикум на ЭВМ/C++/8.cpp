@@ -6,7 +6,7 @@ size_t strlen(const char *str) {
     ++i;
   return i;
 }
-void printslice(char *str, size_t start, size_t end) {
+void printslice(const char *str, size_t start, size_t end) {
   for (size_t i = start; i <= end; i++) {
     cout << str[i];
   }

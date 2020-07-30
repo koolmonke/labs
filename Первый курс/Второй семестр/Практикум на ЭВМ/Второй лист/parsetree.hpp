@@ -22,8 +22,8 @@ void parse_error(const char *string) {
 
 void print(Expr *expr) {
   if (expr) {
-      print(expr->expr[0]);
-    if (expr -> op != 'd')
+    print(expr->expr[0]);
+    if (expr->op != 'd')
       std::cout << expr->op << '\n';
     if (expr->expr[1])
       print(expr->expr[1]);

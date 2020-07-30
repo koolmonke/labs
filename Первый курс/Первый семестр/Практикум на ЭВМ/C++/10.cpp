@@ -9,7 +9,7 @@ size_t strlen(const char *str) {
   return i;
 }
 
-char *str_ukaz(char *a, char *b) {
+const char *str_ukaz(const char *a, const char *b) {
   for (size_t i = strlen(a) - 1; i > 0; i--)
     for (size_t j = strlen(b) - 1; j > 0; j--)
       if (a[i] == b[j])

@@ -1,6 +1,8 @@
 from typing import NamedTuple
 
-Point = NamedTuple('Point', [('x', float), ('y', float)])
+class Point(NamedTuple):
+    x: float
+    y: float
 
 
 def f(p: Point, r: float) -> bool:

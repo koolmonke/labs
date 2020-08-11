@@ -1,4 +1,4 @@
-from lab_solutions.lab_2.task_1 import f
+from applied_mathematics.lab_2.task_1 import f
 
 
 def main():

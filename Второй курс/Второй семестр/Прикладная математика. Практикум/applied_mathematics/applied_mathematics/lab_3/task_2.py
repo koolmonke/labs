@@ -3,9 +3,11 @@ from random import randint
 from applied_mathematics.lab_2.task_2 import Point
 from applied_mathematics.lab_2.task_2 import f as target
 
+from typing import Optional
 
-def main():
-    r = float(input('R='))
+def main(r: Optional[float] = None):
+    if r is None:
+        r = float(input('R='))
     shoots = [Point(randint(-5, 5), randint(-5, 5)) for _ in range(10)]
     for index, item in enumerate(shoots):
         print(f'Выстрел №{index} в {item}')

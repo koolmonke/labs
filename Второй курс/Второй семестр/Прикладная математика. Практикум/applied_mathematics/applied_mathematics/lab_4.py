@@ -1,6 +1,6 @@
 from math import nan
 from random import randint
-from typing import List
+from typing import List, Optional
 
 
 def count_grt0(some_list: List[int]) -> int:
@@ -19,8 +19,9 @@ def transform(some_list: List[int]) -> List[int]:
     return [i for i in some_list if i < 1] + [i for i in some_list if i >= 1]
 
 
-def main():
-    n = int(input('n='))
+def main(n: Optional[int] = None):
+    if n is None:
+        n = int(input('n='))
     random_values = [randint(-5, 5) for _ in range(n)]
 
     print(f'Список случайных чисел длинной {n=}: {random_values}')

@@ -3,8 +3,9 @@ from typing import Optional, Tuple
 import numpy as np
 
 
-def main():
-    n = int(input('Размерность квадратной матрицы = '))
+def main(n: Optional[int] = None):
+    if n is None:
+        n = int(input('Размерность квадратной матрицы = '))
     matrix = np.random.randint(0, 100, size=(n, n))
     print(matrix)
     print()

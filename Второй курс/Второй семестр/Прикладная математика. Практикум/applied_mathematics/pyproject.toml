@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "applied_mathematics"
 version = "0.1.0"
-description = "Прикладная математика. Практикум. 2 курс первый семестр"
+description = "Прикладная математика. Практикум. 2 курс, первый семестр 17 Вариант."
 authors = ["Arthur Hakimov <verybigfolder@yandex.ru>"]
 
 [tool.poetry.dependencies]

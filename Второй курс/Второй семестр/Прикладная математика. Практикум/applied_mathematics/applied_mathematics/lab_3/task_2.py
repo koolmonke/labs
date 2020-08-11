@@ -1,6 +1,7 @@
 from random import randint
 
-from applied_mathematics.lab_2.task_2 import f as target, Point
+from applied_mathematics.lab_2.task_2 import Point
+from applied_mathematics.lab_2.task_2 import f as target
 
 
 def main():

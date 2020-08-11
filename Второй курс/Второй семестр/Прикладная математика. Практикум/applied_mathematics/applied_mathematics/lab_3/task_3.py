@@ -1,5 +1,5 @@
-from math import log
 from decimal import Decimal
+from math import log
 from typing import Optional
 
 

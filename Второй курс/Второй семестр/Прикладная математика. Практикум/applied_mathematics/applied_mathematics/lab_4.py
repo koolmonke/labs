@@ -21,15 +21,18 @@ def transform(some_list: Sequence[int]) -> List[int]:
 
 def main(n: Optional[int] = None):
     if n is None:
-        n = int(input('n='))
+        n = int(input("n="))
     random_values = [randint(-5, 5) for _ in range(n)]
 
-    print(f'Список случайных чисел длинной {n=}: {random_values}')
-    print(f'Количество положительных чисел в нем {count_grt0(random_values)}')
-    print(f'Сумма всех элементов после нуля в нем {sum_after_last0(random_values)}')
-    print(f'Трансформированный список со всеми числами у которых целая часть '
-          f'меньше единицы в начале {transform(random_values)}')
+    print(
+        f"Список случайных чисел длинной {n=}: {random_values}",
+        f"Количество положительных чисел в нем {count_grt0(random_values)}",
+        f"Сумма всех элементов после нуля в нем {sum_after_last0(random_values)}",
+        f"Трансформированный список со всеми числами у которых целая часть ",
+        f"меньше единицы в начале {transform(random_values)}",
+        sep="\n",
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

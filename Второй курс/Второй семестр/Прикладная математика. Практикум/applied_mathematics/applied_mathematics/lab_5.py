@@ -5,7 +5,7 @@ import numpy as np
 
 def main(n: Optional[int] = None):
     if n is None:
-        n = int(input('Размерность квадратной матрицы = '))
+        n = int(input("Размерность квадратной матрицы = "))
     matrix = np.random.randint(0, 100, size=(n, n))
     print(matrix)
     print()
@@ -27,8 +27,8 @@ def find_first_eq_by_value(m: np.ndarray, value: int) -> Optional[Tuple[int, int
 def top_max_values_eq_size(m: np.ndarray) -> np.ndarray:
     flat = m.flatten()
     flat.sort()
-    return flat[::-1][:m.shape[0]]
+    return flat[::-1][: m.shape[0]]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

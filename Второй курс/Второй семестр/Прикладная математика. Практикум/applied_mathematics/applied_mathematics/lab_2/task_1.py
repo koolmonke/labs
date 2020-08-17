@@ -5,7 +5,7 @@ def f(x: float) -> float:
     if x <= -3:
         return 1
     elif x <= -1:
-        return -sqrt(-x ** 2 - 2 * x + 3)
+        return -sqrt(-(x ** 2) - 2 * x + 3)
     elif -1 <= x <= 2:
         return -2
     else:
@@ -13,9 +13,9 @@ def f(x: float) -> float:
 
 
 def main():
-    x = float(input('x='))
-    print(f'{f(x)=}')
+    x = float(input("x="))
+    print(f"{f(x)=}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

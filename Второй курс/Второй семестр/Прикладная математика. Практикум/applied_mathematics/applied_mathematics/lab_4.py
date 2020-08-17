@@ -1,13 +1,13 @@
 from math import nan
 from random import randint
-from typing import List, Optional
+from typing import List, Optional, Sequence
 
 
-def count_grt0(some_list: List[int]) -> int:
+def count_grt0(some_list: Sequence[int]) -> int:
     return len([i for i in some_list if i > 0])
 
 
-def sum_after_last0(some_list: List[int]) -> float:
+def sum_after_last0(some_list: Sequence[int]) -> float:
     try:
         last_zero_index = len(some_list) - some_list[::-1].index(0) - 1
         return sum(some_list[last_zero_index:])
@@ -15,7 +15,7 @@ def sum_after_last0(some_list: List[int]) -> float:
         return nan  # В случае если нет 0
 
 
-def transform(some_list: List[int]) -> List[int]:
+def transform(some_list: Sequence[int]) -> List[int]:
     return [i for i in some_list if i < 1] + [i for i in some_list if i >= 1]
 
 

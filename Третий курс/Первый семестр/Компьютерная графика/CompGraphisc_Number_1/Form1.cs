@@ -176,23 +176,6 @@ namespace CompGraphisc_Number_1
             PointF npd12_P2 = SetPoint(pd12_P2, newH, newW);
             PointF npd13_P2 = SetPoint(pd13_P2, newH, newW);
             PointF npd14_P2 = SetPoint(pd14_P2, newH, newW);
-            //A
-            /*e.Graphics.DrawLine(pen,np1_A, np2_A);
-            e.Graphics.DrawLine(pen, np2_A, np3_A);
-            e.Graphics.DrawLine(pen, np3_A, np4_A);
-            e.Graphics.DrawLine(pen, np4_A, np5_A);
-            e.Graphics.DrawLine(pen, np5_A, np6_A);
-            e.Graphics.DrawLine(pen, np6_A, np7_A);
-            e.Graphics.DrawLine(pen, np7_A, np8_A);
-            e.Graphics.DrawLine(pen, np8_A, np1_A);
-
-            //P
-            e.Graphics.DrawLine(pen, np1_A, np2_A);
-            e.Graphics.DrawBezier(pen, np2_P, np3_P, np4_P, np5_P);
-            e.Graphics.DrawLine(pen ,np5_P, np6_P);
-            e.Graphics.DrawLine(pen, np6_P, np7_P);
-            e.Graphics.DrawLine(pen, np7_P, np8_P);
-            e.Graphics.DrawLine(pen, np8_P, np1_P);*/
 
             //A
             path.AddLine(np1_A, np2_A);

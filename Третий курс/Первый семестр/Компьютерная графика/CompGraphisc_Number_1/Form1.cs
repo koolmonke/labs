@@ -16,7 +16,6 @@ namespace CompGraphisc_Number_1
         float sizeH, sizeW;
         float newH = 1, newW = 1;
         private static readonly SolidBrush brush = new SolidBrush(Color.DimGray);
-        Graphics g;
 
         PointF p1_A = new PointF(100, 50);
         PointF p2_A = new PointF(200, 50);
@@ -100,7 +99,6 @@ namespace CompGraphisc_Number_1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            g = this.CreateGraphics();       
             GraphicsPath path = new GraphicsPath();
             GraphicsPath Defpath = new GraphicsPath();
             GraphicsPath Defpath2 = new GraphicsPath();

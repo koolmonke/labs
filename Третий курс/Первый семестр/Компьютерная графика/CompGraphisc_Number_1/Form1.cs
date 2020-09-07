@@ -233,9 +233,6 @@ namespace CompGraphisc_Number_1
             e.Graphics.ExcludeClip(gp);
             e.Graphics.ExcludeClip(gp2);
             e.Graphics.FillPath(brush, path);
-            //g.FillPath(brush, path);
-            //Pen pen = new Pen(Color.Black, 2);
-            //g.FillRectangle(brush, 300, 125, 75, 75);
         } 
     }
 }

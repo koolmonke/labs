@@ -1,9 +1,9 @@
-function Y = task6 (arr)
+п»їfunction Y = task6 (arr)
   negative_indexes = find(arr < 0);
   positive_indexes = find(arr > 0);
-  to_delete = []; % Нужные нам индексы negative_indexes(1) и positive_indexes(end)
+  to_delete = []; % РќСѓР¶РЅС‹Рµ РЅР°Рј РёРЅРґРµРєСЃС‹ negative_indexes(1) Рё positive_indexes(end)
   
-  if !isempty(negative_indexes) % Делаем проверки на то что такие индексы вообще существуют
+  if !isempty(negative_indexes) % Р”РµР»Р°РµРј РїСЂРѕРІРµСЂРєРё РЅР° С‚Рѕ С‡С‚Рѕ С‚Р°РєРёРµ РёРЅРґРµРєСЃС‹ РІРѕРѕР±С‰Рµ СЃСѓС‰РµСЃС‚РІСѓСЋС‚
   to_delete = [negative_indexes(1)];
   end;
   

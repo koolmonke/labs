@@ -1,5 +1,5 @@
 function output = task7_3()
-    func = @(x) ((x.^2) .* (x + 1).^(-2));
+    func = @(x) (exp(-x) .* cos(x));
 
     a = 0;
     b = 2;

@@ -1,5 +1,5 @@
 function count = task3()
-  arr = readmatrix('task3_input.txt'); % Читаем одномерный массив
+  arr = readmatrix('task3_input.csv'); % Читаем одномерный массив
   for i = 1:length(arr)
       fprintf('index %d value %d\n', i, arr(i))
   end

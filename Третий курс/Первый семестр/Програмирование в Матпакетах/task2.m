@@ -17,7 +17,7 @@
         odd_iter = odd_iter + 2;
         even_iter = even_iter + 2;
         if sign
-            S = S + -temp;
+            S = S - temp;
         else
             S = S + temp;
         end

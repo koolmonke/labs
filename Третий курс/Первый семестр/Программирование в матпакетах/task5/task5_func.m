@@ -1,4 +1,4 @@
-function task5()
+function task5_func()
     A = readmatrix('task5_input.csv')
     m = geomean(A)
     file = 'task5_output.csv';

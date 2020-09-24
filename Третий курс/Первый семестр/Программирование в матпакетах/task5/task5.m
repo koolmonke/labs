@@ -1,6 +1,6 @@
 function task5()
-    task5_inner(@geomean,'task5_input.csv', 'task5_output_matlab.csv')
-    task5_inner(@my_geomean, 'task5_input.csv', 'task5_output_iter.csv')
+    task5_inner(@geomean,'task5_input.csv', 'task5_output_func.csv')
+    task5_inner(@my_geomean, 'task5_input.csv', 'task5_output_iterative.csv')
 end
 
 function task5_inner(geomean_func, file_in, file_out)

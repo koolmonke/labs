@@ -1,4 +1,4 @@
 function count = task3()
-  arr = readmatrix('values.txt')
+  arr = readmatrix('task3_input.csv')
   count = sum(arr > 1);
 end

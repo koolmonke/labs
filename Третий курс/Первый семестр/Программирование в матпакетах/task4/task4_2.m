@@ -5,6 +5,6 @@ function task4_2()
     y_less = arrayfun(@(x) lessOrEqual(x), x_less);
     y_greater = arrayfun(@(x) greater(x), x_greater);
 
-    plot(x_less, y_less, x_greater, y_greater);
+    plot(x_less, y_less, 'r', x_greater, y_greater, 'r');
 
 end

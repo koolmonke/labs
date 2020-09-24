@@ -17,5 +17,5 @@ function task4_1()
 
     end
 
-    plot(x_result_lessorequal, y_result_lessorequal, x_result_greater, y_result_greater);
+    plot(x_result_lessorequal, y_result_lessorequal, 'r', x_result_greater, y_result_greater, 'r');
 end

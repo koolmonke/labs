@@ -12,6 +12,7 @@ function task5_func()
     for i=1:length(A)
         A(i,i)=m(i);
     end
+    
     fid = fopen(file, 'at');
     fprintf(fid, '\nПРЕОБРАЗОВАННАЯ МАТРИЦА\n');
     fclose(fid);

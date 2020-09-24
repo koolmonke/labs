@@ -18,4 +18,5 @@ function task4_1()
     end
 
     plot(x_result_lessorequal, y_result_lessorequal, 'r', x_result_greater, y_result_greater, 'r');
+    legend('y = 2*ln(1+x^2), x <= -1', 'y = (1+cos(x)^2)^(3/5), x > 0');
 end

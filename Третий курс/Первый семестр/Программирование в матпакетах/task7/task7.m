@@ -1,23 +1,23 @@
 function output = task7()
-    disp('Symbolic integral');
+    disp('Символьный иниеграл');
 
     first = task7_1();
 
-    disp('Integral:');
+    disp('Интеграл:');
     first(1)
 
-    disp('Is derivative same as start function?:');
+    disp('Равны ли производная и изначальная функция?:');
     disp(first(2));
 
     second = task7_2();
     third = task7_3()
 
-    disp('Integrals from second and third:');
+    disp('Интегралы от второго и третьего:');
     second = double(second)
 
-    disp('Is equal?:');
+    disp('Они равны?:');
     disp(isequal(second, third));
     
-    disp('Difference between second and third:');
+    disp('Разница между вторым и первым');
     disp(second - third);
 end

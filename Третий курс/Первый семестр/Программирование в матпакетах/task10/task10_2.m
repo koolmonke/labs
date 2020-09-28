@@ -1,8 +1,14 @@
-function output = task10_2()
-    global A;
-    global b;
-
+function output = task10_2(A, b)
+    [r, c] = size(A);
     determinant = det(A);
+
+    if (r ~= c || determinant == 0)
+        error('Unsolvable by  Cramer`s rule');
+    end
+
+    if (r ~= length(b))
+        error('Vector length does not coincide with the matrix dimensions');
+    end
 
     size_arr = size(A, 1);
 

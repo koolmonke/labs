@@ -3,7 +3,7 @@ function output = task10_2(A, b)
     determinant = det(A);
 
     if (r ~= c || determinant == 0)
-        error('Unsolvable by  Cramer`s rule');
+        error('Unsolvable by Cramer`s rule');
     end
 
     if (r ~= length(b))

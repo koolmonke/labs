@@ -1,11 +1,12 @@
-	function S = task2(x)
+function S = task2(x)
     table = [];
     S = 1;
     temp = 1;
+    epsilon = 10^-5;
     even_iter = 5; % Четные
     odd_iter = 2; % Не Четные
     
-    while abs(temp) > eps
+    while abs(temp) > epsilon
         temp = even_iter/odd_iter * -x * temp;
 
         table = [table; temp S];

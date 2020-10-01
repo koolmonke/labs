@@ -1,15 +1,15 @@
 function task4_1()
     y_result_greater = [];
-    y_result_lessorequal = [];
+    y_result_less_or_equal = [];
 
     x_result_greater = [];
-    x_result_lessorequal = [];
+    x_result_less_or_equal = [];
 
     for x = linspace(-2, 2, 300000)
 
         if (x <= -1)
-            x_result_lessorequal = [x_result_lessorequal [x]];
-            y_result_lessorequal = [y_result_lessorequal [lessOrEqual(x)]];
+            x_result_less_or_equal = [x_result_less_or_equal [x]];
+            y_result_less_or_equal = [y_result_less_or_equal [less_or_equal(x)]];
         else
             x_result_greater = [x_result_greater [x]];
             y_result_greater = [y_result_greater [greater(x)]];
@@ -17,7 +17,7 @@ function task4_1()
 
     end
 
-    plot(x_result_lessorequal, y_result_lessorequal, 'r', x_result_greater, y_result_greater, 'r');
+    plot(x_result_less_or_equal, y_result_less_or_equal, 'r', x_result_greater, y_result_greater, 'r');
     hold on
     scatter(-1, 1.181);
     hold off

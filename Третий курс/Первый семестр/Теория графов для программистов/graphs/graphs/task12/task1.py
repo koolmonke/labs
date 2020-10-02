@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, Sequence
+from typing import Dict, Iterable, Sequence
 
 
 @dataclass(frozen=True)
@@ -11,26 +11,41 @@ class Human:
     name: str
 
 
-def dfs(graph: Dict[Human, Sequence[Human]], start: Human) -> Sequence[Human]:
-    visited, stack = [], [start]
+def dfs_paths(
+    graph: Dict[Human, Sequence[Human]], start: Human, goal: Human
+) -> Iterable[Sequence[Human]]:
+    stack = [(start, [start])]  # (vertex, path)
     while stack:
-        vertex = stack.pop()
-        if vertex not in visited:
-            visited.append(vertex)
-            stack.extend(set(graph[vertex]) - set(visited))
-    return visited
+        (vertex, path) = stack.pop()
+        for next in set(graph[vertex]) - set(path):
+            if next == goal and not next in path:
+                yield path + [next]
+            else:
+                stack.append((next, path + [next]))
 
 
 def main():
     graph: Dict[Human, Sequence[Human]] = {
         Human("A"): [Human("B"), Human("C")],
-        Human("B"): [Human("A"), Human("D"), Human("E")],
-        Human("C"): [Human("A"), Human("F")],
-        Human("D"): [Human("B")],
-        Human("E"): [Human("B"), Human("F")],
-        Human("F"): [Human("C"), Human("E")],
+        Human("B"): [Human("A"), Human("E")],
+        Human("C"): [Human("A"), Human("D")],
+        Human("D"): [Human("C"), Human("E"), Human("A")],
+        Human("E"): [Human("B"), Human("D")],
     }
-    print(dfs(graph, Human("A")))
+    t = sorted(
+        list(dfs_paths(graph, Human("A"), Human("D"))),
+        key=lambda x: len(x),
+        reverse=True,
+    )
+    t1 = list(
+        filter(
+            lambda x: len(t) - len(x),
+            sorted(
+                list(dfs_paths(graph, Human("D"), Human("A"))), key=lambda x: len(x)
+            ),
+        )
+    )
+    print([t[0], t1[0]])
 
 
 if __name__ == "__main__":

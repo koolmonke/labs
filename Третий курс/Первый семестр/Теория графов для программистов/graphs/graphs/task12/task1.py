@@ -32,20 +32,22 @@ def main():
         Human("D"): [Human("B"), Human("Z")],
         Human("Z"): [Human("C"), Human("D"), Human("A")],
     }
+
     t = sorted(
-        list(dfs_paths(graph, Human("A"), Human("D"))),
+        dfs_paths(graph, Human("A"), Human("Z")),
         key=lambda x: len(x),
         reverse=True,
     )
+
     t1 = list(
         filter(
             lambda x: len(t) - len(x),
-            sorted(
-                list(dfs_paths(graph, Human("D"), Human("A"))), key=lambda x: len(x)
-            ),
+            sorted(dfs_paths(graph, Human("Z"), Human("A")), key=lambda x: len(x)),
         )
     )
-    print([t[0], t1[0]])
+
+    res = [t[0], t1[0]]
+    print(res)
 
 
 if __name__ == "__main__":

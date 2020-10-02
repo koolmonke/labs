@@ -27,10 +27,10 @@ def dfs_paths(
 def main():
     graph: Dict[Human, Sequence[Human]] = {
         Human("A"): [Human("B"), Human("C")],
-        Human("B"): [Human("A"), Human("E")],
-        Human("C"): [Human("A"), Human("D")],
-        Human("D"): [Human("C"), Human("E"), Human("A")],
-        Human("E"): [Human("B"), Human("D")],
+        Human("B"): [Human("A"), Human("D")],
+        Human("C"): [Human("A"), Human("Z")],
+        Human("D"): [Human("B"), Human("Z")],
+        Human("Z"): [Human("C"), Human("D"), Human("A")],
     }
     t = sorted(
         list(dfs_paths(graph, Human("A"), Human("D"))),

@@ -9,6 +9,9 @@ class Watchman:
     start: int
     end: int
 
+    def __post_init__(self):
+        assert self.start < self.end, "start < end"
+
     def __contains__(self, key: "Watchman") -> bool:
         duty_range = range(self.start, self.end)
         return key.start in duty_range and key.end in duty_range
@@ -34,13 +37,13 @@ class TimeTable:
 
         return graph
 
-    def append_duty(self, duty: Watchman) -> "TimeTable":
+    def append_watch(self, watchman: Watchman) -> "TimeTable":
         table = self.table.copy()
         for key, value in table.items():
-            if duty in key:
-                value.add(duty)
+            if watchman in key:
+                value.add(watchman)
 
-        table[duty] = set()
+        table[watchman] = set()
         return TimeTable(self.rebalance_graph(table), self.head)
 
     def __getitem__(self, key: Watchman) -> "TimeTable":
@@ -58,9 +61,9 @@ class TimeTable:
 
 def main() -> None:
     t = (
-        TimeTable({Watchman(0, i): set() for i in range(5)}, Watchman(0, 4))
-        .append_duty(Watchman(1, 3))
-        .append_duty(Watchman(2, 2))
+        TimeTable({Watchman(0, i): set() for i in range(1, 5)}, Watchman(0, 4))
+        .append_watch(Watchman(1, 4))
+        .append_watch(Watchman(2, 3))
     )
     pprint(t.table)
 

@@ -5,7 +5,7 @@ T = TypeVar("T")
 Graph = Dict[T, Sequence[T]]
 
 
-def dfs(graph: Dict[T, Sequence[T]], start: T, end: T) -> Iterable[List[T]]:
+def dfs(graph: Graph[T], start: T, end: T) -> Iterable[List[T]]:
     fringe: List[Tuple[T, List[T]]] = [(start, [])]
     while fringe:
         state, path = fringe.pop()

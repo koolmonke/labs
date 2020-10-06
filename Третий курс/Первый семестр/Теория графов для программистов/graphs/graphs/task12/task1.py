@@ -1,5 +1,7 @@
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, Sequence
+
+from graphs.graph_utils import dfs
 
 
 @dataclass(frozen=True)
@@ -11,21 +13,8 @@ class Human:
     name: str
 
 
-def dfs(graph: Dict[Human, List[Human]], start: Human, end: Human) -> Iterable[List[Human]]:
-    fringe: List[Tuple[Human, List[Human]]] = [(start, [])]
-    while fringe:
-        state, path = fringe.pop()
-        if path and state == end:
-            yield path
-            continue
-        for next_state in graph[state]:
-            if next_state in path:
-                continue
-            fringe.append((next_state, path + [next_state]))
-
-
 def main():
-    graph: Dict[Human, List[Human]] = {
+    graph: Dict[Human, Sequence[Human]] = {
         Human("A"): [Human("B"), Human("C")],
         Human("B"): [Human("A"), Human("D")],
         Human("C"): [Human("A"), Human("Z")],

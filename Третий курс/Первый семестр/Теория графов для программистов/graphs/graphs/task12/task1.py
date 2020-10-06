@@ -11,9 +11,7 @@ class Human:
     name: str
 
 
-def dfs(
-    graph: Dict[Human, List[Human]], start: Human, end: Human
-) -> Iterable[List[Human]]:
+def dfs(graph: Dict[Human, List[Human]], start: Human, end: Human) -> Iterable[List[Human]]:
     fringe: List[Tuple[Human, List[Human]]] = [(start, [])]
     while fringe:
         state, path = fringe.pop()

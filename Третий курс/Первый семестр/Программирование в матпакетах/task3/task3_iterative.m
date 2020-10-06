@@ -1,8 +1,6 @@
 function count = task3_iterative()
   arr = readmatrix('task3_input.csv'); % Читаем одномерный массив
-  for i = 1:length(arr)
-      fprintf('A[%d]=%d\n', i, arr(i))
-  end
+  disp_array(arr);
   count = 0;
   for i = 1:length(arr)
       if arr(i) < 1

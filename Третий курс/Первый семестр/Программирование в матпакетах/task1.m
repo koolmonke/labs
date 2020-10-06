@@ -9,11 +9,5 @@ function task1()
 end
 
 function y = f(a, b, d, x, i, k)
-    cond1 = (a+b) == 0;
-    cond2 = sin(k*x) == 0;
-    if (cond1 || cond2)
-       y = NaN;
-    else
-       y = (a*x^2+abs(d))/(a+b)^2-10^4 * nthroot((k*x)/(a+b)^2, 5)-(cos(i))/(sin(k*x));
-    end
+    y = (a*x^2+abs(d))/(a+b)^2-10^4 * nthroot((k*x)/(a+b)^2, 5)-(cos(i))/(sin(k*x));
 end

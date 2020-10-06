@@ -1,5 +1,5 @@
 function task5()
-    task5_inner(@geomean,'task5_input.csv', 'task5_output_func.csv')
+    task5_inner(@geomean, 'task5_input.csv', 'task5_output_func.csv')
     task5_inner(@my_geomean, 'task5_input.csv', 'task5_output_iterative.csv')
 end
 

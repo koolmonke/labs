@@ -6,6 +6,7 @@ Graph = Dict[T, Sequence[T]]
 
 
 def dfs(graph: Graph[T], start: T, end: T) -> Iterable[List[T]]:
+    """Find all possible pathes between start and end in graph"""
     fringe: List[Tuple[T, List[T]]] = [(start, [])]
     while fringe:
         state, path = fringe.pop()

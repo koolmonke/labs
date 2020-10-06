@@ -5,7 +5,7 @@ function task4_1()
     x_result_greater = [];
     x_result_less_or_equal = [];
 
-    for x = linspace(-2, 2, 300000)
+    for x = 2:-1.3333e-05:-2
 
         if (x <= -1)
             x_result_less_or_equal = [x_result_less_or_equal [x]];
@@ -14,7 +14,6 @@ function task4_1()
             x_result_greater = [x_result_greater [x]];
             y_result_greater = [y_result_greater [greater(x)]];
         end
-
     end
 
     plot(x_result_less_or_equal, y_result_less_or_equal, 'r', x_result_greater, y_result_greater, 'r');

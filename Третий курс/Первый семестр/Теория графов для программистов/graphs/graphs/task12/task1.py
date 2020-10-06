@@ -22,7 +22,7 @@ def main():
         Human("Z"): [Human("C"), Human("D"), Human("A")],
     }
 
-    cycles = [[node] + path for node in graph for path in dfs(graph, node, node)]
+    cycles = ([node] + path for node in graph for path in dfs(graph, node, node))
     print(max(cycles, key=list.__len__))
 
 

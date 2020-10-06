@@ -14,6 +14,6 @@ function y = f(a, b, d, x, i, k)
     if (cond1 || cond2)
        y = NaN;
     else
-       y = (a*x^2+abs(d))/(a+b)^2-10^4 * ((k*x)/(a+b)^2)^(1/5)-(cos(i))/(sin(k*x));
+       y = (a*x^2+abs(d))/(a+b)^2-10^4 * nthroot((k*x)/(a+b)^2, 5)-(cos(i))/(sin(k*x));
     end
 end

@@ -1,8 +1,8 @@
-from typing import Dict, Iterator, List, Sequence, Tuple, TypeVar
+from typing import Iterator, List, Mapping, Sequence, Tuple, TypeVar
 
-T = TypeVar("T")
+T = TypeVar("T", covariant=True)
 
-Graph = Dict[T, Sequence[T]]
+Graph = Mapping[T, Sequence[T]]
 
 PathOut = List[T]
 

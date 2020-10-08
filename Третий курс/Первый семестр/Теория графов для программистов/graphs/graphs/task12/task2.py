@@ -6,7 +6,7 @@ from pprint import pprint
 N = 3
 
 
-def main():
+def main() -> None:
     cycles = sorted(
         (set([node] + path) for node in GRAPH for path in dfs(GRAPH, node, node)),
         key=lambda x: len(x),

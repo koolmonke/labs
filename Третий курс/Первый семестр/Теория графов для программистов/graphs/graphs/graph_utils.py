@@ -1,4 +1,4 @@
-from typing import Dict, Iterable, List, Sequence, Tuple, TypeVar
+from typing import Dict, Iterator, List, Sequence, Tuple, TypeVar
 
 T = TypeVar("T")
 
@@ -7,7 +7,7 @@ Graph = Dict[T, Sequence[T]]
 PathOut = List[T]
 
 
-def dfs(graph: Graph[T], start: T, end: T) -> Iterable[PathOut]:
+def dfs(graph: Graph[T], start: T, end: T) -> Iterator[PathOut[T]]:
     """Find all possible pathes from start to end in graph"""
     fringe: List[Tuple[T, List[T]]] = [(start, [])]
     while fringe:

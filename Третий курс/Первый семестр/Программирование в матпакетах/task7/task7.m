@@ -1,7 +1,7 @@
-function output = task7()
+function task7()
     disp('Символьный иниеграл');
 
-    first = task7_1();
+    first = task7_1()
 
     disp('Интеграл:');
     first(1)

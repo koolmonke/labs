@@ -1,4 +1,11 @@
-function output = task6_1()
+function task6_1()
     global A
-    output = task6_2(A);
+    global output
+    persistent n1
+    if isempty(n1)
+        n1 = 0;
+    end
+    n1 = n1+1;
+    output = task6_impl(A);
+    fprintf('task6_1 было запущено %d раз(а)\n', n1)
 end

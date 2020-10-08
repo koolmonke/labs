@@ -1,13 +1,9 @@
 function task6(arr)
     globals(arr);
 
-    disp('Result of using globals');
+    disp('Используя глобальные перемен:');
     first = task6_1()
 
-    disp('Result of using parametrs');
+    disp('Используя параметры функции');
     second = task6_2(arr)
-
-    disp('Is the same?:');
-    disp(isequal(first, second));
-
 end

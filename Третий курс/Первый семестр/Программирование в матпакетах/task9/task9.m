@@ -50,18 +50,8 @@ function task9()
     sgn_p = sign(ddy(extr + rand()));
     sgn_m = sign(ddy(extr - rand()));
     fprintf('     %0d      %d      %0d     \n', sgn_m, extr, sgn_p);
-
-    if sgn_m > 0
-        fprintf('Строго выпукло при  x < %d\n', extr);
-    else
-        fprintf('Выпукла при x < %d\n', extr');
-    end
-
-    if sgn_m > 0
-        fprintf('Строго выпукло при x > %d\n', extr);
-    else
-        fprintf('Выпукла при x > %d\n', extr');
-    end
+    
+    fprintf('Функция вогнута на всей области определения')
 
     disp('# 8. Горизонт и вертикальные асимптоты');
     disp('Нет горизонтальных пиделов, потому что предел к +inf это -inf и -inf это undefined');

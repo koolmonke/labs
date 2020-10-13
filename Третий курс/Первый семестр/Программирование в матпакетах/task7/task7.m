@@ -18,6 +18,6 @@ function task7()
     disp('Они равны?:');
     disp(isequal(second, third));
     
-    disp('Разница между вторым и первым');
+    disp('Разница между вторым и третьим способом');
     disp(second - third);
 end

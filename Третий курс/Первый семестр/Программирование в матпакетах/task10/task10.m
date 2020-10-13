@@ -2,19 +2,17 @@ function task10()
     globals();
     global A b;
 
-    disp('Numeric solution in matlab:');
+    disp('Численное решение:');
     first = task10_1_1();
     disp(first);
 
-    disp('Symbolic solution in matlab:');
+    disp('Символьное решение:');
     second = task10_1_2();
     disp(second);
 
-    disp('Cramer`s rule:');
+    disp('Крамер:');
     third = task10_2(A, b);
     disp(third);
-
-    disp('Are the same?:');
 
     disp('1?=2');
     disp(isequal(first, second));
@@ -29,21 +27,21 @@ function task10()
     disp(second - third);
 
     [vectors, values, rang] = task10_3();
-    disp('Eigenvectors');
+    disp('Собственные вектора');
     disp(vectors);
 	
-    disp('Eigenvalues');
+    disp('Собственные значения');
     disp(values);
 	
-	disp('Eigenvectors check:');
+	disp('Проверка собственных векторов:');
 	for i = 1:length(values)
 		disp('A*x =? l*x');
 		disp(isequal(A*vectors(:,i), vectors(:,i).*values(i,i)));
 		
-		disp('Order of difference');
+		disp('Порядок разницы');
 		disp(A*vectors(:,i) - vectors(:,i).*values(i,i));
 	end
 	
-    disp('Rank');
+    disp('Ранг');
     disp(rang);
 end

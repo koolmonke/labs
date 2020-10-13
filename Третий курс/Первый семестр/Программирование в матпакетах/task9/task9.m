@@ -23,7 +23,7 @@ function task9()
     disp(OddOrEven(y));
 
     disp('# 5. Периодическая?');
-    disp('No :)');
+    disp('Нет');
 
     disp('# 6. Экстремумы');
     dy(x) = diff(y, x);

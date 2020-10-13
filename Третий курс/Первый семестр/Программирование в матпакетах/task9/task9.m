@@ -52,9 +52,9 @@ function task9()
     fprintf('     %0d      %d      %0d     \n', sgn_m, extr, sgn_p);
 
     if sgn_m > 0
-        fprintf('Strictly convex when x < %d\n', extr);
+        fprintf('Строго выпукло при  x < %d\n', extr);
     else
-        fprintf('Convex when x < %d\n', extr');
+        fprintf('Выпукла при x < %d\n', extr');
     end
 
     if sgn_m > 0

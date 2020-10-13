@@ -2,8 +2,8 @@ function task9()
     syms x;
     y(x) = 3 - sqrt(x) - 0.5 * log(x);
 
-    disp('# 1. Domain');
-    disp('Domain of the function is: ');
+    disp('# 1. Область опред');
+    disp('Область определения функции: ');
     disp('x > 0');
 
     disp('# 2. Односторонние приделы');

@@ -4,11 +4,11 @@ namespace TEditor.Utils
 {
     internal static class FileUtils
     {
-        public static void FileWriter(string Path, string ToWrite)
+        public static void FileWriter(string path, string toWrite)
         {
-            using (var writer = new StreamWriter(Path))
+            using (var writer = new StreamWriter(path))
             {
-                writer.Write(ToWrite);
+                writer.Write(toWrite);
             }
         }
 

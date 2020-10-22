@@ -4,5 +4,5 @@ function task8()
     xx = linspace(0, 2);
 
     plot(first.x, first.y, xx, second(xx));
-    legend('Численные методы', 'Символьный метод')
+    legend('Численные методы','Первая производная','Символьный метод')
 end

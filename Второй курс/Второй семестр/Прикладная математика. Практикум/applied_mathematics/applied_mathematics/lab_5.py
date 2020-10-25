@@ -1,6 +1,6 @@
-from typing import Optional, Tuple
+# type: ignore
 
-import numpy as np
+from typing import Optional, Tuple
 
 
 def main(n: Optional[int] = None):
@@ -16,7 +16,7 @@ def main(n: Optional[int] = None):
     print(matrix)
 
 
-def find_first_eq_by_value(m: np.ndarray, value: int) -> Optional[Tuple[int, int]]:
+def find_first_eq_by_value(m, value: int) -> Optional[Tuple[int, int]]:
     for i in range(m.shape[0]):
         for j in range(m.shape[1]):
             if m[i, j] == value:
@@ -24,7 +24,7 @@ def find_first_eq_by_value(m: np.ndarray, value: int) -> Optional[Tuple[int, int
     return None
 
 
-def top_max_values_eq_size(m: np.ndarray) -> np.ndarray:
+def top_max_values_eq_size(m):
     flat = m.flatten()
     flat.sort()
     return flat[::-1][: m.shape[0]]

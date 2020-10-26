@@ -20,7 +20,7 @@ function task9()
     disp(y(0));
 
     disp('# 4. Четность');
-    disp(OddOrEven(y));
+    disp('Функция ни четная ни нечетная');
 
     disp('# 5. Периодическая?');
     disp('Нет');
@@ -51,17 +51,17 @@ function task9()
     sgn_m = sign(ddy(extr - rand()));
     fprintf('     %0d      %d      %0d     \n', sgn_m, extr, sgn_p);
     
-    fprintf('Функция вогнута на всей области определения')
+    fprintf('Функция вогнута на всей области определения\n')
 
     disp('# 8. Горизонт и вертикальные асимптоты');
-    disp('Нет горизонтальных пиделов, потому что предел к +inf это -inf и -inf это undefined');
+    disp('Нет горизонтальных придел, потому что предел к +inf это -inf и -inf это undefined');
 
     disp('y = k*x + b');
     k = limit(y / x, x, inf);
     b = limit(y - k * x, x, inf);
     fprintf('y = %d * x + %d\n', k, b);
 
-    disp('Нет асимптот');
+    disp('f(x) -> inf, при x -> 0');
 
     disp('# 9. График');
     a = input('Левый край интервала для постройки\n');
@@ -72,16 +72,4 @@ function task9()
 
     disp('Taylor expansion at x = 1');
     pretty(taylor(y, x, 1));
-end
-
-function isOdd = OddOrEven(symfunc)
-
-    if symfunc(-1) == symfunc(1)
-        isOdd = 'Функция четная';
-    elseif symfunc(-1) == -symfunc(1)
-        isOdd = 'Функция нечетная';
-    else
-        isOdd = 'Функция ни четная ни нечетная';
-    end
-
 end

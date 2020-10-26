@@ -28,30 +28,70 @@ function task9()
     disp('# 6. Экстремумы');
     dy(x) = diff(y, x);
     extr = solve(dy == 0, x);
-
-    sgn_p = sign(dy(extr + rand()));
-    sgn_m = sign(dy(extr - rand()));
-
-    fprintf('     %0d      %d      %0d     \n', sgn_m, extr, sgn_p);
-
-    if sgn_m < sgn_p
-        disp('Локальный минимум: ');
+    if isempty(extr)
+        disp('Экстремумов нет');
     else
-        disp('Локальный максимум: ');
-    end
+        extr = [0, extr, extr(end) + 1]; % Массив всех граничных точек
+        for i = 1:length(extr) 
+            if i == 1 || i == length(extr)
+                continue;
+            else
+                sgn_m = sign(dy((extr(i)- extr(i-1))/2)); % Нашли точку между экстремумами либо экстр и границей
+                sgn_p = sign(dy((extr(i+1) - extr(i))/2)); % Нашли точку справа от экстр до следующего экстремума, либо точку м/у экстремуом и границей
+                
+                fprintf('     %0d      %d      %0d     \n', sgn_m, extr(i), sgn_p);
 
-    disp(double(y(extr)));
+                if sgn_m < sgn_p
+                    disp('Локальный минимум: ');
+                else
+                    disp('Локальный максимум: ');
+                end
+
+                disp(double(y(extr(i))));
+            end
+                
+        end
+    end
 
     disp('# 7. Выпуклость')
 
     ddy = diff(dy, x);
     extr = solve(ddy == 0, x);
 
-    sgn_p = sign(ddy(extr + rand()));
-    sgn_m = sign(ddy(extr - rand()));
-    fprintf('     %0d      %d      %0d     \n', sgn_m, extr, sgn_p);
-    
-    fprintf('Функция вогнута на всей области определения\n')
+    if isempty(extr)
+        disp('Точек перегиба нет');
+        if sign(ddy(1)) > 0
+            disp('Всюду вогнуто');
+        else
+            disp('Всюду выпукло');
+        end
+    else
+        extr = extr(imag(extr) == 0);
+        extr = [0, extr, extr(end) + 1]; % Массив всех граничных точек
+        for i = 1:length(extr) 
+            if i == 1 || i == length(extr)
+                continue;
+            else
+                sgn_m = sign(dy((extr(i)- extr(i-1))/2)); % Нашли точку между экстремумами либо экстр и границей
+                sgn_p = sign(dy((extr(i+1) - extr(i))/2)); % Нашли точку справа от экстр до следующего экстремума, либо точку м/у экстремуом и границей
+                
+                fprintf('     %0d      %d      %0d     \n', sgn_m, extr(i), sgn_p);
+
+                if double(sgn_m) > 0
+                       fprintf('Вогнута, когда x < %d\n', extr(i));
+                else
+                       fprintf('Выпукла, когда x < %d\n', extr(i));
+                end
+
+                if double(sgn_p) > 0
+                       fprintf('Вогнута, когда x > %d\n', extr(i));
+                else
+                       fprintf('Выпукла, когда x > %d\n', extr(i));
+                end
+
+            end
+        end     
+    end
 
     disp('# 8. Горизонт и вертикальные асимптоты');
     disp('Нет горизонтальных придел, потому что предел к +inf это -inf и -inf это undefined');
@@ -61,12 +101,11 @@ function task9()
     b = limit(y - k * x, x, inf);
     fprintf('y = %d * x + %d\n', k, b);
 
-    disp('f(x) -> inf, при x -> 0');
+    disp('f(x) -> inf, при x -> +0');
 
     disp('# 9. График');
-    a = input('Левый край интервала для постройки\n');
     b = input('Правый край интервала для постройки\n');
-    task9_1(a, b)
+    task9_1(0, b)
 
     disp('# 10. ряд Тейлора');
 

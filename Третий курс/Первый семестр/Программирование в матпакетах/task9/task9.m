@@ -13,7 +13,7 @@ function task9()
     disp('Предел справа к нулю');
     disp(limit(y, x, 0, 'right'));
 
-    disp('# 3. пересечение с осями');
+    disp('# 3. Пересечение с осями');
     disp('Ox');
     disp(vpasolve(y == 0, x));
     disp('Oy');
@@ -105,7 +105,10 @@ function task9()
 
     disp('# 9. График');
     b = input('Правый край интервала для постройки\n');
-    task9_1(0, b)
+    func = @(x) (3 -  sqrt(x) - 0.5 * log(x));
+
+    plot(linspace(0, b, 5000000), func(linspace(0, b, 5000000)));
+    title('$y(x)=3-\sqrt{x}-0.5\ln{x}$', 'Interpreter', 'latex', 'FontSize', 14)
 
     disp('# 10. ряд Тейлора');
 

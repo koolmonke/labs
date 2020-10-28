@@ -13,7 +13,7 @@ def task_c(table: TableIn) -> List[Time]:
     new_watchmen = []
     prev_insert_was = None
     for prev, item in zip(prev_list, cur_list):
-        if not (item - prev > 0) and (prev_insert_was is None or prev_insert_was < item):
+        if item - prev <= 0 and (prev_insert_was is None or prev_insert_was < item):
             prev_insert_was = item - fix_time
             new_watchmen.append((item, item - fix_time))
     return new_watchmen

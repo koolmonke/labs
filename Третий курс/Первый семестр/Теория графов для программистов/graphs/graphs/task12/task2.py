@@ -9,7 +9,7 @@ N = 3
 def main() -> None:
     groups = sorted(
         (set([node] + path) for node in GRAPH for path in dfs(GRAPH, node, node)),
-        key=lambda x: len(x),
+        key=set.__len__,
         reverse=True,
     )
     pprint(groups[:N])

@@ -1,7 +1,7 @@
+from pprint import pprint
+
 from graphs.graph_utils import dfs
 from graphs.task12 import GRAPH
-
-from pprint import pprint
 
 N = 3
 

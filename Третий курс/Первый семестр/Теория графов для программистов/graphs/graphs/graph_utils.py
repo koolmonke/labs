@@ -1,6 +1,6 @@
 from typing import Iterator, List, Mapping, Sequence, Tuple, TypeVar
 
-T = TypeVar("T", covariant=True)
+T = TypeVar("T")
 
 Graph = Mapping[T, Sequence[T]]
 

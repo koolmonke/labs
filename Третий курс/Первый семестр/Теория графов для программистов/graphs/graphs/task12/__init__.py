@@ -1,4 +1,4 @@
-from typing import Dict, Sequence
+from graphs.graph_utils import Graph
 from dataclasses import dataclass
 
 
@@ -11,7 +11,7 @@ class Human:
     name: str
 
 
-GRAPH: Dict[Human, Sequence[Human]] = {
+GRAPH: Graph[Human] = {
     Human("A"): [Human("B"), Human("C")],
     Human("B"): [Human("A"), Human("D")],
     Human("C"): [Human("A"), Human("Z")],

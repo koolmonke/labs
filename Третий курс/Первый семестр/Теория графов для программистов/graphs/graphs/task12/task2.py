@@ -7,12 +7,12 @@ N = 3
 
 
 def main() -> None:
-    cycles = sorted(
+    groups = sorted(
         (set([node] + path) for node in GRAPH for path in dfs(GRAPH, node, node)),
         key=lambda x: len(x),
         reverse=True,
     )
-    pprint(cycles[:N])
+    pprint(groups[:N])
 
 
 if __name__ == "__main__":

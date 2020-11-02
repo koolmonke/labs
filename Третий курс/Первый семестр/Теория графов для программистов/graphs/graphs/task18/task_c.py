@@ -1,6 +1,6 @@
-from typing import List
+from typing import Iterator, List
 
-from graphs.task18 import TableIn, Time, Minute
+from graphs.task18 import Minute, TableIn, Time
 from graphs.task18.task_b import task_b
 
 
@@ -20,7 +20,7 @@ def task_c(table: TableIn) -> List[Time]:
 
 
 def fixed_time(table: TableIn) -> Minute:
-    def inner():
+    def inner() -> Iterator[int]:
         count = 0
         for prev, item in zip(prev_list, cur_list):
             if item - prev > 0:

@@ -19,3 +19,8 @@ def dfs(graph: Graph[T], start: T, end: T) -> Iterator[PathOut[T]]:
             if next_state in path:
                 continue
             fringe.append((next_state, path + [next_state]))
+
+
+def find_cycles(graph: Graph[T]) -> Iterator[PathOut[T]]:
+    """Find all possible cycles in graph"""
+    return ([node] + path for node in graph for path in dfs(graph, node, node))

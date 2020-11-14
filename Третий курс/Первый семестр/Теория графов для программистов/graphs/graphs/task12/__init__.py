@@ -1,4 +1,4 @@
-from graphs.graph_utils import Graph
+from graphs.graph_utils import GraphIn
 from dataclasses import dataclass
 
 
@@ -11,7 +11,7 @@ class Human:
     name: str
 
 
-GRAPH: Graph[Human] = {
+GRAPH: GraphIn[Human] = {
     Human("A"): [Human("B"), Human("C")],
     Human("B"): [Human("A"), Human("D")],
     Human("C"): [Human("A"), Human("Z")],

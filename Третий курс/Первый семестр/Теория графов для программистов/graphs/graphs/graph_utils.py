@@ -1,13 +1,15 @@
-from typing import Iterator, List, Mapping, Sequence, Tuple, TypeVar
+from typing import Dict, Iterator, List, Mapping, Sequence, Tuple, TypeVar
 
 T = TypeVar("T")
 
-Graph = Mapping[T, Sequence[T]]
+GraphIn = Mapping[T, Sequence[T]]
+
+GraphOut = Dict[T, List[T]]
 
 PathOut = List[T]
 
 
-def dfs(graph: Graph[T], start: T, end: T) -> Iterator[PathOut[T]]:
+def dfs(graph: GraphIn[T], start: T, end: T) -> Iterator[PathOut[T]]:
     """Find all possible pathes from start to end in graph"""
     fringe: List[Tuple[T, List[T]]] = [(start, [])]
     while fringe:
@@ -21,6 +23,6 @@ def dfs(graph: Graph[T], start: T, end: T) -> Iterator[PathOut[T]]:
             fringe.append((next_state, path + [next_state]))
 
 
-def find_cycles(graph: Graph[T]) -> Iterator[PathOut[T]]:
+def find_cycles(graph: GraphIn[T]) -> Iterator[PathOut[T]]:
     """Find all possible cycles in graph"""
     return ([node] + path for node in graph for path in dfs(graph, node, node))

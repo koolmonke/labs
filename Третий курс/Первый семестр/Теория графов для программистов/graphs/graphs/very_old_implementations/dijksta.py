@@ -13,7 +13,7 @@ distances: Dict[str, Paths] = {
     "F": {"A": 5, "E": 2, "C": 16},
 }
 
-unvisited = {node: inf for node in nodes}  # using None as +inf
+unvisited = {node: inf for node in nodes}
 visited = {}
 current = "B"
 currentDistance = 0

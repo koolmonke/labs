@@ -46,7 +46,7 @@ create table movie_shows(
     foreign key (cinema_halls_id) references cinema_halls(id),
     start_of_show datetime not null,
     movies_id int not null references movies(id),
-    foreign key (movies_id) references movies(id),
+    foreign key (movies_id) references movies(id)
 );
 
 create table ops_on_tickets(

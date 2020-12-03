@@ -13,6 +13,7 @@ create table workers(
 create table movies(
     id int not null auto_increment,
     primary key (id),
+    title text not null,
     duration time not null,
     begin_film_release datetime not null,
     end_film_release datetime not null,
@@ -41,9 +42,11 @@ create table seats(
 create table movie_shows(
     id int not null auto_increment,
     primary key (id),
+    cinema_halls_id int not null,
+    foreign key (cinema_halls_id) references cinema_halls(id)
     start_of_show datetime not null,
     movies_id int not null references movies(id),
-    foreign key (movies_id) references movies(id)
+    foreign key (movies_id) references movies(id),
 );
 
 create table ops_on_tickets(
@@ -65,4 +68,4 @@ create table tickets(
     is_payed bool not null default (false),
     is_booked bool not null default (false),
     type_of_payment enum('картой', 'наличный расчет')
-)
+);

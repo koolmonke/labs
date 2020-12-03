@@ -1,5 +1,3 @@
-create database kinos;
-
 use kinos;
 
 create table workers(

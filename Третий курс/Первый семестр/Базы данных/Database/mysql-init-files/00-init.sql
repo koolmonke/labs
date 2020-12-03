@@ -43,7 +43,7 @@ create table movie_shows(
     id int not null auto_increment,
     primary key (id),
     cinema_halls_id int not null,
-    foreign key (cinema_halls_id) references cinema_halls(id)
+    foreign key (cinema_halls_id) references cinema_halls(id),
     start_of_show datetime not null,
     movies_id int not null references movies(id),
     foreign key (movies_id) references movies(id),

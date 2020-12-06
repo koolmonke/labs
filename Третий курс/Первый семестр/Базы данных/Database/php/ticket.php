@@ -21,7 +21,7 @@ echo "</select>";
 echo '<input type="submit" onclick="this.form.submit()"/>
     </form>'
 // select * from kinos.tickets where is_payed = false
-// select * from kinos.workes where middlename is null
+// select * from kinos.workers where middlename is null
 ?>
 
 </body>

@@ -3,26 +3,25 @@ use kinos;
 create table workers(
     id int not null auto_increment,
     primary key (id),
-    lastname text,
-    firstname text not null,
-    middlename text
+    lastname varchar(256),
+    firstname varchar(256) not null,
+    middlename varchar(256)
 );
 
 create table movies(
     id int not null auto_increment,
     primary key (id),
-    title text not null,
+    title varchar(256) not null,
     duration time not null,
     begin_film_release datetime not null,
     end_film_release datetime not null,
-    distributor text not null
+    distributor varchar(256) not null
 );
 
 create table cinema_halls(
     id int not null auto_increment,
     primary key (id),
-    name_of_hall nvarchar(50) not null,
-    amount_of_seats_total int not null,
+    name_of_hall varchar(256) not null,
     description text,
     number_of_rows int not null,
     number_of_seats int not null
@@ -59,6 +58,7 @@ create table ops_on_tickets(
 create table tickets(
     id int not null auto_increment,
     primary key (id),
+    date_of_issue date,
     movie_show_id int not null references movie_shows(id),
     foreign key (movie_show_id) references movie_shows(id),
     seats_id int not null references seats(id),

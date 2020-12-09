@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="14020469-cb78-440b-875c-34208a2be948">
+    <data-source source="LOCAL" name="kinos@localhost" uuid="14020469-cb78-440b-875c-34208a2be948">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:9906</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:9906/kinos</jdbc-url>
     </data-source>
   </component>
 </project>

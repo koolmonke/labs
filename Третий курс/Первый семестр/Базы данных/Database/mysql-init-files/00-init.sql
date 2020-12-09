@@ -22,7 +22,7 @@ create table cinema_halls(
     id int not null auto_increment,
     primary key (id),
     name_of_hall varchar(256) not null,
-    description text,
+    description varchar(256),
     number_of_rows int not null,
     number_of_seats int not null
 );
@@ -52,7 +52,9 @@ create table ops_on_tickets(
     date_of_op datetime not null,
     op_type enum('бронь', 'оплата', 'отмена', 'возврат', 'проход'),
     workers_id int not null references workers(id),
-    foreign key (workers_id) references workers(id)
+    foreign key (workers_id) references workers(id),
+    ticket_id int not null,
+    foreign key (ticket_id) references tickets(id)
 );
 
 create table tickets(

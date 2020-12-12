@@ -10,7 +10,7 @@
 $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
 echo "Все фильмы:";
 echo '<table border="1" width="100%" cellpadding="5">';
-foreach($db->query('select * from kinos.movies') as $row) {
+foreach($db->query('select * from movies') as $row) {
     echo '<tr>';
     echo "<th>{$row['id']}</th>";
     echo "<th>{$row['title']}</th>";

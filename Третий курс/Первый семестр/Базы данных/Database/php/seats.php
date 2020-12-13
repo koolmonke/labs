@@ -28,27 +28,8 @@ foreach ($db->query('select * from kinos.seats') as $row) {
 echo "</table>";
 
 ?>
-<p>Добавить место</p>
-<form action="submit_seats.php" method="post">
-    <p style='color: blue'>Номер зала <input type="number" name="cinema_halls_id" value="">
-    <p>Номер ряда <input type="number" name="row_index" value="">
-    <p>Номер места<input type="number" name="seat_index" value="">
-    <p><input type="submit"></p>
-</form>
-
-<p>Удалить место</p>
-<form action="delete_seats.php" method="post">
-    <p>id записи <input type="number" name="id" value="">
-    <p><input type="submit"></p>
-</form>
-
-<p>Изменить место</p>
-<form action="update_seats.php" method="post">
-    <p>id записи <input type="number" name="id" value="">
-    <p style='color: blue'>Номер зала <input type="number" name="cinema_halls_id" value="">
-    <p>Номер ряда <input type="number" name="row_index" value="">
-    <p>Номер места<input type="number" name="seat_index" value="">
-    <p><input type="submit"></p>
-</form>
+<p><a target="_blank" href="submit_seats.php"> Добавить место </a>
+<p><a target="_blank" href="delete_seats.php"> Удалить место </a>
+<p><a target="_blank" href="update_seats.php"> Изменить место </a>
 </body>
 </html>

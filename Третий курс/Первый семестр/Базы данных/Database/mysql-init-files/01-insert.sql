@@ -20,11 +20,7 @@ insert into movies (duration, begin_film_release, end_film_release, distributor,
                                                                                                 '2020-12-15 19:30:10','Columbia/Sony',
                                                                                                 'Ковбой Бипоп');
 
-insert into cinema_halls (name_of_hall, amount_of_seats_total, description, number_of_rows, number_of_seats) VALUES ('Первый зал',
-                                                                                                                     10,
-                                                                                                                     'Первый зал',
-                                                                                                                     2,
-                                                                                                                     5);
+insert into cinema_halls (name_of_hall, description) VALUES ('Первый зал', 'Первый зал');
 
 insert into seats (cinema_halls_id, row_index, seat_index) VALUES (1, 1, 1);
 

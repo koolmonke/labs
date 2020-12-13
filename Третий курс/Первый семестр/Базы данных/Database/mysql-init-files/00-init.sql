@@ -22,9 +22,7 @@ create table cinema_halls(
     id int not null auto_increment,
     primary key (id),
     name_of_hall varchar(256) not null,
-    description varchar(256),
-    number_of_rows int not null,
-    number_of_seats int not null
+    description varchar(256)
 );
 
 create table seats(

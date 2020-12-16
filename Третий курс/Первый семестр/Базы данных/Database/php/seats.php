@@ -6,8 +6,6 @@
 <body>
 
 <?php
-include 'cinema_halls.php';
-
 $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
 echo "Все места:";
 echo '<table border="1" width="100%" cellpadding="5">';
@@ -32,8 +30,8 @@ foreach ($db->query('select seats.id as seats_pk, cinema_halls_id, row_index, se
 echo "</table>";
 
 ?>
-<p><a target="_blank" href="submit_seats.php"> Добавить место </a>
-<p><a target="_blank" href="delete_seats.php"> Удалить место </a>
-<p><a target="_blank" href="update_seats.php"> Изменить место </a>
+<p><a target="_blank" href="submit_seats.php"> Добавить место </a></p>
+<p><a target="_blank" href="delete_seats.php"> Удалить место </a></p>
+<p><a target="_blank" href="update_seats.php"> Изменить место </a></p>
 </body>
 </html>

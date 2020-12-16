@@ -21,7 +21,7 @@ create table movies(
 create table cinema_halls(
     id int not null auto_increment,
     primary key (id),
-    name_of_hall varchar(256) not null,
+    name_of_hall varchar(256) unique not null,
     description varchar(256)
 );
 

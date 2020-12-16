@@ -20,8 +20,22 @@ if (!empty($_POST)) {
 ?>
 
 <form action="update_seats.php" method="post">
-    <p>id записи <input type="number" name="id" value="">
-    <p style='color: blue'>Номер зала <input type="number" name="cinema_halls_id" value="">
+    <p>id места<select name="id">
+        <?php
+        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
+        foreach ($db->query("select * from seats") as $row) {
+            echo "<option value={$row['id']}>{$row['id']}</option>";
+        }
+        ?>
+        </select></p>
+    <select name="cinema_halls_id">
+        <?php
+        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
+        foreach ($db->query("select * from cinema_halls") as $row) {
+            echo "<option value={$row['id']}>{$row['name_of_hall']}</option>";
+        }
+        ?>
+    </select>
     <p>Номер ряда <input type="number" name="row_index" value="">
     <p>Номер места<input type="number" name="seat_index" value="">
     <p><input type="submit"></p>

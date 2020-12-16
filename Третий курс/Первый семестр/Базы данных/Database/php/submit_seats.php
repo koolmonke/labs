@@ -20,7 +20,14 @@ if (!empty($_POST)) {
 }
 ?>
 <form action="submit_seats.php" method="post">
-    <p style='color: blue'>Номер зала <input type="number" name="cinema_halls_id" value="">
+    <p>Название зала<select name="cinema_halls_id">
+        <?php
+        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
+        foreach ($db->query("select * from cinema_halls") as $row) {
+            echo "<option value={$row['id']}>{$row['name_of_hall']}</option>";
+        }
+        ?>
+    </select></p>
     <p>Номер ряда <input type="number" name="row_index" value="">
     <p>Номер места<input type="number" name="seat_index" value="">
     <p><input type="submit"></p>

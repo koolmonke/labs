@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="RU-ru">
+<html lang="RU-ru" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Места</title>
 </head>
@@ -22,7 +22,14 @@ if (!empty($_POST)) {
 ?>
 
 <form action="delete_seats.php" method="post">
-    <p>id записи <input type="number" name="id" value="">
+    <p>id места <select name="id">
+        <?php
+        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
+        foreach ($db->query("select * from seats") as $row) {
+            echo "<option value={$row['id']}>{$row['id']}</option>";
+        }
+        ?>
+        </select></p>
     <p><input type="submit"></p>
 </form>
 </body>

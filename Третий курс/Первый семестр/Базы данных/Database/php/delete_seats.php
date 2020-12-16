@@ -22,14 +22,16 @@ if (!empty($_POST)) {
 ?>
 
 <form action="delete_seats.php" method="post">
-    <p>id места <select name="id">
-        <?php
-        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
-        foreach ($db->query("select * from seats") as $row) {
-            echo "<option value={$row['id']}>{$row['id']}</option>";
-        }
-        ?>
-        </select></p>
+    <p>id места<label title="id места">
+            <select name="id">
+                <?php
+                $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
+                foreach ($db->query("select * from seats") as $row) {
+                    echo "<option value={$row['id']}>{$row['id']}</option>";
+                }
+                ?>
+            </select>
+        </label></p>
     <p><input type="submit"></p>
 </form>
 </body>

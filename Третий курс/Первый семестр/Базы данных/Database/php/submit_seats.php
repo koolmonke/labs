@@ -30,14 +30,14 @@ if (!empty($_POST)) {
                 ?>
             </select>
         </label></p>
-        <p>Номер ряда
-            <label title="Номер ряда">
-                <input type="number" name="row_index" value="">
-            </label></p>
-        <p>Номер места
-            <label title="Номер места">
-                <input type="number" name="seat_index" value="">
-            </label></p>
+    <p>Номер ряда
+        <label title="Номер ряда">
+            <input type="number" name="row_index" value="">
+        </label></p>
+    <p>Номер места
+        <label title="Номер места">
+            <input type="number" name="seat_index" value="">
+        </label></p>
     <p><input type="submit"></p>
 </form>
 </body>

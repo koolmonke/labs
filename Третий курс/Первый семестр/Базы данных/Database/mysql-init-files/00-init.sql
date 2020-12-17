@@ -3,9 +3,9 @@ use kinos;
 create table workers(
     id int not null auto_increment,
     primary key (id),
-    lastname varchar(256),
+    lastname varchar(256) not null,
     firstname varchar(256) not null,
-    middlename varchar(256)
+    dob date not null
 );
 
 create table movies(

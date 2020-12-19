@@ -30,7 +30,7 @@
                     ?>
                 </select>
             </label></p>
-        <label title="Название зала">
+        <label class="foreign_items" title="Название зала">
             Название зала <select name="cinema_halls_id">
                 <?php
                 $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');

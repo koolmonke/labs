@@ -20,7 +20,7 @@
     }
     ?>
     <form action="submit_seats.php" method="post">
-        <p>Название зала<label title="Название зала">
+        <p class="foreign_items">Название зала<label title="Название зала">
                 <select name="cinema_halls_id">
                     <?php
                     $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');

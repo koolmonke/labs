@@ -33,7 +33,6 @@
         <label class="foreign_items" title="Название зала">
             Название зала <select name="cinema_halls_id">
                 <?php
-                $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
                 foreach ($db->query("select * from cinema_halls") as $row) {
                     echo "<option value={$row['id']}>{$row['name_of_hall']}</option>";
                 }

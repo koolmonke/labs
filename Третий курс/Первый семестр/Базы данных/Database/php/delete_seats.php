@@ -10,11 +10,10 @@
 
 if (!empty($_POST)) {
     $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
-    print_r($_POST);
     $delete = $db->prepare("DELETE FROM seats WHERE id = :id");
 
     if ($delete->execute($_POST)) {
-        echo "Действие было совершено удачно";
+        echo "Действие было совершено успешно";
     } else {
         echo "Ошибка в запросе";
     }

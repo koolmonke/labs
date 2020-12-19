@@ -7,7 +7,6 @@
 <body>
 <div class="main_content">
     <?php
-
     if (!empty($_POST)) {
         $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
         $insert = $db->prepare("INSERT INTO seats (cinema_halls_id, row_index, seat_index) VALUES (:cinema_halls_id, :row_index, :seat_index)");

@@ -32,6 +32,9 @@ a {
 }
 
 .buttons {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    text-decoration: none;
     color: inherit;
     transition: color 0.5s linear;
     margin: 2px;

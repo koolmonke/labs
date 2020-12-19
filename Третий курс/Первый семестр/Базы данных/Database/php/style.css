@@ -1,0 +1,67 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+th {
+    padding: 15px;
+}
+
+table {
+    margin-bottom: 7rem;
+}
+
+html, body {
+    background-color: #1E2328;
+    color: #EBEBEB;
+    font-family: 'Work Sans', sans-serif;
+}
+
+a {
+    border: 1px solid grey;
+    padding: 5px;
+    text-decoration: none;
+
+}
+
+.main_content {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttons {
+    color: inherit;
+    transition: color 0.5s linear;
+    margin: 2px;
+}
+
+.buttons:hover {
+    color: #E44D26;
+    border-color: #E44D26;
+}
+
+.buttons_wrapper {
+    text-align: center;
+}
+
+.foreign_items {
+    color: #FED053;
+}
+
+input, select {
+    background-color: #EBEBEB;
+    border-color: #E44D26;
+    border-radius: 5px;
+    border-style: solid;
+    padding: 4px;
+}
+
+input[type="date"], input[type="time"] {
+    height: 15px;
+}
+
+li {
+    margin: 10px;
+}

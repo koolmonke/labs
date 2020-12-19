@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html lang="RU-ru">
 <head>
-    <title>Места</title>
+    <title>Все места</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<?php
-$db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
-echo "Все места:";
-echo '<table border="1" width="100%" cellpadding="5">';
-echo '<tr>';
-echo "<th>id</th>";
-echo "<th>Номер ряда</th>";
-echo "<th>Номер места</th>";
-echo "<th style='color: blue' '>Номер зала</th>";
-echo "<th style='color: blue' '>Название зала</th>";
-echo "<th style='color: blue' '>Описание зала</th>";
-echo "</tr>";
-foreach ($db->query('select seats.id as seats_pk, cinema_halls_id, row_index, seat_index, name_of_hall, description from kinos.seats join cinema_halls ch on ch.id = seats.cinema_halls_id order by seats_pk') as $row) {
-    echo '<tr>';
-    echo "<th>{$row['seats_pk']}</th>";
-    echo "<th>{$row['row_index']}</th>";
-    echo "<th>{$row['seat_index']}</th>";
-    echo "<th style='color: blue'>{$row['cinema_halls_id']}</th>";
-    echo "<th style='color: blue'>{$row['name_of_hall']}</th>";
-    echo "<th style='color: blue'>{$row['description']}</th>";
-    echo "</tr>";
-}
-echo "</table>";
+<div class="main_content">
+    <h2>Все места:</h2>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Номер ряда</th>
+            <th>Номер места</th>
+            <th class="foreign_items">Номер зала</th>
+            <th class="foreign_items">Название зала</th>
+            <th class="foreign_items">Описание зала</th>
+        </tr>
+        <?php
+        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
 
-?>
-<p><a target="_blank" href="submit_seats.php"> Добавить место </a></p>
-<p><a target="_blank" href="delete_seats.php"> Удалить место </a></p>
-<p><a target="_blank" href="update_seats.php"> Изменить место </a></p>
+        foreach ($db->query('select seats.id seats_pk, cinema_halls_id, row_index, seat_index, name_of_hall, description from kinos.seats join cinema_halls ch on ch.id = seats.cinema_halls_id order by seats_pk') as $row) {
+            echo '<tr>';
+            echo "<th>{$row['seats_pk']}</th>";
+            echo "<th>{$row['row_index']}</th>";
+            echo "<th>{$row['seat_index']}</th>";
+            echo "<th class='foreign_items'>{$row['cinema_halls_id']}</th>";
+            echo "<th class='foreign_items'>{$row['name_of_hall']}</th>";
+            echo "<th class='foreign_items'>{$row['description']}</th>";
+            echo "</tr>";
+        }
+        ?>
+    </table>
 
-<p><a target="_blank" href="queries.php"> Запросы к БД </a></p>
+    <div class="buttons_wrapper">
+        <a class="buttons" target="_blank" href="submit_seats.php"> Добавить место </a>
+        <a class="buttons" target="_blank" href="delete_seats.php"> Удалить место </a>
+        <a class="buttons" target="_blank" href="update_seats.php"> Изменить место </a>
+        <a class="buttons" target="_blank" href="queries.php"> Запросы к БД </a>
+    </div>
+</div>
 </body>
 </html>

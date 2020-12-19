@@ -7,8 +7,8 @@
 <body>
 <div class="main_content">
     <?php
+    $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
     if (!empty($_POST)) {
-        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
         $update = $db->prepare("update seats set cinema_halls_id = :cinema_halls_id, row_index = :row_index, seat_index = :seat_index where id = :id");
 
         $unique_seat_check = $db->prepare("select * from seats where row_index=? and seat_index=? and cinema_halls_id=?");
@@ -29,7 +29,6 @@
         <p>id места <label title="id места">
                 <select name="id">
                     <?php
-                    $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
                     foreach ($db->query("select * from seats") as $row) {
                         echo "<option value={$row['id']}>{$row['id']}</option>";
                     }

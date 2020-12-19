@@ -7,8 +7,8 @@
 <body>
 <div class="main_content">
     <?php
+    $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
     if (!empty($_POST)) {
-        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
         $delete = $db->prepare("DELETE FROM seats WHERE id = :id");
 
         if ($delete->execute($_POST)) {
@@ -23,7 +23,6 @@
         <p>id места<label title="id места">
                 <select name="id">
                     <?php
-                    $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
                     foreach ($db->query("select * from seats") as $row) {
                         echo "<option value={$row['id']}>{$row['id']}</option>";
                     }

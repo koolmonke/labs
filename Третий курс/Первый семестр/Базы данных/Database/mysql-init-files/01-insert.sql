@@ -48,6 +48,9 @@ VALUES (1, 1, 4);
 insert into seats (cinema_halls_id, row_index, seat_index)
 VALUES (1, 1, 5);
 
+insert into seats (cinema_halls_id, row_index, seat_index)
+VALUES (2, 1, 1);
+
 insert into movie_shows (start_of_show, movies_id, cinema_halls_id)
 VALUES ('2020-09-15 19:30:10', 1, 1);
 

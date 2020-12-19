@@ -28,7 +28,7 @@ VALUES ('01:55:00', '2020-09-15 19:30:10',
         'Ковбой Бипоп');
 
 insert into cinema_halls (name_of_hall, description)
-VALUES ('Первый зал', 'Первый зал');
+VALUES ('Первый зал', 'Основной зал');
 
 insert into cinema_halls (name_of_hall, description)
 VALUES ('Второй зал', 'Малый зал');

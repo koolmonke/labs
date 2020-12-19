@@ -7,7 +7,6 @@
 <body>
 <div class="main_content">
     <?php
-
     if (!empty($_POST)) {
         $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
         $delete = $db->prepare("DELETE FROM seats WHERE id = :id");

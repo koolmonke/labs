@@ -8,7 +8,6 @@
             <th>Описание зала</th>
         </tr>
         <?php
-
         $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
 
         foreach ($db->query('select * from cinema_halls') as $row) {

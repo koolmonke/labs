@@ -7,7 +7,6 @@
 <body>
 <table>
     <?php
-
     $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
     echo "Все фильмы:";
 

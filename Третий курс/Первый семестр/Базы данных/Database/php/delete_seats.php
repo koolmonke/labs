@@ -33,6 +33,7 @@
             </label></p>
         <p><input type="submit"></p>
     </form>
+    <a class="buttons" href="index.php">Назад</a>
 </div>
 </body>
 </html>

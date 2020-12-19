@@ -118,6 +118,8 @@
             </form>
         </li>
     </ol>
+    <a style="margin: 25px" class="buttons" href="index.php">Назад</a>
 </div>
+
 </body>
 </html>

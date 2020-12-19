@@ -39,6 +39,8 @@
                 <input type="number" name="seat_index" value="">
             </label></p>
         <p><input type="submit"></p>
+
+        <a class="buttons" href="index.php">Назад</a>
     </form>
 </div>
 </body>

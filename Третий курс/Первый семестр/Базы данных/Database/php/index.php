@@ -34,10 +34,10 @@
     </table>
 
     <div class="buttons_wrapper">
-        <a class="buttons" target="_blank" href="submit_seats.php">Добавить место</a>
-        <a class="buttons" target="_blank" href="delete_seats.php">Удалить место</a>
-        <a class="buttons" target="_blank" href="update_seats.php">Изменить место</a>
-        <a class="buttons" target="_blank" href="queries.php">Запросы к БД</a>
+        <a class="buttons" href="submit_seats.php">Добавить место</a>
+        <a class="buttons" href="delete_seats.php">Удалить место</a>
+        <a class="buttons" href="update_seats.php">Изменить место</a>
+        <a class="buttons" href="queries.php">Запросы к БД</a>
     </div>
 </div>
 </body>

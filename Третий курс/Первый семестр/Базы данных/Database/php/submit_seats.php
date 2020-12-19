@@ -25,7 +25,8 @@
     }
     ?>
     <form action="submit_seats.php" method="post">
-        <p class="foreign_items">Название зала<label title="Название зала">
+        <p class="foreign_items">
+            Название зала<label title="Название зала">
                 <select name="cinema_halls_id">
                     <?php
                     foreach ($db->query("select * from cinema_halls") as $row) {

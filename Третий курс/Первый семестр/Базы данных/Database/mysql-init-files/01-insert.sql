@@ -30,6 +30,9 @@ VALUES ('01:55:00', '2020-09-15 19:30:10',
 insert into cinema_halls (name_of_hall, description)
 VALUES ('Первый зал', 'Первый зал');
 
+insert into cinema_halls (name_of_hall, description)
+VALUES ('Второй зал', 'Малый зал');
+
 insert into seats (cinema_halls_id, row_index, seat_index)
 VALUES (1, 1, 1);
 

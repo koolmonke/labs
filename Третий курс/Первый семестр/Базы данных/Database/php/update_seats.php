@@ -11,8 +11,14 @@
         $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
         $update = $db->prepare("update seats set cinema_halls_id = :cinema_halls_id, row_index = :row_index, seat_index = :seat_index where id = :id");
 
-        if ($update->execute($_POST)) {
-            echo "Действие было совершено успешно";
+        $unique_seat_check = $db->prepare("select * from seats where row_index=? and seat_index=? and cinema_halls_id=?");
+        $unique_seat_check->execute([$_POST["row_index"], $_POST["seat_index"], $_POST['cinema_halls_id']]);
+        $duplicate_seats = $unique_seat_check->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!$duplicate_seats && $update->execute($_POST)) {
+            echo "Данные обновлены успешно";
+        } elseif ($duplicate_seats) {
+            echo "Ошибка в введеных данных: Место с данным номером ряда и номером места уже существуют";
         } else {
             echo "Ошибка в запросе";
         }

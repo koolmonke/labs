@@ -12,8 +12,14 @@
         $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
         $insert = $db->prepare("INSERT INTO seats (cinema_halls_id, row_index, seat_index) VALUES (:cinema_halls_id, :row_index, :seat_index)");
 
-        if ($insert->execute($_POST)) {
-            echo "Действие было совершено успешно";
+        $unique_seat_check = $db->prepare("select * from seats where row_index=:row_index and seat_index=:seat_index and cinema_halls_id=:cinema_halls_id");
+        $unique_seat_check->execute($_POST);
+        $duplicate_seats = $unique_seat_check->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!$duplicate_seats && $insert->execute($_POST)) {
+            echo "Данные введены успешно";
+        } elseif ($duplicate_seats) {
+            echo "Ошибка в введеных данных: Место с данным номером ряда и номером места уже существуют";
         } else {
             echo "Ошибка в запросе";
         }

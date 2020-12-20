@@ -15,7 +15,7 @@
         $unique_seat_check->execute([$_POST["row_index"], $_POST["seat_index"], $_POST['cinema_halls_id']]);
         $duplicate_seats = $unique_seat_check->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!$duplicate_seats && $update->execute($_POST)) {
+        if ($_POST['row_index'] > 0 && $_POST['seat_index'] > 0 && !$duplicate_seats && $update->execute($_POST)) {
             echo "Данные обновлены успешно";
         } elseif ($duplicate_seats) {
             echo "Ошибка в введеных данных: Место с данным номером ряда и номером места уже существуют";

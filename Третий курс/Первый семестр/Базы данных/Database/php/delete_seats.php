@@ -12,7 +12,7 @@
         $delete = $db->prepare("DELETE FROM seats WHERE id = :id");
 
         if ($delete->execute($_POST)) {
-            echo "Действие было совершено успешно";
+            echo "Данные удалены успешно";
         } else {
             echo "Ошибка в запросе";
         }

@@ -61,6 +61,22 @@ input, select {
     padding: 4px;
 }
 
+input[type="submit"] {
+    border: 1px solid grey;
+    padding: 5px;
+    border-radius: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: #1E2328;
+    transition: color 0.5s linear;
+    margin: 2px;
+}
+
+input[type="submit"]:hover {
+    color: #E44D26;
+    border-color: #E44D26;
+}
+
 input[type="date"], input[type="time"] {
     height: 15px;
 }

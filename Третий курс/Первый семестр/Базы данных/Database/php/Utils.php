@@ -1,8 +1,19 @@
 <?php
 
 
+use JetBrains\PhpStorm\Pure;
+
 class Utils
 {
+    public static function renderSelectQueryToTable(string $query, array $data): string
+    {
+        $db = Utils::getPDO();
+        $stmt = $db->prepare($query);
+        $stmt->execute($data);
+        $result = $stmt->fetchAll();
+        return $result ? Utils::renderTable($result) : "Запрос вернул пустой результат";
+    }
+
     public static function getPDO(): PDO
     {
         $options = [
@@ -10,5 +21,27 @@ class Utils
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ];
         return new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass', $options);
+    }
+
+    #[Pure] public static function renderTable(array $array): string
+    {
+        $html = '<table>';
+
+        $html .= '<tr>';
+        foreach ($array[0] as $key => $value) {
+            $html .= '<th>' . htmlspecialchars($key) . '</th>';
+        }
+        $html .= '</tr>';
+
+        foreach ($array as $key => $value) {
+            $html .= '<tr>';
+            foreach ($value as $key2 => $value2) {
+                $html .= '<td>' . htmlspecialchars($value2) . '</td>';
+            }
+            $html .= '</tr>';
+        }
+
+        $html .= '</table>';
+        return $html;
     }
 }

@@ -28,8 +28,16 @@
         <li>
             <form action="queries/count_seats_in_cinema_hall.php" method="post">
                 Количество мест в зале
-                <label title="№ зала">
-                    <input type="number" name="cinema_halls_id">
+                <label title="Название зала">
+                    <select name="cinema_halls_id">
+                        <?php
+                        include "Utils.php";
+                        $db = Utils::getPDO();
+                        foreach ($db->query("select * from cinema_halls") as $item) {
+                            echo "<option value={$item['id']}>{$item['name_of_hall']}</option>";
+                        }
+                        ?>
+                    </select>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
@@ -71,8 +79,6 @@
                 <label title="Название зала">
                     <select name="cinema_halls_id">
                         <?php
-                        include "Utils.php";
-                        $db = Utils::getPDO();
                         foreach ($db->query("select id, name_of_hall from cinema_halls order by id") as $row) {
                             echo "<option value={$row['id']}>{$row['name_of_hall']}</option>";
                         }

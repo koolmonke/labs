@@ -108,6 +108,14 @@
                 <input type="submit" value="Выполнить">
             </form>
         </li>
+        <li>
+            <form action="queries/top_n_ops_per_worker.php" method="post">
+                Топ <label title="Кол-во работников">
+                    <input type="number" min="1" name="n">
+                </label> работников по количествую операций
+                <input type="submit" value="Выполнить">
+            </form>
+        </li>
     </ol>
     <a style="margin: 25px" class="buttons" href="index.php">Назад</a>
 </div>

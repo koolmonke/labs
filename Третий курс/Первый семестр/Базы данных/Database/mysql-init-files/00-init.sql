@@ -45,16 +45,16 @@ create table movie_shows(
 );
 
 create table tickets(
-                        id int not null auto_increment,
-                        primary key (id),
-                        date_of_issue date,
-                        movie_show_id int not null references movie_shows(id),
-                        foreign key (movie_show_id) references movie_shows(id),
-                        seats_id int not null references seats(id),
-                        foreign key (seats_id) references seats(id),
-                        is_payed bool not null default (false),
-                        is_booked bool not null default (false),
-                        type_of_payment enum('картой', 'наличный расчет')
+    id int not null auto_increment,
+    primary key (id),
+    date_of_issue date,
+    movie_show_id int not null references movie_shows(id),
+    foreign key (movie_show_id) references movie_shows(id),
+    seats_id int not null references seats(id),
+    foreign key (seats_id) references seats(id),
+    is_payed bool not null default (false),
+    is_booked bool not null default (false),
+    type_of_payment enum('картой', 'наличный расчет')
 );
 
 create table ops_on_tickets(

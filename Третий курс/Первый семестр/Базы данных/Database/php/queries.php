@@ -71,7 +71,8 @@
                 <label title="Название зала">
                     <select name="cinema_halls_id">
                         <?php
-                        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
+                        include "Utils.php";
+                        $db = Utils::getPDO();
                         foreach ($db->query("select id, name_of_hall from cinema_halls order by id") as $row) {
                             echo "<option value={$row['id']}>{$row['name_of_hall']}</option>";
                         }

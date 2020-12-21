@@ -18,7 +18,8 @@
             <th class="foreign_items">Описание зала</th>
         </tr>
         <?php
-        $db = new PDO('mysql:host=db;dbname=kinos', 'devuser', 'devpass');
+        include "Utils.php";
+        $db = Utils::getPDO();
 
         foreach ($db->query('select seats.id seats_pk, cinema_halls_id, row_index, seat_index, name_of_hall, description from kinos.seats join cinema_halls ch on ch.id = seats.cinema_halls_id order by seats_pk') as $row) {
             echo '<tr>';

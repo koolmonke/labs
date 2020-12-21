@@ -12,7 +12,7 @@
             <form action="queries/lastnames.php" method="post">
                 Фамилии работников заканчивающиеся на
                 <label title="Фамилия">
-                    <input type="text" name="last_name">
+                    <input type="text" name="lastname">
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
@@ -81,16 +81,6 @@
                 </label>
                 <label title="Дата фильма">
                     <input type="date" name="date">
-                </label>
-                <input type="submit" value="Выполнить">
-            </form>
-        </li>
-
-        <li>
-            <form action="queries/most_ops_per_worker.php" method="post">
-                Сотрудники которые продали больше N кол-ва билетов
-                <label title="Кол-во билетов">
-                    <input type="number" name="amount_of_tickets">
                 </label>
                 <input type="submit" value="Выполнить">
             </form>

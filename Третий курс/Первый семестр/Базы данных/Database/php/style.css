@@ -53,15 +53,8 @@ a {
     color: #FED053;
 }
 
-input, select {
-    background-color: #EBEBEB;
-    border-color: #E44D26;
-    border-radius: 5px;
-    border-style: solid;
-    padding: 4px;
-}
 
-input[type="submit"] {
+input, select {
     border: 1px solid grey;
     padding: 5px;
     border-radius: 0;
@@ -72,13 +65,16 @@ input[type="submit"] {
     margin: 2px;
 }
 
-input[type="submit"]:hover {
+input[type ~= "submit"]:hover {
     color: #E44D26;
+}
+
+input:hover {
     border-color: #E44D26;
 }
 
 input[type="date"], input[type="time"] {
-    height: 15px;
+    height: 18px;
 }
 
 li {

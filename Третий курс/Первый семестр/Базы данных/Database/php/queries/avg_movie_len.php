@@ -2,10 +2,14 @@
 
 <div class="main_content">
     <?php
-    include "../Utils.php";
-    $query = "select sec_to_time(avg(time_to_sec(duration))) as avg_duration from movies";
-    echo Utils::renderSelectQueryToTable($query, []);
-    echo "<p>Запрос: $query</p>";
+    if (!empty($_POST)) {
+        include "../Utils.php";
+        $query = "select sec_to_time(avg(time_to_sec(duration))) as avg_duration from movies";
+        echo Utils::renderSelectQueryToTable($query, []);
+        echo "<p>Запрос: $query</p>";
+    } else {
+        echo "<p>Пустой запрос</p>";
+    }
     ?>
     <a class="buttons" href="../queries.php">Назад</a>
 </div>

@@ -13,8 +13,8 @@ table {
 }
 
 html, body {
-    background-color: #1E2328;
-    color: #EBEBEB;
+    background-color: #1e2328;
+    color: #ebebeb;
     font-family: 'Work Sans', sans-serif;
 }
 
@@ -22,7 +22,6 @@ a {
     border: 1px solid grey;
     padding: 5px;
     text-decoration: none;
-
 }
 
 .main_content {
@@ -41,8 +40,8 @@ a {
 }
 
 .buttons:hover {
-    color: #E44D26;
-    border-color: #E44D26;
+    color: #e44d26;
+    border-color: #e44d26;
 }
 
 .buttons_wrapper {
@@ -50,9 +49,8 @@ a {
 }
 
 .foreign_items {
-    color: #FED053;
+    color: #fed053;
 }
-
 
 input, select {
     border: 1px solid grey;
@@ -60,17 +58,17 @@ input, select {
     border-radius: 0;
     font-size: inherit;
     color: inherit;
-    background-color: #1E2328;
+    background-color: #1e2328;
     transition: color 0.5s linear;
     margin: 2px;
 }
 
 input[type ~= "submit"]:hover {
-    color: #E44D26;
+    color: #e44d26;
 }
 
 input:hover {
-    border-color: #E44D26;
+    border-color: #e44d26;
 }
 
 input[type="date"], input[type="time"] {

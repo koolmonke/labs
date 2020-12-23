@@ -132,6 +132,14 @@
                 <input type="submit" value="Выполнить">
             </form>
         </li>
+        <li>
+            <form action="queries/top_n_movies_by_amount_of_tickets_sold.php" method="post">
+                Топ <label title="Кол-во фильмов">
+                    <input type="number" min="1" name="n">
+                </label> фильмов по количеству проданных билетов
+                <input type="submit" value="Выполнить">
+            </form>
+        </li>
     </ol>
     <a style="margin: 25px" class="buttons" href="index.php">Назад</a>
 </div>

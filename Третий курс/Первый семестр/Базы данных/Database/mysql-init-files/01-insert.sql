@@ -54,8 +54,8 @@ VALUES (2, 1, 1);
 insert into movie_shows (start_of_show, movies_id, cinema_halls_id)
 VALUES ('2020-09-15 19:30:10', 1, 1);
 
-insert into tickets (id, date_of_issue, movie_show_id, seats_id, is_payed, is_booked, type_of_payment)
-VALUES (2, '2020-12-21', 1, 2, 1, 1, 'картой');
+insert into tickets (date_of_issue, movie_show_id, seats_id, is_payed, is_booked, type_of_payment)
+VALUES ('2020-12-21', 1, 2, 1, 1, 'картой');
 
 insert into kinos.ops_on_tickets (date_of_op, op_type, workers_id, ticket_id)
 VALUES ('2020-12-21 16:40:48', null, 1, 2);

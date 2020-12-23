@@ -17,14 +17,12 @@
                 <input type="submit" value="Выполнить">
             </form>
         </li>
-
         <li>
             <form action="queries/avg_movie_len.php" method="post">
                 Средняя длина фильма
                 <input type="submit" value="Выполнить">
             </form>
         </li>
-
         <li>
             <form action="queries/count_seats_in_cinema_hall.php" method="post">
                 Количество мест в зале
@@ -42,27 +40,36 @@
                 <input type="submit" value="Выполнить">
             </form>
         </li>
-
         <li>
             <form action="queries/movie_shows_on_date.php" method="post">
                 Все сеансы в конкретный день
                 <label title="Дата сеансов">
-                    <input type="date" name="date">
+                    <select name="date">
+                        <?php
+                        foreach ($db->query("select id, date(start_of_show) as new_start from movie_shows") as $item) {
+                            echo "<option value={$item['new_start']}>{$item['new_start']}</option>";
+                        }
+                        ?>
+                    </select>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
         </li>
-
         <li>
             <form action="queries/movies_newer_than_date.php" method="post">
                 Все фильмы, премьеры которых произошли после даты
                 <label title="Дата премьеры">
-                    <input type="date" name="date">
+                    <select name="date">
+                        <?php
+                        foreach ($db->query("select id, date(start_of_show) as new_start from movie_shows") as $item) {
+                            echo "<option value={$item['new_start']}>{$item['new_start']}</option>";
+                        }
+                        ?>
+                    </select>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
         </li>
-
         <li>
             <form action="queries/movies_shorter_than_time.php" method="post">
                 Все фильмы, которые короче какой-то продолжительности
@@ -72,7 +79,6 @@
                 <input type="submit" value="Выполнить">
             </form>
         </li>
-
         <li>
             <form action="queries/movies_in_specific_cinema_hall_and_date.php" method="post">
                 Все фильмы в определенном зале, в определенный день
@@ -86,12 +92,17 @@
                     </select>
                 </label>
                 <label title="Дата фильма">
-                    <input type="date" name="date">
+                    <select name="date">
+                        <?php
+                        foreach ($db->query("select id, date(start_of_show) as new_start from movie_shows") as $item) {
+                            echo "<option value={$item['new_start']}>{$item['new_start']}</option>";
+                        }
+                        ?>
+                    </select>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
         </li>
-
         <li>
             <form action="queries/tickets_by_type_of_payment.php" method="post">
                 Билеты по типу оплаты
@@ -104,7 +115,6 @@
                 <input type="submit" value="Выполнить">
             </form>
         </li>
-
         <li>
             <form action="queries/workers_older_than.php" method="post">
                 Работники старше определенного возраста

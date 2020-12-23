@@ -6,11 +6,14 @@
 </head>
 <body>
 <div class="main_content">
-    <form action="update_seats.php" method="post">
+    <?php
+    include "render_seats.php";
+    echo render_seats();
+    ?>
+    <form id="update_form" action="update_seats.php" method="post">
         <p>id места <label title="id места">
                 <select name="id">
                     <?php
-                    include "Utils.php";
                     $db = Utils::getPDO();
                     foreach ($db->query("select * from seats") as $row) {
                         echo "<option value={$row['id']}>{$row['id']}</option>";

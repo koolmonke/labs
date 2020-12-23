@@ -6,13 +6,15 @@
 </head>
 <body>
 <div class="main_content">
-
+    <?php
+    include "render_seats.php";
+    echo render_seats();
+    ?>
     <form action="submit_seats.php" method="post">
         <p class="foreign_items">
             Название зала<label title="Название зала">
                 <select name="cinema_halls_id">
                     <?php
-                    include "Utils.php";
                     $db = Utils::getPDO();
                     foreach ($db->query("select * from cinema_halls") as $row) {
                         echo "<option value={$row['id']}>{$row['name_of_hall']}</option>";

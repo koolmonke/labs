@@ -5,6 +5,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<script>
+    function update_values() {
+        const current_host = window.location.host;
+        const select_value = document.getElementById("id").value;
+        const request = async () => {
+            const response = await fetch(`http://${current_host}/api/get_seat_by_id.php?id=${select_value}`);
+            const json = await response.json();
+            console.log(json);
+            document.getElementById("row_index").value = json["row_index"];
+            document.getElementById("seat_index").value = json["seat_index"];
+            document.getElementById("cinema_halls_id").value = json["cinema_halls_id"];
+        }
+        request();
+    }
+
+    window.addEventListener('load', () => {
+        update_values();
+    });
+
+
+</script>
 <div class="main_content">
     <?php
     include "render_seats.php";
@@ -12,7 +33,7 @@
     ?>
     <form id="update_form" action="update_seats.php" method="post">
         <p>id места <label title="id места">
-                <select name="id">
+                <select onchange="update_values()" name="id" id="id">
                     <?php
                     $db = Utils::getPDO();
                     foreach ($db->query("select * from seats") as $row) {
@@ -22,7 +43,7 @@
                 </select>
             </label></p>
         <label class="foreign_items" title="Название зала">
-            Название зала <select name="cinema_halls_id">
+            Название зала <select name="cinema_halls_id" id="cinema_halls_id">
                 <?php
                 foreach ($db->query("select * from cinema_halls") as $row) {
                     echo "<option value={$row['id']}>{$row['name_of_hall']}</option>";
@@ -31,10 +52,10 @@
             </select>
         </label>
         <p>Номер ряда<label title="Номер ряда">
-                <input type="number" name="row_index" value="">
+                <input type="number" name="row_index" id="row_index" value="">
             </label></p>
         <p>Номер места<label title="Номер места">
-                <input type="number" name="seat_index" value="">
+                <input type="number" name="seat_index" id="seat_index" value="">
             </label></p>
         <p><input type="submit"></p>
     </form>

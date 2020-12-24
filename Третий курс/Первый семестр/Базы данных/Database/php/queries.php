@@ -10,7 +10,7 @@
     <ol>
         <li>
             <form action="queries/lastnames.php" method="post">
-                Фамилии работников заканчивающиеся на
+                Работники, фамилии которых заканчиваются на
                 <label title="Фамилия">
                     <input type="text" name="lastname">
                 </label>

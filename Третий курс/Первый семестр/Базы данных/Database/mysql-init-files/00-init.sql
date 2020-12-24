@@ -1,3 +1,5 @@
+create database if not exists kinos;
+
 use kinos;
 
 create table workers

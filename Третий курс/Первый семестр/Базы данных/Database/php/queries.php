@@ -46,7 +46,7 @@
                 <label title="Дата сеансов">
                     <select name="date">
                         <?php
-                        foreach ($db->query("select id, date(start_of_show) as new_start from movie_shows") as $item) {
+                        foreach ($db->query("select distinct date(start_of_show) as new_start from movie_shows order by new_start") as $item) {
                             echo "<option value={$item['new_start']}>{$item['new_start']}</option>";
                         }
                         ?>
@@ -61,7 +61,7 @@
                 <label title="Дата премьеры">
                     <select name="date">
                         <?php
-                        foreach ($db->query("select id, date(start_of_show) as new_start from movie_shows") as $item) {
+                        foreach ($db->query("select distinct date(start_of_show) as new_start from movie_shows order by new_start") as $item) {
                             echo "<option value={$item['new_start']}>{$item['new_start']}</option>";
                         }
                         ?>
@@ -94,7 +94,7 @@
                 <label title="Дата фильма">
                     <select name="date">
                         <?php
-                        foreach ($db->query("select id, date(start_of_show) as new_start from movie_shows") as $item) {
+                        foreach ($db->query("select distinct date(start_of_show) as new_start from movie_shows order by new_start") as $item) {
                             echo "<option value={$item['new_start']}>{$item['new_start']}</option>";
                         }
                         ?>

@@ -30,23 +30,24 @@
     <?php
     include "render_seats.php";
     $db = Utils::getPDO();
-    $result_message = null;
-    if (!empty($_POST)) {
-        $update = $db->prepare("update seats set cinema_halls_id = :cinema_halls_id, row_index = :row_index, seat_index = :seat_index where id = :id");
+    $result_message = (function ($db): string {
+        if (!empty($_POST)) {
+            $update = $db->prepare("update seats set cinema_halls_id = :cinema_halls_id, row_index = :row_index, seat_index = :seat_index where id = :id");
 
-        $unique_seat_check = $db->prepare("select * from seats where row_index=? and seat_index=? and cinema_halls_id=?");
-        $unique_seat_check->execute([$_POST["row_index"], $_POST["seat_index"], $_POST['cinema_halls_id']]);
-        $duplicate_seats = $unique_seat_check->fetchAll(PDO::FETCH_ASSOC);
-        if ($_POST['row_index'] > 0 && $_POST['seat_index'] > 0 && !$duplicate_seats && $update->execute($_POST)) {
-            $result_message = "Данные обновлены успешно";
-        } elseif ($duplicate_seats) {
-            $result_message = "Ошибка в введеных данных: Место с данным номером ряда и номером места уже существуют";
+            $unique_seat_check = $db->prepare("select * from seats where row_index=? and seat_index=? and cinema_halls_id=?");
+            $unique_seat_check->execute([$_POST["row_index"], $_POST["seat_index"], $_POST['cinema_halls_id']]);
+            $duplicate_seats = $unique_seat_check->fetchAll(PDO::FETCH_ASSOC);
+            if ($_POST['row_index'] > 0 && $_POST['seat_index'] > 0 && !$duplicate_seats && $update->execute($_POST)) {
+                return "Данные обновлены успешно";
+            } elseif ($duplicate_seats) {
+                return "Ошибка в введеных данных: Место с данным номером ряда и номером места уже существуют";
+            } else {
+                return "Ошибка в запросе";
+            }
         } else {
-            $result_message = "Ошибка в запросе";
+            return "Введите запрос";
         }
-    } else {
-        $result_message = "Введите запрос";
-    }
+    })($db);
     echo render_seats();
     ?>
     <form id="update_form" action="update_seats.php" method="post">

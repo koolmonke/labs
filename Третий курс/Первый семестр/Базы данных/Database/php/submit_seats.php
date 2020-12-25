@@ -9,24 +9,26 @@
     <?php
     include "render_seats.php";
     $db = Utils::getPDO();
-    $result_message = null;
-    if (!empty($_POST)) {
-        $insert = $db->prepare("INSERT INTO seats (cinema_halls_id, row_index, seat_index) VALUES (:cinema_halls_id, :row_index, :seat_index)");
+    $result_message = (function ($db): string {
+        if (!empty($_POST)) {
+            $insert = $db->prepare("INSERT INTO seats (cinema_halls_id, row_index, seat_index) VALUES (:cinema_halls_id, :row_index, :seat_index)");
 
-        $unique_seat_check = $db->prepare("select * from seats where row_index=:row_index and seat_index=:seat_index and cinema_halls_id=:cinema_halls_id");
-        $unique_seat_check->execute($_POST);
-        $duplicate_seats = $unique_seat_check->fetchAll(PDO::FETCH_ASSOC);
+            $unique_seat_check = $db->prepare("select * from seats where row_index=:row_index and seat_index=:seat_index and cinema_halls_id=:cinema_halls_id");
+            $unique_seat_check->execute($_POST);
+            $duplicate_seats = $unique_seat_check->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($_POST['row_index'] > 0 && $_POST['seat_index'] > 0 && !$duplicate_seats && $insert->execute($_POST)) {
-            $result_message = "Данные введены успешно";
-        } elseif ($duplicate_seats) {
-            $result_message = "Ошибка в введеных данных: Место с данным номером ряда и номером места уже существуют";
+            if ($_POST['row_index'] > 0 && $_POST['seat_index'] > 0 && !$duplicate_seats && $insert->execute($_POST)) {
+                return "Данные введены успешно";
+            } elseif ($duplicate_seats) {
+                return "Ошибка в введеных данных: Место с данным номером ряда и номером места уже существуют";
+            } else {
+                return "Ошибка в запросе";
+            }
         } else {
-            $result_message = "Ошибка в запросе";
+            return "Введите запрос";
         }
-    } else {
-        $result_message = "Введите запрос";
-    }
+    })($db);
+
     echo render_seats();
     ?>
     <form action="submit_seats.php" method="post">

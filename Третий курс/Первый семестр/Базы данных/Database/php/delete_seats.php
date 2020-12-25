@@ -9,18 +9,20 @@
     <?php
     include "render_seats.php";
     $db = Utils::getPDO();
-    $result_message = null;
-    if (!empty($_POST)) {
-        $delete = $db->prepare("DELETE FROM seats WHERE id = :id");
+    $result_message = (function ($db): string {
+        if (!empty($_POST)) {
+            $delete = $db->prepare("DELETE FROM seats WHERE id = :id");
 
-        if ($delete->execute($_POST)) {
-            $result_message = "Данные удалены успешно";
+            if ($delete->execute($_POST)) {
+                return "Данные удалены успешно";
+            } else {
+                return "Ошибка в запросе";
+            }
         } else {
-            $result_message = "Ошибка в запросе";
+            return "Введите запрос";
         }
-    } else {
-        $result_message = "Введите запрос";
-    }
+    })($db);
+
     echo render_seats();
     ?>
     <form action="delete_seats.php" method="post">

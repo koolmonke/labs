@@ -4,7 +4,7 @@
     <?php
     if (!empty($_POST)) {
         include "../Utils.php";
-        $query = "select firstname, lastname, truncate(datediff(curdate(), dob) / 365.25, 0) as age from workers where truncate(datediff(curdate(), dob) / 365.25, 0) > ?;";
+        $query = "select firstname, lastname, truncate(datediff(curdate(), dob) / 365.25, 0) as age from workers where truncate(datediff(curdate(), dob) / 365.25, 0) > ?";
         echo Utils::renderSelectQueryToTable($query, [$_POST["age"]]);
         echo "<p>Запрос: $query</p>";
     } else {

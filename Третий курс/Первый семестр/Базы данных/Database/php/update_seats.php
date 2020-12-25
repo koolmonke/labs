@@ -6,11 +6,16 @@
 </head>
 <body>
 <script>
-    function update_values() {
+    function update_onchange() {
+        const id = document.getElementById("id").value;
+        update_values(id);
+    }
+
+    function update_values(id) {
         const current_host = window.location.host;
-        const select_value = document.getElementById("id").value;
+
         const request = async () => {
-            const response = await fetch(`http://${current_host}/api/get_seat_by_id.php?id=${select_value}`);
+            const response = await fetch(`http://${current_host}/api/get_seat_by_id.php?id=${id}`);
             const json = await response.json();
             console.log(json);
             document.getElementById("row_index").value = json["row_index"];
@@ -21,7 +26,7 @@
     }
 
     window.addEventListener('load', () => {
-        update_values();
+        update_onchange();
     });
 
 
@@ -30,7 +35,7 @@
     <?php
     include "render_seats.php";
     $db = Utils::getPDO();
-    $result_message = (function ($db): string {
+    $post_result = (function ($db): array {
         if (!empty($_POST)) {
             $update = $db->prepare("update seats set cinema_halls_id = :cinema_halls_id, row_index = :row_index, seat_index = :seat_index where id = :id");
 
@@ -38,25 +43,29 @@
             $unique_seat_check->execute([$_POST["row_index"], $_POST["seat_index"], $_POST['cinema_halls_id']]);
             $duplicate_seats = $unique_seat_check->fetchAll(PDO::FETCH_ASSOC);
             if ($_POST['row_index'] > 0 && $_POST['seat_index'] > 0 && !$duplicate_seats && $update->execute($_POST)) {
-                return "Данные обновлены успешно";
+                return ["message" => "Данные обновлены успешно", "info" => null];
             } elseif ($duplicate_seats) {
-                return "Ошибка в введеных данных: Место с данным номером ряда и номером места уже существуют";
+                return ["message" => "Ошибка в введеных данных: Место с id={$duplicate_seats[0]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $_POST];
             } else {
-                return "Ошибка в запросе";
+                return ["message" => "Ошибка в запросе", "info" => null];
             }
         } else {
-            return "Введите запрос";
+            return ["message" => "Введите запрос", "info" => null];
         }
     })($db);
     echo render_seats();
     ?>
     <form id="update_form" action="update_seats.php" method="post">
         <p>id места <label title="id места">
-                <select onchange="update_values()" name="id" id="id">
+                <select onchange="update_onchange()" name="id" id="id">
                     <?php
-
                     foreach ($db->query("select * from seats") as $row) {
-                        echo "<option value={$row['id']}>{$row['id']}</option>";
+                        echo ($post_result !== null && $post_result["info"]["id"] == $row["id"])
+                            ?
+                            "<option selected value={$row['id']}>{$row['id']}</option>"
+                            :
+                            "<option value={$row['id']}>{$row['id']}</option>";
+
                     }
                     ?>
                 </select>
@@ -80,7 +89,7 @@
     </form>
     <p>
         <?php
-        echo $result_message;
+        echo $post_result["message"];
         ?>
     </p>
     <a class="buttons" href="index.php">Назад</a>

@@ -3,7 +3,8 @@
 include "Utils.php";
 function render_seats(): string
 {
-    $html = '<table>
+    $html = '<h2>Все места:</h2>
+        <table>
         <tr>
             <th>id</th>
             <th>Номер ряда</th>

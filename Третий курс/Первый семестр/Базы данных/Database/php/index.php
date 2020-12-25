@@ -7,7 +7,6 @@
 <body>
 
 <div class="main_content">
-    <h2>Все места:</h2>
     <?php
     include "render_seats.php";
     echo render_seats();

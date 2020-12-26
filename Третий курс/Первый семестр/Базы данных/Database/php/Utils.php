@@ -37,7 +37,7 @@ class Utils
         foreach ($array as $key => $value) {
             $html .= '<tr>';
             foreach ($value as $key2 => $value2) {
-                $html .= '<td>' . htmlspecialchars($value2) . '</td>';
+                $html .= '<th>' . htmlspecialchars($value2) . '</th>';
             }
             $html .= '</tr>';
         }

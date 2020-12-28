@@ -5,26 +5,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<script>
-    function update_values(id) {
-        const current_host = window.location.host;
-
-        const request = async (url) => {
-            const json = await fetch(url).then(response => response.json());
-            for (const k in json) {
-                if (json.hasOwnProperty(k) && document.getElementById(k) !== null) {
-                    document.getElementById(k).value = json[k];
-                }
-            }
-        }
-        request(`http://${current_host}/api/get_seat_by_id.php?id=${id}`);
-    }
-
-    window.addEventListener('load', () => {
-        const id = document.getElementById("id").value;
-        update_values(id);
-    });
-</script>
 <div class="main_content">
     <?php
     include "render_seats.php";
@@ -51,7 +31,7 @@
     ?>
     <form id="update_form" action="update_seats.php" method="post">
         <p>id места <label title="id места">
-                <select onchange="update_values(this.value)" name="id" id="id">
+                <select onchange="update(this.value)" name="id" id="id">
                     <?php
                     foreach ($db->query("select * from seats") as $row) {
                         echo ($post_result !== null && $post_result["info"]["id"] == $row["id"])
@@ -88,5 +68,14 @@
     </p>
     <a class="buttons" href="index.php">Назад</a>
 </div>
+<script src="app.js"></script>
+<script>
+    const update = (id) => update_values(`http://${host}/api/get_seat_by_id.php?id=${id}`);
+
+    window.addEventListener('load', () => {
+        const id = document.getElementById("id").value;
+        update(id);
+    });
+</script>
 </body>
 </html>

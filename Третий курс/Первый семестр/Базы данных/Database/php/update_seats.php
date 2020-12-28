@@ -9,23 +9,21 @@
     function update_values(id) {
         const current_host = window.location.host;
 
-        const request = async () => {
-            const json = await fetch(`http://${current_host}/api/get_seat_by_id.php?id=${id}`).then(response => response.json());
+        const request = async (url) => {
+            const json = await fetch(url).then(response => response.json());
             for (const k in json) {
                 if (json.hasOwnProperty(k) && document.getElementById(k) !== null) {
                     document.getElementById(k).value = json[k];
                 }
             }
         }
-        request();
+        request(`http://${current_host}/api/get_seat_by_id.php?id=${id}`);
     }
 
     window.addEventListener('load', () => {
         const id = document.getElementById("id").value;
         update_values(id);
     });
-
-
 </script>
 <div class="main_content">
     <?php

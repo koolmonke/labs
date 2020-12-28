@@ -34,11 +34,11 @@
                 <select onchange="update(this.value)" name="id" id="id">
                     <?php
                     foreach ($db->query("select * from seats") as $row) {
-                        echo ($post_result !== null && $post_result["info"]["id"] == $row["id"])
-                            ?
-                            "<option selected value={$row['id']}>{$row['id']}</option>"
-                            :
-                            "<option value={$row['id']}>{$row['id']}</option>";
+                        if (($post_result["info"] !== null && $post_result["info"]["id"] == $row["id"])) {
+                            echo "<option selected value={$row['id']}>{$row['id']}</option>";
+                        } else {
+                            echo "<option value={$row['id']}>{$row['id']}</option>";
+                        }
 
                     }
                     ?>

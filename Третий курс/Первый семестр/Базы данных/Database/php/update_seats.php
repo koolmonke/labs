@@ -6,27 +6,23 @@
 </head>
 <body>
 <script>
-    function update_onchange() {
-        const id = document.getElementById("id").value;
-        update_values(id);
-    }
-
     function update_values(id) {
         const current_host = window.location.host;
 
         const request = async () => {
-            const response = await fetch(`http://${current_host}/api/get_seat_by_id.php?id=${id}`);
-            const json = await response.json();
-            console.log(json);
-            document.getElementById("row_index").value = json["row_index"];
-            document.getElementById("seat_index").value = json["seat_index"];
-            document.getElementById("cinema_halls_id").value = json["cinema_halls_id"];
+            const json = await fetch(`http://${current_host}/api/get_seat_by_id.php?id=${id}`).then(response => response.json());
+            for (const k in json) {
+                if (json.hasOwnProperty(k) && document.getElementById(k) !== null) {
+                    document.getElementById(k).value = json[k];
+                }
+            }
         }
         request();
     }
 
     window.addEventListener('load', () => {
-        update_onchange();
+        const id = document.getElementById("id").value;
+        update_values(id);
     });
 
 
@@ -57,7 +53,7 @@
     ?>
     <form id="update_form" action="update_seats.php" method="post">
         <p>id места <label title="id места">
-                <select onchange="update_onchange()" name="id" id="id">
+                <select onchange="update_values(this.value)" name="id" id="id">
                     <?php
                     foreach ($db->query("select * from seats") as $row) {
                         echo ($post_result !== null && $post_result["info"]["id"] == $row["id"])

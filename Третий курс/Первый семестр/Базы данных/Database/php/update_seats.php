@@ -70,7 +70,7 @@
 </div>
 <script src="app.js"></script>
 <script>
-    const update = (id) => update_values(`http://${host}/api/get_seat_by_id.php?id=${id}`);
+    const update = (id) => update_values(`${location.protocol}//${host}/api/get_seat_by_id.php?id=${id}`);
 
     window.addEventListener('load', () => {
         const id = document.getElementById("id").value;

@@ -33,5 +33,3 @@ services:
     depends_on:
       - web
       - db
-    volumes:
-    - ./Caddyfile:/etc/caddy/Caddyfile

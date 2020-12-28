@@ -61,7 +61,7 @@ create table tickets
     seats_id        int  not null references seats (id),
     foreign key (seats_id) references seats (id),
     is_payed        bool not null default (false),
-    is_booked       bool not null default (false),
+    is_booked       bool not null default (true),
     type_of_payment enum ('картой', 'наличный расчет')
 );
 

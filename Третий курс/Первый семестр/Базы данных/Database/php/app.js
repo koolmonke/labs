@@ -1,7 +1,7 @@
 const host = window.location.host;
 
 const update_values = (url) => {
-    const request = async (url) => {
+    const request = async () => {
         const json = await fetch(url).then(response => response.json());
         for (const jsonKey in json) {
             if (json.hasOwnProperty(jsonKey) && document.getElementById(jsonKey) !== null) {
@@ -9,5 +9,5 @@ const update_values = (url) => {
             }
         }
     }
-    return request(url);
+    return request();
 };

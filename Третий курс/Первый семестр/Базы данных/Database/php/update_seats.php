@@ -68,7 +68,7 @@
     </p>
     <a class="buttons" href="index.php">Назад</a>
 </div>
-<script src="app.js"></script>
+<script src="update_values.js"></script>
 <script>
     const update = (id) => update_values(`${location.protocol}//${host}/api/get_seat_by_id.php?id=${id}`);
 

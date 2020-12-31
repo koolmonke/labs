@@ -124,6 +124,7 @@ class CRUD
         <input name="update" value="Обновить" type="submit">
         <input name="delete" value="Удалить" type="submit">
     </form>
+        <a class="buttons" href="queries.php">Запросы к БД</a>
     <?php
     echo "<p>{$crud_query_response["message"]}</p>";
     ?>

@@ -12,7 +12,7 @@
             <form action="queries/lastnames.php" method="post">
                 Работники, фамилии которых заканчиваются на
                 <label title="Фамилия">
-                    <input type="text" name="lastname">
+                    <input type="text" name="lastname" required>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
@@ -74,7 +74,7 @@
             <form action="queries/movies_shorter_than_time.php" method="post">
                 Все фильмы, которые короче какой-то продолжительности
                 <label title="Продолжительности фильма">
-                    <input type="time" name="length">
+                    <input type="time" name="length" required>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
@@ -119,7 +119,7 @@
             <form action="queries/workers_older_than.php" method="post">
                 Работники старше определенного возраста
                 <label title="Возраст">
-                    <input type="number" min="16" name="age">
+                    <input type="number" min="16" name="age" required>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
@@ -127,7 +127,7 @@
         <li>
             <form action="queries/top_n_ops_per_worker.php" method="post">
                 Топ <label title="Кол-во работников">
-                    <input type="number" min="1" name="n">
+                    <input type="number" min="1" name="n" required>
                 </label> работников по количествую операций
                 <input type="submit" value="Выполнить">
             </form>
@@ -135,7 +135,7 @@
         <li>
             <form action="queries/top_n_movies_by_amount_of_tickets_sold.php" method="post">
                 Топ <label title="Кол-во фильмов">
-                    <input type="number" min="1" name="n">
+                    <input type="number" min="1" name="n" required>
                 </label> фильмов по количеству проданных билетов
                 <input type="submit" value="Выполнить">
             </form>

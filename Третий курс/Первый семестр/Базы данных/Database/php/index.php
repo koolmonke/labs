@@ -79,11 +79,11 @@ class CRUD
         }
     }
 
-    #[ArrayShape(["message" => "string"])] public function delete(int $id): array
+    #[ArrayShape(["message" => "string", "info" => "?string"])] public function delete(int $id): array
     {
         $delete = $this->db->prepare("DELETE FROM seats WHERE id = ?");
 
-        return ["message" => $delete->execute([$id]) ? "Данные удалены успешно" : "Ошибка в запросе"];
+        return ["message" => $delete->execute([$id]) ? "Данные удалены успешно" : "Ошибка в запросе", "info" => null];
     }
 
 }
@@ -108,6 +108,8 @@ class CRUD
         default => ["message" => "Введите запрос"],
     };
     echo $crud->renderTable($crud_query_response['info'] ?? null);
+    $classes = "status " . ($crud_query_response["message"] != "Введите запрос" ? (isset($crud_query_response["info"]) ? "failure" : "success") : "");
+    echo "<p class='{$classes}'>{$crud_query_response["message"]}</p>";
     ?>
     <form id="crud_form" action="/" method="post">
         <p class="foreign_items">Название зала <label title="cinema_halls_id"><select name="cinema_halls_id"
@@ -124,10 +126,7 @@ class CRUD
         <input name="update" value="Обновить" type="submit">
         <input name="delete" value="Удалить" type="submit">
     </form>
-        <a class="buttons" href="queries.php">Запросы к БД</a>
-    <?php
-    echo "<p>{$crud_query_response["message"]}</p>";
-    ?>
+    <a class="buttons" href="queries.php">Запросы к БД</a>
 </div>
 <script src="update_values.js"></script>
 <script>

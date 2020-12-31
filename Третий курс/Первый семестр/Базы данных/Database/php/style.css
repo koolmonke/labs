@@ -93,3 +93,14 @@ input[type="date"], input[type="time"] {
 li {
     margin: 10px;
 }
+
+.status {
+    font-size: larger;
+}
+
+.success {
+    color: #adff2f;
+}
+.failure {
+    color: #ff1c1c;
+}

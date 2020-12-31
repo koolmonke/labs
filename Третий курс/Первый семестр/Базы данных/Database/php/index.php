@@ -112,7 +112,7 @@ class CRUD
     echo "<p class='{$classes}'>{$crud_query_response["message"]}</p>";
     ?>
     <form id="crud_form" action="/" method="post">
-        <p class="foreign_items">Название зала <label title="cinema_halls_id"><select name="cinema_halls_id"
+        <p class="foreign_items">Название зала <label title="Название зала"><select name="cinema_halls_id"
                                                                                       id="cinema_halls_id">
                     <?php
                     foreach ($db->query("select * from cinema_halls") as $item) {

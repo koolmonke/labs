@@ -44,8 +44,23 @@ a {
     border-color: #e44d26;
 }
 
-.buttons_wrapper {
-    text-align: center;
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 0;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #ebebeb;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid white;
+}
+
+input[type='radio']:checked:after {
+    background-color: #e44d26;
+
 }
 
 .foreign_items {

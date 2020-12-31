@@ -1,5 +1,3 @@
-const host = window.location.host;
-
 const update_values = (url) => {
     const request = async () => {
         const json = await fetch(url).then(response => response.json());

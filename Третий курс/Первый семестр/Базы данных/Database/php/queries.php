@@ -44,13 +44,18 @@
             <form action="queries/movie_shows_on_date.php" method="post">
                 Все сеансы в конкретный день
                 <label title="Дата сеансов">
-                    <select name="date">
-                        <?php
+                    <?php
+                    function movie_shows_dates_to_options_menu(PDO $db)
+                    {
+                        echo "<select name=\"date\">";
                         foreach ($db->query("select distinct date(start_of_show) as new_start from movie_shows order by new_start") as $item) {
                             echo "<option value={$item['new_start']}>{$item['new_start']}</option>";
                         }
-                        ?>
-                    </select>
+                        echo "</select>";
+                    }
+
+                    movie_shows_dates_to_options_menu($db);
+                    ?>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
@@ -59,13 +64,9 @@
             <form action="queries/movies_newer_than_date.php" method="post">
                 Все фильмы, премьеры которых произошли после даты
                 <label title="Дата премьеры">
-                    <select name="date">
-                        <?php
-                        foreach ($db->query("select distinct date(start_of_show) as new_start from movie_shows order by new_start") as $item) {
-                            echo "<option value={$item['new_start']}>{$item['new_start']}</option>";
-                        }
-                        ?>
-                    </select>
+                    <?php
+                    movie_shows_dates_to_options_menu($db);
+                    ?>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>
@@ -92,13 +93,9 @@
                     </select>
                 </label>
                 <label title="Дата фильма">
-                    <select name="date">
-                        <?php
-                        foreach ($db->query("select distinct date(start_of_show) as new_start from movie_shows order by new_start") as $item) {
-                            echo "<option value={$item['new_start']}>{$item['new_start']}</option>";
-                        }
-                        ?>
-                    </select>
+                    <?php
+                    movie_shows_dates_to_options_menu($db);
+                    ?>
                 </label>
                 <input type="submit" value="Выполнить">
             </form>

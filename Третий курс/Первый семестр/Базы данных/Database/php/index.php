@@ -56,9 +56,9 @@ class CRUD
         $update = $this->db->prepare("update seats set cinema_halls_id = ?, row_index = ?, seat_index = ? where id = ?");
 
         $uniqueSeatCheck = $this->uniqueSeatCheck($row_index, $seat_index, $cinema_halls_id);
-        if ($row_index > 0 && $seat_index > 0 && !$uniqueSeatCheck["duplicate_exist"] && $update->execute([$cinema_halls_id, $row_index, $seat_index, $id])) {
+        if ($row_index > 0 && $seat_index > 0 && !($uniqueSeatCheck["duplicate_exist"] && $uniqueSeatCheck["duplicate_seat"]["id"] != $id) && $update->execute([$cinema_halls_id, $row_index, $seat_index, $id])) {
             return ["message" => "Данные обновлены успешно", "info" => null];
-        } elseif ($uniqueSeatCheck["duplicate_exist"]) {
+        } elseif ($uniqueSeatCheck["duplicate_exist"] && $uniqueSeatCheck["duplicate_seat"]["id"] != $id) {
             return ["message" => "Ошибка в введеных данных: Место с id={$uniqueSeatCheck["duplicate_seat"]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $id];
         } else {
             return ["message" => "Ошибка в запросе", "info" => null];

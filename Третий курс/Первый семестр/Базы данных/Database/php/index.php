@@ -65,15 +65,15 @@ class CRUD
         }
     }
 
-    #[ArrayShape(["message" => "string", "info" => "?string"])] public function create(int $row_index, int $seat_index, int $cinema_halls_id): array
+    #[ArrayShape(["message" => "string", "info" => "?int"])] public function create(int $row_index, int $seat_index, int $cinema_halls_id): array
     {
         $insert = $this->db->prepare("INSERT INTO seats (cinema_halls_id, row_index, seat_index) VALUES (?, ?, ?)");
 
         $uniqueSeatCheck = $this->uniqueSeatCheck($row_index, $seat_index, $cinema_halls_id);
         if ($row_index > 0 && $seat_index > 0 && !$uniqueSeatCheck["duplicate_exist"] && $insert->execute([$cinema_halls_id, $row_index, $seat_index])) {
             return ["message" => "Данные введены успешно", "info" => null];
-        } elseif ($uniqueSeatCheck) {
-            return ["message" => "Ошибка в введеных данных: Место с id={$uniqueSeatCheck["duplicate_seat"]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $uniqueSeatCheck];
+        } elseif ($uniqueSeatCheck["duplicate_exist"]) {
+            return ["message" => "Ошибка в введеных данных: Место с id={$uniqueSeatCheck["duplicate_seat"]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $uniqueSeatCheck["duplicate_seat"]["id"]];
         } else {
             return ["message" => "Ошибка в запросе", "info" => null];
         }
@@ -113,7 +113,7 @@ class CRUD
     ?>
     <form id="crud_form" action="/" method="post">
         <p class="foreign_items">Название зала <label title="Название зала"><select name="cinema_halls_id"
-                                                                                      id="cinema_halls_id">
+                                                                                    id="cinema_halls_id">
                     <?php
                     foreach ($db->query("select * from cinema_halls") as $item) {
                         echo "<option value={$item['id']}>{$item['name_of_hall']}</option>";
@@ -132,15 +132,11 @@ class CRUD
 <script>
     const update_form = (id) => update_values(`/api/get_seat_by_id.php?id=${id}`);
 
-    <?php
-    $autocomplete_onload = "window.addEventListener('load', () => {
-        const id = document.getElementById(\"id\").value;
-        update_form(id);
-    });";
-    if ($crud_query_response['info'] ?? false) {
-        echo $autocomplete_onload;
-    }
-    ?>
+    window.addEventListener('load', () => {
+        for (const radioButton of document.getElementsByName("id")) {
+            if (radioButton.checked) update_form(radioButton.value)
+        }
+    });
 </script>
 </body>
 </html>

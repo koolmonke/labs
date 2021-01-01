@@ -59,7 +59,7 @@ class CRUD
         if ($row_index > 0 && $seat_index > 0 && !($uniqueSeatCheck["duplicate_exist"] && $uniqueSeatCheck["duplicate_seat"]["id"] != $id) && $update->execute([$cinema_halls_id, $row_index, $seat_index, $id])) {
             return ["message" => "Данные обновлены успешно", "info" => null];
         } elseif ($uniqueSeatCheck["duplicate_exist"] && $uniqueSeatCheck["duplicate_seat"]["id"] != $id) {
-            return ["message" => "Ошибка в введеных данных: Место с id={$uniqueSeatCheck["duplicate_seat"]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $id];
+            return ["message" => "Ошибка в введенных данных: Место с id={$uniqueSeatCheck["duplicate_seat"]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $id];
         } else {
             return ["message" => "Ошибка в запросе", "info" => null];
         }
@@ -73,7 +73,7 @@ class CRUD
         if ($row_index > 0 && $seat_index > 0 && !$uniqueSeatCheck["duplicate_exist"] && $insert->execute([$cinema_halls_id, $row_index, $seat_index])) {
             return ["message" => "Данные введены успешно", "info" => null];
         } elseif ($uniqueSeatCheck["duplicate_exist"]) {
-            return ["message" => "Ошибка в введеных данных: Место с id={$uniqueSeatCheck["duplicate_seat"]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $uniqueSeatCheck["duplicate_seat"]["id"]];
+            return ["message" => "Ошибка в введенных данных: Место с id={$uniqueSeatCheck["duplicate_seat"]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $uniqueSeatCheck["duplicate_seat"]["id"]];
         } else {
             return ["message" => "Ошибка в запросе", "info" => null];
         }

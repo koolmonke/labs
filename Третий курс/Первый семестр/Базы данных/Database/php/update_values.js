@@ -6,6 +6,6 @@ const update_values = (url) => {
                 document.getElementById(jsonKey).value = json[jsonKey];
             }
         }
-    }
+    };
     return request();
 };

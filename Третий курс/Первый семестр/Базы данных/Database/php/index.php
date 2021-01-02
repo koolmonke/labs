@@ -30,7 +30,7 @@ class CRUD
         foreach ($this->db->query("select seats.id seats_pk, cinema_halls_id, row_index, seat_index, name_of_hall, description from seats join cinema_halls ch on ch.id = seats.cinema_halls_id order by seats_pk") as $row) {
             $checked = $selected_seats_pk == $row["seats_pk"] ? "checked" : "";
             $html .= "<tr>
-                        <th><input type='radio' {$checked} form='crud_form' name='id' id='id' onchange='update_form(this.value)' value={$row['seats_pk']}></th>
+                        <th><input type='radio' {$checked} form='crud_form' name='id' onchange='update_form(this.value)' value={$row['seats_pk']}></th>
                         <th>{$row['seats_pk']}</th>
                         <th>{$row['row_index']}</th>
                         <th>{$row['seat_index']}</th>

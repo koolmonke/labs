@@ -134,7 +134,10 @@ class CRUD
 
     window.addEventListener('load', () => {
         for (const radioButton of document.getElementsByName("id")) {
-            if (radioButton.checked) update_form(radioButton.value)
+            if (radioButton.checked) {
+                update_form(radioButton.value);
+                break;
+            }
         }
     });
 </script>

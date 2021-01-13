@@ -108,7 +108,7 @@ class CRUD
         default => ["message" => "Введите запрос"],
     };
     echo $crud->renderTable($crud_query_response['info'] ?? null);
-    $classes = "status " . ($crud_query_response["message"] != "Введите запрос" ? (isset($crud_query_response["info"]) ? "failure" : "success") : "");
+    $classes = "status" . ($crud_query_response["message"] != "Введите запрос" ? (isset($crud_query_response["info"]) ? " failure" : " success") : "");
     echo "<p class='{$classes}'>{$crud_query_response["message"]}</p>";
     ?>
     <form id="crud_form" action="/" method="post">

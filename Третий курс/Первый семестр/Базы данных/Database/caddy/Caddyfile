@@ -1,3 +1,4 @@
 kinos.nicethingsdonehere.tk
+encode gzip
 
 reverse_proxy web:80

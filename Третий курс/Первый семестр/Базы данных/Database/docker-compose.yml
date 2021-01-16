@@ -20,7 +20,6 @@ services:
       retries: 10
   web:
     build: .
-    container_name: php_web
     depends_on:
       - db
     volumes:

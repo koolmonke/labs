@@ -61,7 +61,7 @@ class CRUD
         } elseif ($uniqueSeatCheck["duplicate_exist"] && $uniqueSeatCheck["duplicate_seat"]["id"] != $id) {
             return ["message" => "Ошибка в введенных данных: Место с id={$uniqueSeatCheck["duplicate_seat"]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $id];
         } else {
-            return ["message" => "Ошибка в запросе", "info" => null];
+            return ["message" => "Ошибка в запросе", "info" => [$row_index, $seat_index, $cinema_halls_id]];
         }
     }
 
@@ -75,7 +75,7 @@ class CRUD
         } elseif ($uniqueSeatCheck["duplicate_exist"]) {
             return ["message" => "Ошибка в введенных данных: Место с id={$uniqueSeatCheck["duplicate_seat"]["id"]} уже содержит данные с этим номером ряда и номером места", "info" => $uniqueSeatCheck["duplicate_seat"]["id"]];
         } else {
-            return ["message" => "Ошибка в запросе", "info" => null];
+            return ["message" => "Ошибка в запросе", "info" => [$row_index, $seat_index, $cinema_halls_id]];
         }
     }
 

@@ -36,8 +36,8 @@ create table seats
     primary key (id),
     cinema_halls_id int not null references cinema_halls (id),
     foreign key (cinema_halls_id) references cinema_halls (id),
-    row_index       int not null,
-    seat_index      int not null
+    row_index       int not null check ( row_index > 0 ),
+    seat_index      int not null check ( seat_index > 0 )
 );
 
 create table movie_shows

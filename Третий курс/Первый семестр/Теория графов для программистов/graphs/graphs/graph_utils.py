@@ -10,7 +10,7 @@ PathOut = List[T]
 
 
 def dfs(graph: GraphIn[T], start: T, end: T) -> Iterator[PathOut[T]]:
-    """Find all possible pathes from start to end in graph"""
+    """Find all possible paths from start to end in graph"""
     fringe: List[Tuple[T, List[T]]] = [(start, [])]
     while fringe:
         state, path = fringe.pop()

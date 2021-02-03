@@ -18,9 +18,8 @@ def dfs(graph: GraphIn[T], start: T, end: T) -> Iterator[PathOut[T]]:
             yield path
             continue
         for next_state in graph[state]:
-            if next_state in path:
-                continue
-            fringe.append((next_state, path + [next_state]))
+            if next_state not in path:
+                fringe.append((next_state, path + [next_state]))
 
 
 def find_cycles(graph: GraphIn[T]) -> Iterator[PathOut[T]]:

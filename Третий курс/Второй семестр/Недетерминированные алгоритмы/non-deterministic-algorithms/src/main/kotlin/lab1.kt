@@ -1,6 +1,9 @@
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import java.io.File
 
-
+@Serializable
 data class Item(val price: Int, val weight: Int)
 
 typealias Items = List<Item>
@@ -17,10 +20,7 @@ fun takeWhileBackpackIsNotFull(sizeOfBackpack: Int, items: Items): Items =
 fun main(args: Array<String>) {
     if (args.size == 2) {
         val filename = args[0]
-        val items = File(filename).readLines().map {
-            val line = it.split(" ")
-            Item(line[0].toInt(), line[1].toInt())
-        }
+        val items = Json.decodeFromString<List<Item>>(File(filename).readText())
         val sizeOfBackpack = args[1].toInt()
         println(items)
         println(orderedByPricePerKilo(sizeOfBackpack, items))

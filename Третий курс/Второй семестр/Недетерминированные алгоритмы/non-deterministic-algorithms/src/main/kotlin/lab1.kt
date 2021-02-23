@@ -11,7 +11,7 @@ typealias Items = List<Item>
 fun random(sizeOfBackpack: Int, items: Items) = takeWhileBackpackIsNotFull(sizeOfBackpack, items.shuffled())
 
 fun orderedByPricePerKilo(sizeOfBackpack: Int, items: Items) =
-    takeWhileBackpackIsNotFull(sizeOfBackpack, items.sortedByDescending { item -> item.price / item.weight })
+    takeWhileBackpackIsNotFull(sizeOfBackpack, items.sortedByDescending { it.price / it.weight })
 
 fun takeWhileBackpackIsNotFull(sizeOfBackpack: Int, items: Items): Items =
     items.zip(items.runningFold(0) { acc, item -> acc + item.weight }).takeWhile { it.second < sizeOfBackpack }

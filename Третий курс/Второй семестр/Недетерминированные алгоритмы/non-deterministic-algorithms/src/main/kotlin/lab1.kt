@@ -20,7 +20,7 @@ fun takeWhileBackpackIsNotFull(sizeOfBackpack: Int, items: Items): Items =
 fun main(args: Array<String>) {
     if (args.size == 2) {
         val filename = args[0]
-        val items = Json.decodeFromString<List<Item>>(File(filename).readText())
+        val items = Json.decodeFromString<Items>(File(filename).readText())
         val sizeOfBackpack = args[1].toInt()
         println(items)
         println(orderedByPricePerKilo(sizeOfBackpack, items))

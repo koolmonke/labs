@@ -26,6 +26,6 @@ fun main(args: Array<String>) {
         println(orderedByPricePerKilo(sizeOfBackpack, items))
         println(random(sizeOfBackpack, items))
     } else {
-        println("Первый аргумент название, второй размер рюкзака")
+        println("Первый аргумент путь до файла, второй размер рюкзака")
     }
 }

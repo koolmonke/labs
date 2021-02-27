@@ -30,8 +30,8 @@ fun main(args: Array<String>) {
         val items = Json.decodeFromString<Items>(File(filename).readText())
         val sizeOfBackpack = args[1].toInt()
         val backpack = Backpack(sizeOfBackpack)
-        println(backpack.fill(items))
         println(items)
+        println(backpack.fill(items))
     } else {
         println("Первый аргумент путь до файла, второй размер рюкзака")
     }

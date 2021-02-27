@@ -24,18 +24,6 @@ data class Backpack(val sizeOfBackpack: Weight) {
     }
 }
 
-fun random(sizeOfBackpack: Weight, items: Items) = takeWhileBackpackIsNotFull(sizeOfBackpack, items.shuffled())
-
-fun orderedByPricePerKilo(sizeOfBackpack: Weight, items: Items) =
-    takeWhileBackpackIsNotFull(sizeOfBackpack, items.sortedByDescending { it.price / it.weight })
-
-fun orderByWeight(sizeOfBackpack: Weight, items: Items) =
-    takeWhileBackpackIsNotFull(sizeOfBackpack, items.sortedBy { it.weight })
-
-fun takeWhileBackpackIsNotFull(sizeOfBackpack: Weight, items: Items): Items =
-    items.zip(items.runningFold(0) { acc, item -> acc + item.weight }).takeWhile { it.second < sizeOfBackpack }
-        .dropLast(1).map(Pair<Item, Int>::first)
-
 fun main(args: Array<String>) {
     if (args.size == 2) {
         val filename = args[0]

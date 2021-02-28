@@ -7,7 +7,7 @@ class GFG(private val maxN: Int) {
     private val gr = Array(maxN) { BooleanArray(maxN) }
 
     // Returns true if there is a possible subset
-    // of size 'k' that can be a vertex cover 
+    // of size 'k' that can be a vertex cover
     fun isCover(V: Int, k: Int, E: Int): Boolean {
         // Set has first 'k' bits high initially
         var set = (1 shl k) - 1
@@ -87,13 +87,13 @@ class GFG(private val maxN: Int) {
 
 fun main() {
     /*
-        6
-    /
-    1 ----- 5 vertex cover = {1, 2}
+     6
+     |
+     1 --- 5 vertex cover = {1, 2}
     /|\
-    3 | \
-    \ | \
-    2 4 */
+   3 | \
+   \ /  \
+    2    4 */
 
     GFG(7).run {
         val v = 6
@@ -109,11 +109,11 @@ fun main() {
 
 
     /*
-    2 ---- 4 ---- 6
-    /|     |
-    1 |     | vertex cover = {2, 3, 4}
-    \ |     |
-    3 ---- 5 */
+     2----4----6
+    /|    |
+   1 |    | vertex cover = {2, 3, 4}
+    \|    |
+     3----5 */
     GFG(7).run {
         val v = 6
         val e = 7

@@ -67,6 +67,12 @@ class GFG(private val maxN: Int) {
 
     // Returns answer to graph stored in gr[][]
     fun findMinCover(n: Int, m: Int): Int {
+        gr.forEach { booleans ->
+            booleans.forEach {
+            print("${if(it) 1 else 0} ")
+        }
+            println()
+        }
         // Binary search the answer
         var left = 1
         var right = n
@@ -105,8 +111,9 @@ fun main() {
     GFG(7).run {
         val v = 6
         val e = 6
-        Json.decodeFromString<List<Edge>>(File("docs/lab2/example1.json").readText())
-            .forEach { insertEdge(it.u, it.v) }
+        for (edge in Json.decodeFromString<List<Edge>>(File("docs/lab2/example1.json").readText())) {
+            insertEdge(edge.u, edge.v)
+        }
         println("Minimum size of a vertex cover = ${findMinCover(v, e)}")
     }
 
@@ -120,8 +127,9 @@ fun main() {
     GFG(7).run {
         val v = 6
         val e = 7
-        Json.decodeFromString<List<Edge>>(File("docs/lab2/example2.json").readText())
-            .forEach { insertEdge(it.u, it.v) }
+        for (edge in Json.decodeFromString<List<Edge>>(File("docs/lab2/example2.json").readText())) {
+            insertEdge(edge.u, edge.v)
+        }
         println("Minimum size of a vertex cover = ${findMinCover(v, e)}")
     }
 }

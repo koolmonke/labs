@@ -4,7 +4,7 @@ class GFG(private val maxN: Int) {
     // Global array to store the graph
     // Note: since the array is global, all the 
     // elements are 0 initially 
-    private var gr = Array(maxN) { BooleanArray(maxN) }
+    private val gr = Array(maxN) { BooleanArray(maxN) }
 
     // Returns true if there is a possible subset
     // of size 'k' that can be a vertex cover 

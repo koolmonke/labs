@@ -1,3 +1,8 @@
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import java.io.File
+
 // cover using Binary Search
 class GFG(private val maxN: Int) {
 
@@ -85,6 +90,9 @@ class GFG(private val maxN: Int) {
 
 }
 
+@Serializable
+data class Edge(val u: Int, val v: Int)
+
 fun main() {
     /*
      6
@@ -94,16 +102,11 @@ fun main() {
    3 | \
    \ /  \
     2    4 */
-
     GFG(7).run {
         val v = 6
         val e = 6
-        insertEdge(1, 2)
-        insertEdge(2, 3)
-        insertEdge(1, 3)
-        insertEdge(1, 4)
-        insertEdge(1, 5)
-        insertEdge(1, 6)
+        Json.decodeFromString<List<Edge>>(File("docs/lab2/example1.json").readText())
+            .forEach { insertEdge(it.u, it.v) }
         println("Minimum size of a vertex cover = ${findMinCover(v, e)}")
     }
 
@@ -117,13 +120,8 @@ fun main() {
     GFG(7).run {
         val v = 6
         val e = 7
-        insertEdge(1, 2)
-        insertEdge(1, 3)
-        insertEdge(2, 3)
-        insertEdge(2, 4)
-        insertEdge(3, 5)
-        insertEdge(4, 5)
-        insertEdge(4, 6)
+        Json.decodeFromString<List<Edge>>(File("docs/lab2/example2.json").readText())
+            .forEach { insertEdge(it.u, it.v) }
         println("Minimum size of a vertex cover = ${findMinCover(v, e)}")
     }
 }

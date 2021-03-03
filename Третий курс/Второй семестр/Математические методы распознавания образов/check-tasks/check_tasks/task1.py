@@ -61,7 +61,7 @@ def fit_circle(points: List[Point]):  # находим по мнк
 
 def main():
     points = load_points(Path("..") / "docs" / "task1.json")
-    print(points)
+    print(*points, sep="\n")
     circle_obj = fit_circle(points)
     print(circle_obj)
     plt.plot([p.x for p in points], [p.y for p in points], "o")

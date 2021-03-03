@@ -22,7 +22,7 @@ class Circle:
     radius: float
 
     def to_tuple(self):
-        return self.center, self.radius
+        return self.center.to_tuple(), self.radius
 
 
 def load_points(path: Path):
@@ -51,18 +51,12 @@ def fit_circle(points: List[Point]):  # находим по мнк
     sum_x__x_2_plus_y_2 = x__x_2_plus_y_2.sum(dtype=float)
     sum_y__x_2_plus_y_2 = y__x_2_plus_y_2.sum(dtype=float)
 
-    m3b3 = np.array([[sum_x_2, sum_x_y, sum_x],
-                     [sum_x_y, sum_y_2, sum_y],
-                     [sum_x, sum_y, len(points)]])
-    invm3b3 = np.linalg.inv(m3b3)
+    inv_m3b3 = np.linalg.inv(np.array([[sum_x_2, sum_x_y, sum_x],
+                                      [sum_x_y, sum_y_2, sum_y],
+                                      [sum_x, sum_y, len(points)]]))
     m3b1 = np.array([sum_x__x_2_plus_y_2, sum_y__x_2_plus_y_2, sum_x_2_plus_y_2])
-    A = np.dot(invm3b3, m3b1)[0]
-    B = np.dot(invm3b3, m3b1)[1]
-    C = np.dot(invm3b3, m3b1)[2]
-    center_x = A / 2
-    center_y = B / 2
-    radius = np.sqrt(4 * C + A ** 2 + B ** 2) / 2
-    return Circle(center=Point(center_x, center_y), radius=radius)
+    a, b, c = np.dot(inv_m3b3, m3b1)
+    return Circle(center=Point(x=a / 2, y=b / 2), radius=np.sqrt(4 * c + a ** 2 + b ** 2) / 2)
 
 
 def main():
@@ -70,7 +64,7 @@ def main():
     print(points)
     circle_obj = fit_circle(points)
     print(circle_obj)
-    plt.plot([p.x for p in points], [p.y for p in points], 'o')
+    plt.plot([p.x for p in points], [p.y for p in points], "o")
     circle1 = plt.Circle(circle_obj.center.to_tuple(), circle_obj.radius, color='r', fill=False)
     plt.gca().add_patch(circle1)
     plt.show()

@@ -21,7 +21,7 @@ class GFG(private val maxN: Int) {
         var acc = ""
         for (booleans in gr) {
             for (item in booleans) {
-                acc += ("${if (item) 1 else 0} ")
+                acc += "${if (item) 1 else 0} "
             }
             acc += "\n"
         }

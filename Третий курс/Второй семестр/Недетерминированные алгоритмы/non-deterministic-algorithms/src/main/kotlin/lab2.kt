@@ -10,6 +10,23 @@ class GFG(private val maxN: Int) {
     // Note: since the array is global, all the 
     // elements are 0 initially 
     private val gr = Array(maxN) { BooleanArray(maxN) }
+    var edgeCount = 0
+        private set
+
+    var vertexCount = 0
+        private set
+        get() = gr.count { line -> line.any { it } }
+
+    override fun toString(): String {
+        var acc = ""
+        for (booleans in gr) {
+            for (item in booleans) {
+                acc += ("${if (item) 1 else 0} ")
+            }
+            acc += "\n"
+        }
+        return acc
+    }
 
     // Returns true if there is a possible subset
     // of size 'k' that can be a vertex cover
@@ -90,6 +107,8 @@ class GFG(private val maxN: Int) {
 
     // Inserts an edge in the graph
     fun insertEdge(u: Int, v: Int) {
+        if (!gr[u][v])
+            edgeCount++
         gr[u][v] = true
         gr[v][u] = true // Undirected graph
     }

@@ -10,6 +10,7 @@ class GFG(private val maxN: Int) {
     // Note: since the array is global, all the 
     // elements are 0 initially 
     private val gr = Array(maxN) { BooleanArray(maxN) }
+
     var edgeCount = 0
         private set
 

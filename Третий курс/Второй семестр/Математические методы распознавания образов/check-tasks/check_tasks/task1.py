@@ -25,7 +25,7 @@ class Circle:
         return self.center.to_tuple(), self.radius
 
 
-def load_points(path: Path):
+def load_points(path: Path) -> List[Point]:
     with open(path) as file:
         return json.load(file, object_hook=lambda point: Point(**point))
 

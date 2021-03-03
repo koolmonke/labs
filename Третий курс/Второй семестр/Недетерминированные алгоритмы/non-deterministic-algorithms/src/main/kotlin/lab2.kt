@@ -30,7 +30,7 @@ class GFG(private val maxN: Int) {
 
     // Returns true if there is a possible subset
     // of size 'k' that can be a vertex cover
-    fun isCover(V: Int, k: Int, E: Int): Boolean {
+    private fun isCover(V: Int, k: Int, E: Int): Boolean {
         // Set has first 'k' bits high initially
         var set = (1 shl k) - 1
         val limit = 1 shl V

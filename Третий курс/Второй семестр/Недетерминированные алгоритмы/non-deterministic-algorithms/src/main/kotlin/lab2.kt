@@ -100,7 +100,7 @@ class GFG(private val maxN: Int) {
     }
 
     // Inserts an edge in the graph
-    fun insertEdge(u: Int, v: Int) {
+    fun insertEdge(edge: Edge) = edge.run {
         if (!gr[u][v])
             edgeCount++
         gr[u][v] = true
@@ -122,9 +122,7 @@ fun main() {
    \ /  \
     2    4 */
     GFG(7).run {
-        for (edge in Json.decodeFromString<List<Edge>>(File("docs/lab2/example1.json").readText())) {
-            insertEdge(edge.u, edge.v)
-        }
+        Json.decodeFromString<List<Edge>>(File("docs/lab2/example1.json").readText()).forEach(this::insertEdge)
 
         print(this)
         println("vertexCount = $vertexCount and edgeCount = $edgeCount")
@@ -140,9 +138,7 @@ fun main() {
     \|    |
      3----5 */
     GFG(7).run {
-        for (edge in Json.decodeFromString<List<Edge>>(File("docs/lab2/example2.json").readText())) {
-            insertEdge(edge.u, edge.v)
-        }
+        Json.decodeFromString<List<Edge>>(File("docs/lab2/example2.json").readText()).forEach(this::insertEdge)
 
         print(this)
         println("vertexCount = $vertexCount and edgeCount = $edgeCount")

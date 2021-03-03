@@ -129,6 +129,7 @@ fun main() {
         print(this)
         println("vertexCount = $vertexCount and edgeCount = $edgeCount")
         println("Minimum size of a vertex cover = ${findMinCover()}")
+        println()
     }
 
 

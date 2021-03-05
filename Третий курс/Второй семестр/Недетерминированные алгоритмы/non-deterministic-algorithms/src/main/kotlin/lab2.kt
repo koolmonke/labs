@@ -5,16 +5,20 @@ import java.io.File
 fun <T> Collection<T>.choice() = this.shuffled().take(1)[0]
 
 
-class Graph(vertexes: Map<String, List<String>>) {
+typealias Node = String
 
-    val vertexes: Map<String, List<String>> = vertexes.filter { it.value.isNotEmpty() }
+class Graph(vertexes: Map<Node, List<Node>>) {
 
-    fun filterAssociated(v: String) =
-        Graph(vertexes.mapValues { entry -> entry.value.filter { it != v } }.filterKeys { it != v })
+    val vertexes: Map<Node, List<Node>> = vertexes.filter { it.value.isNotEmpty() }
+
+    fun filterAssociated(v: Node) =
+        Graph(vertexes.mapValues { connected -> connected.value.filter { it != v } }.filterKeys { it != v })
+
+    override fun toString() = "Graph(vertexes=$vertexes)"
 }
 
-fun solve(graph: Graph): List<String> {
-    tailrec fun inner(graph: Graph, answer: List<String>): List<String> = if(graph.vertexes.isNotEmpty()) {
+fun Graph.solve(): List<Node> {
+    tailrec fun inner(graph: Graph, answer: List<Node>): List<Node> = if (graph.vertexes.isNotEmpty()) {
         val randomVert = graph.vertexes.keys.choice()
         val anotherVert = graph.vertexes[randomVert]!!.choice()
         val betterChoice =
@@ -22,13 +26,14 @@ fun solve(graph: Graph): List<String> {
                 randomVert
             else
                 anotherVert
-        inner(graph.filterAssociated(betterChoice),answer + listOf(betterChoice))
+        inner(graph.filterAssociated(betterChoice), answer + listOf(betterChoice))
     } else answer
-    return inner(graph, listOf())
+    return inner(this, listOf())
 }
 
 fun main() {
-    val graph = Json.decodeFromString<Map<String, List<String>>>(File("docs/lab2/example1.json").readText())
-    val graphObj = Graph(graph)
-    println(solve(graphObj))
+    Graph(Json.decodeFromString(File("docs/lab2/example1.json").readText()))
+        .also { println(it) }.solve()
+    Graph(Json.decodeFromString(File("docs/lab2/example2.json").readText()))
+        .also { println(it) }.solve()
 }

@@ -5,22 +5,16 @@ import java.io.File
 fun <T> Collection<T>.choice() = this.shuffled().take(1)[0]
 
 
-data class Graph(var vertexes: Map<String, List<String>>) {
-    fun deleteEdgeless() {
-        vertexes = vertexes.filter { it.value.isNotEmpty() }
-    }
+class Graph(vertexes: Map<String, List<String>>) {
 
-    fun deleteAssociated(v: String) {
-        vertexes = vertexes.mapValues { entry -> entry.value.filter { it != v } }.filterKeys { it != v }
-        deleteEdgeless()
-    }
+    val vertexes: Map<String, List<String>> = vertexes.filter { it.value.isNotEmpty() }
 
+    fun filterAssociated(v: String) =
+        Graph(vertexes.mapValues { entry -> entry.value.filter { it != v } }.filterKeys { it != v })
 }
 
 fun solve(graph: Graph): List<String> {
-    val answer = mutableListOf<String>()
-    graph.deleteEdgeless()
-    while (graph.vertexes.isNotEmpty()) {
+    tailrec fun inner(graph: Graph, answer: List<String>): List<String> = if(graph.vertexes.isNotEmpty()) {
         val randomVert = graph.vertexes.keys.choice()
         val anotherVert = graph.vertexes[randomVert]!!.choice()
         val betterChoice =
@@ -28,10 +22,9 @@ fun solve(graph: Graph): List<String> {
                 randomVert
             else
                 anotherVert
-        answer.add(betterChoice)
-        graph.deleteAssociated(betterChoice)
-    }
-    return answer.toList()
+        inner(graph.filterAssociated(betterChoice),answer + listOf(betterChoice))
+    } else answer
+    return inner(graph, listOf())
 }
 
 fun main() {

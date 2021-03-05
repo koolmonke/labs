@@ -32,8 +32,10 @@ fun Graph.solve(): List<Node> {
 }
 
 fun main() {
-    Graph(Json.decodeFromString(File("docs/lab2/example1.json").readText()))
+    println(Graph(Json.decodeFromString(File("docs/lab2/example1.json").readText()))
         .also { println(it) }.solve()
-    Graph(Json.decodeFromString(File("docs/lab2/example2.json").readText()))
+    )
+    println(Graph(Json.decodeFromString(File("docs/lab2/example2.json").readText()))
         .also { println(it) }.solve()
+    )
 }

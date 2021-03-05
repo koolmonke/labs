@@ -62,11 +62,10 @@ def fit_circle(points: List[Point]):  # находим по мнк
 def main():
     points = load_points(Path("..") / "docs" / "task1.json")
     print(*points, sep="\n")
-    circle_obj = fit_circle(points)
-    print(circle_obj)
+    circle = fit_circle(points)
+    print(circle)
     plt.plot([p.x for p in points], [p.y for p in points], "o")
-    circle1 = plt.Circle(circle_obj.center.to_tuple(), circle_obj.radius, color='r', fill=False)
-    plt.gca().add_patch(circle1)
+    plt.gca().add_patch(plt.Circle(*circle.to_tuple(), color='r', fill=False))
     plt.show()
 
 

@@ -12,7 +12,7 @@ class Graph(vertexes: Map<Node, List<Node>>) {
     val vertexes: Map<Node, List<Node>> = vertexes.filter { it.value.isNotEmpty() }
 
     fun filterAssociated(v: Node) =
-        Graph(vertexes.mapValues { connected -> connected.value.filter { it != v } }.filterKeys { it != v })
+        Graph(vertexes.filterKeys { it != v }.mapValues { connected -> connected.value.filter { it != v } })
 
     override fun toString() = "Graph(vertexes=$vertexes)"
 }

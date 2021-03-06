@@ -32,13 +32,13 @@ fun Graph.solve(): List<Node> {
     return inner(this, listOf())
 }
 
+const val number_of_examples = 2
+
 fun main() {
-    println(
-        Graph(Json.decodeFromString(File("docs/lab2/example1.json").readText()))
-            .also { println(it) }.solve()
-    )
-    println(
-        Graph(Json.decodeFromString(File("docs/lab2/example2.json").readText()))
-            .also { println(it) }.solve()
-    )
+    for (i in 1..number_of_examples) {
+        println(
+            Graph(Json.decodeFromString(File("docs/lab2/example$i.json").readText()))
+                .also { println(it) }.solve()
+        )
+    }
 }

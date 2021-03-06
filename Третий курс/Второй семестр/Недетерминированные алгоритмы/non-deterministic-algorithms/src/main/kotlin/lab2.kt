@@ -9,10 +9,11 @@ typealias Node = String
 
 class Graph(vertexes: Map<Node, List<Node>>) {
 
-    val vertexes: Map<Node, List<Node>> = vertexes.filter { it.value.isNotEmpty() }
+    val vertexes: Map<Node, List<Node>> = vertexes.filterValues { it.isNotEmpty() }
 
     fun filterAssociated(v: Node) =
-        Graph(vertexes.filterKeys { it != v }.mapValues { connected -> connected.value.filter { it != v } })
+        Graph(vertexes.filterKeys { it != v }
+            .mapValues { connected -> connected.value.filter { it != v } })
 
     override fun toString() = "Graph(vertexes=$vertexes)"
 }
@@ -32,10 +33,12 @@ fun Graph.solve(): List<Node> {
 }
 
 fun main() {
-    println(Graph(Json.decodeFromString(File("docs/lab2/example1.json").readText()))
-        .also { println(it) }.solve()
+    println(
+        Graph(Json.decodeFromString(File("docs/lab2/example1.json").readText()))
+            .also { println(it) }.solve()
     )
-    println(Graph(Json.decodeFromString(File("docs/lab2/example2.json").readText()))
-        .also { println(it) }.solve()
+    println(
+        Graph(Json.decodeFromString(File("docs/lab2/example2.json").readText()))
+            .also { println(it) }.solve()
     )
 }

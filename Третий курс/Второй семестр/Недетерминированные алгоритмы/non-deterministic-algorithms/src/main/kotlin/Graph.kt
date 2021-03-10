@@ -5,15 +5,15 @@ typealias Node = String
 class Graph(vertexes: Map<Node, List<Node>>) {
 
     val vertexes: Map<Node, List<Node>> = run {
-        val d = vertexes.filterValues { it.isNotEmpty() }
-        for ((vert, conn) in d) {
-            for (conn_vert in conn) {
-                if (d[conn_vert]?.contains(vert) != true) {
+        val map = vertexes.filterValues { it.isNotEmpty() }
+        for ((vertex, connected) in map) {
+            for (connectedVertexes in connected) {
+                if (map[connectedVertexes]?.contains(vertex) != true) {
                     throw IllegalArgumentException()
                 }
             }
         }
-        d
+        map
     }
 
     fun filterAssociated(v: Node) =

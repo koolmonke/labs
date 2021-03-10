@@ -13,7 +13,7 @@ fun solve(graph: Graph): Graph {
             inner(
                 graph.vertexes.mapValues { graph.countConnections(it.key) }.toList().sortedBy { it.second }
                     .also { println("Отсоритированный массив $it") },
-                graph.filterAssociated(connections.first().also { println("Удаляем $it") }.first)
+                graph.filterAssociated(connections.first().also { println("Убираем $it") }.first)
             )
         } else graph
     return inner(graph.vertexes.mapValues { graph.countConnections(it.key) }.toList(), graph)

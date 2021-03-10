@@ -9,7 +9,7 @@ import java.io.File
 
 fun solve(graph: Graph): Graph {
     tailrec fun inner(connections: List<Pair<Node, Int?>>, graph: Graph): Graph =
-        if (!connections.all { it.second == graph.count() - 1 }) {
+        if (connections.any { it.second != graph.count() - 1 }) {
             inner(
                 graph.vertexes.mapValues { graph.countConnections(it.key) }.toList().sortedBy { it.second }
                     .also { println("Отсоритированный массив $it") },

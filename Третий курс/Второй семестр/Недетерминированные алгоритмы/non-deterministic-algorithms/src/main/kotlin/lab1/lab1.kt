@@ -1,3 +1,5 @@
+package lab1
+
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -24,16 +26,10 @@ data class Backpack(val sizeOfBackpack: Weight) {
     }
 }
 
-fun main(args: Array<String>) {
-    if (args.size == 2) {
-        val filename = args[0]
-        val items = Json.decodeFromString<Items>(File(filename).readText())
-        val sizeOfBackpack = args[1].toInt()
-        val backpack = Backpack(sizeOfBackpack)
-        val (optimalItemsInBackpack, optimalSize) = backpack.fill(items)
-        println(items)
-        println("Предметы: $optimalItemsInBackpack, их вес $optimalSize")
-    } else {
-        println("Первый аргумент путь до файла, второй размер рюкзака")
-    }
+fun main() {
+    val filename = "docs/lab1/example.json"
+    val backpack = Backpack(50).also { println(it) }
+    val (optimalItemsInBackpack, optimalSize) = backpack.fill(
+        Json.decodeFromString<Items>(File(filename).readText()).also { println(it) })
+    println("Предметы: $optimalItemsInBackpack, их вес $optimalSize")
 }

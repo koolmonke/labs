@@ -22,8 +22,6 @@ class Graph(vertexes: Map<Node, List<Node>>) {
 
     override fun toString() = "Graph(vertexes=$vertexes)"
 
-    fun count() = vertexes.count()
-
     fun countConnections(to: Node) = vertexes[to]?.count()
 
 }

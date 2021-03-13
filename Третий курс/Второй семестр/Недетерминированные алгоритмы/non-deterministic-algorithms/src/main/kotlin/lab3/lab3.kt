@@ -8,15 +8,14 @@ import lab2.number_of_examples
 import java.io.File
 
 fun solve(graph: Graph): Graph {
-    tailrec fun inner(connections: List<Pair<Node, Int?>>, graph: Graph): Graph =
-        if (connections.any { it.second != graph.vertexes.count() - 1 }) {
+    tailrec fun inner(connections: Map<Node, Int?>, graph: Graph): Graph =
+        if (connections.any { it.value != graph.vertexes.count() - 1 }) {
             inner(
-                graph.vertexes.mapValues { graph.countConnections(it.key) }.toList().sortedBy { it.second }
-                    .also { println("Отсоритированный список $it") },
-                graph.filterAssociated(connections.first().also { println("Убираем ${it.first}") }.first)
+                graph.vertexes.mapValues { graph.countConnections(it.key) },
+                graph.filterAssociated(connections.minOfWith(compareBy { it.value }) { it }.key)
             )
         } else graph
-    return inner(graph.vertexes.mapValues { graph.countConnections(it.key) }.toList(), graph)
+    return inner(graph.vertexes.mapValues { graph.countConnections(it.key) }, graph)
 }
 
 

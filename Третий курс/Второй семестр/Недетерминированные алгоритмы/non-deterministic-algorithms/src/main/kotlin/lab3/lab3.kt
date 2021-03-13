@@ -15,7 +15,8 @@ fun solve(graph: Graph): Graph {
                 graph.filterAssociated(connections.minOfWith(compareBy { it.value }) { it }.key)
             )
         } else graph
-    return inner(graph.vertexes.mapValues { graph.countConnections(it.key) }, graph)
+    val connections = graph.vertexes.mapValues { graph.countConnections(it.key) }
+    return inner(connections, graph.filterAssociated(connections.minOfWith(compareBy { it.value }) { it }.key))
 }
 
 

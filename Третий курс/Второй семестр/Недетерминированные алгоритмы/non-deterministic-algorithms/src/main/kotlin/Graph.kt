@@ -7,8 +7,8 @@ class Graph(vertexes: Map<Node, List<Node>>) {
     val vertexes: Map<Node, List<Node>> = run {
         val map = vertexes.filterValues { it.isNotEmpty() }
         for ((vertex, connected) in map) {
-            for (connectedVertexes in connected) {
-                if (map[connectedVertexes]?.contains(vertex) != true) {
+            for (connectedVertex in connected) {
+                if (map[connectedVertex]?.contains(vertex) != true) {
                     throw IllegalArgumentException()
                 }
             }

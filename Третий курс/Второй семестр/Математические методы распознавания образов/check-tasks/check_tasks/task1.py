@@ -31,32 +31,10 @@ def load_points(path: Path) -> List[Point]:
 
 
 def fit_circle(points: Sequence[Point]):  # находим по мнк
-    x = np.array([point.x for point in points])
-    y = np.array([point.y for point in points])
-
-    x_y = np.multiply(x, y)
-    x_2 = np.square(x)
-    y_2 = np.square(y)
-
-    x_2_plus_y_2 = np.add(x_2, y_2)
-    x__x_2_plus_y_2 = np.multiply(x, x_2_plus_y_2)
-    y__x_2_plus_y_2 = np.multiply(y, x_2_plus_y_2)
-
-    sum_x = x.sum(dtype=float)
-    sum_y = y.sum(dtype=float)
-    sum_x_2 = x_2.sum(dtype=float)
-    sum_y_2 = y_2.sum(dtype=float)
-    sum_x_y = x_y.sum(dtype=float)
-    sum_x_2_plus_y_2 = x_2_plus_y_2.sum(dtype=float)
-    sum_x__x_2_plus_y_2 = x__x_2_plus_y_2.sum(dtype=float)
-    sum_y__x_2_plus_y_2 = y__x_2_plus_y_2.sum(dtype=float)
-
-    inv_m3b3 = np.linalg.inv(np.array([[sum_x_2, sum_x_y, sum_x],
-                                       [sum_x_y, sum_y_2, sum_y],
-                                       [sum_x, sum_y, len(points)]]))
-    m3b1 = np.array([sum_x__x_2_plus_y_2, sum_y__x_2_plus_y_2, sum_x_2_plus_y_2])
-    a, b, c = np.dot(inv_m3b3, m3b1)
-    return Circle(center=Point(x=a / 2, y=b / 2), radius=np.sqrt(4 * c + a ** 2 + b ** 2) / 2)
+    a = np.array([[2 * p.x, 2 * p.y, 1] for p in points])
+    b = np.array([p.x ** 2 + p.y ** 2 for p in points])
+    c = np.linalg.solve(a.transpose() @ a, a.transpose() @ b)
+    return Circle(center=Point(x=c[0], y=c[1]), radius=np.sqrt(c[2] + c[0] ** 2 + c[1] ** 2))
 
 
 def main():

@@ -2,8 +2,8 @@ from math import ceil
 
 
 def solve(char_per_page: int = 500, typos: int = 500, pages: int = 500) -> (int, int):
-    minim = typos if typos <= pages else 0
-    maxim = 1 if typos <= char_per_page else ceil(typos / char_per_page)
+    maxim = min(typos, pages)
+    minim = ceil(typos / char_per_page)
 
     return minim, maxim
 

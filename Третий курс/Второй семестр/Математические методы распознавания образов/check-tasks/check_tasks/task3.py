@@ -14,7 +14,7 @@ def main() -> None:
     typos = int(input("Кол-во опечаток "))
 
     minimum, maximum = solve(char_per_page, typos, pages)
-    print(f"от {pages - minimum} до {pages - maximum} страниц не содержат опечатки")
+    print(f"от {pages - maximum} до {pages - minimum} страниц не содержат опечатки")
 
 
 if __name__ == '__main__':

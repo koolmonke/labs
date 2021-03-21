@@ -1,36 +1,58 @@
 #include <cmath>
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
+double f1(double a, double b, double c, double x) {
+  if (c == 0) {
+    throw invalid_argument("c == 0, но делить на ноль нельзя");
+  }
+  return a * x * x + b / c;
+}
+
+double f2(double a, double b, double c, double x) {
+  if ((x - c) == 0) {
+    throw invalid_argument("x - c == 0, но делить на ноль нельзя");
+  }
+  return (x - a) / ((x - c) * (x - c));
+}
+
+double f3(double a, double b, double c, double x) {
+  if (c == 0) {
+    throw invalid_argument("c == 0, но делить на ноль нельзя");
+  }
+  return x * x / (c * c);
+}
+
+double F(double a, double b, double c, double x) {
+  if ((x < 1) && (c != 0)) {
+    return f1(a, b, c, x);
+  } else if ((x > 1.5) && (c == 0)) {
+    return f2(a, b, c, x);
+  } else {
+    return f3(a, b, c, x);
+  }
+}
+
 int main() {
-  float a, b, c, x_begin, x_end, x_step;
+  double a, b, c, x_begin, x_end, x_step;
   cout << "Введите a,  b,  c,  X_нач,  X_кон,  dX" << '\n';
   cin >> a >> b >> c >> x_begin >> x_end >> x_step;
-  bool trigger = (((int)a & (int)b) ^ (int)c) != 0;
+  const bool trigger = (((int)a & (int)b) ^ (int)c) != 0;
   while (x_begin <= x_end) {
-    bool trigger1 =
-        !((x_begin < 1) && (c != 0)) && !((x_begin > 1.5) && (c == 0));
-    float x = x_begin;
-    cout << "|" << x_begin << "| ";
-    if (!trigger1) {
+    try {
+      cout << x_begin << ' ';
       if (trigger) {
-        if ((x < 1) && (c != 0))
-          cout << (a * x * x + b / c) << '\n';
-        else if ((x > 1.5) && (c == 0))
-          cout << ((x - a) / pow(x - c, 2.0)) << '\n';
-        else
-          cout << ((x * x) / (c * c)) << '\n';
+        cout << F(a, b, c, x_begin) << '\n';
       } else {
-        if ((x < 1) && (c != 0))
-          cout << (int)(a * x * x + b / c) << '\n';
-        else if ((x > 1.5) && (c == 0))
-          cout << (int)((x - a) / (pow(x - c, 2.0))) << '\n';
-        else
-          cout << (int)((x * x) / (c * c)) << '\n';
+        cout << (int)F(a, b, c, x_begin) << '\n';
       }
-    } else
-      cout << "Нельзя делить на ноль" << '\n';
+
+    } catch (const std::exception &e) {
+      std::cerr << e.what() << '\n';
+    }
+
     x_begin += x_step;
   }
   return 0;

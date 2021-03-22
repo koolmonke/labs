@@ -3,21 +3,25 @@ from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
 from pprint import pprint
-from typing import Optional
+
+import numpy as np
 
 docs = Path("../../docs")
-Data = list[int]
 THRESHOLD = 0
 
 
-@dataclass
+@dataclass(frozen=True)
 class Image:
-    supposed_number: Optional[int]
-    data: Data
+    data: np.ndarray
 
     @cached_property
     def area(self):
-        return len([i for i in self.data if i > THRESHOLD])
+        return np.count_nonzero(self.data > THRESHOLD)
+
+
+@dataclass(frozen=True)
+class TrainImage(Image):
+    number: int
 
 
 def read_train_data(filename: str):
@@ -26,7 +30,7 @@ def read_train_data(filename: str):
         next(csv_reader)
         for row in csv_reader:
             image = row[1:]
-            yield Image(int(row[0]), [int(element) for element in image])
+            yield TrainImage(np.array([int(i) for i in image]), int(row[0]))
 
 
 def read_test_data(filename: str):
@@ -34,12 +38,12 @@ def read_test_data(filename: str):
         csv_reader = csv.reader(csv_file)
         next(csv_reader)
         for row in csv_reader:
-            yield Image(None, [int(element) for element in row])
+            yield Image(np.array([int(i) for i in row]))
 
 
 def main():
     train_images = list(read_train_data("train.csv"))
-    db = {digit: [image for image in train_images if image.supposed_number == digit] for digit in range(10)}
+    db = {digit: [image for image in train_images if image.number == digit] for digit in range(10)}
     avg_area_db = {digit: (sum(image.area for image in train_images) / len(train_images)) for (digit, train_images) in
                    db.items()}
     pprint(avg_area_db)

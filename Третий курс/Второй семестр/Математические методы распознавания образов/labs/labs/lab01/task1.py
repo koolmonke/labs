@@ -44,9 +44,8 @@ def main():
                    db.items()}
     pprint(avg_area_db)
     for image in read_test_data("test.csv"):
-        possible_top_3_digits = dict(
-            sorted([(digit, image.area - avg_area) for (digit, avg_area) in avg_area_db.items()],
-                   key=lambda x: abs(x[1]))[:3])
+        possible_top_3_digits = sorted([(digit, image.area - avg_area) for (digit, avg_area) in avg_area_db.items()],
+                                       key=lambda x: abs(x[1]))[:3]
         print(possible_top_3_digits)
 
 

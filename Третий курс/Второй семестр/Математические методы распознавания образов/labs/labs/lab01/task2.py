@@ -8,7 +8,7 @@ def distance(some: Image, other: Image) -> int:
 
 
 def best_distance(db: Sequence[TrainImage], some: Image, distance_f: Callable[[Image, Image], int]):
-    return min([(trained.number, distance_f(some, trained)) for trained in db], key=lambda x: x[1])
+    return min(((trained.number, distance_f(some, trained)) for trained in db), key=lambda x: x[1])
 
 
 def main():

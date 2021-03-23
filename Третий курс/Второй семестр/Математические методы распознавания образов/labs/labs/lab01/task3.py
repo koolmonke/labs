@@ -3,9 +3,9 @@ from labs.lab01.task2 import best_distance
 
 
 def distance(some: Image, other: Image) -> int:
-    some_data = some.data.reshape((28, 28))
-    other_data = other.data.reshape((28, 28))
-    return (some_data - other_data).sum()
+    some_data = (some.data != 0).reshape((28, 28))
+    other_data = (other.data != 0).reshape((28, 28))
+    return (some_data ^ other_data).sum()
 
 
 def main():

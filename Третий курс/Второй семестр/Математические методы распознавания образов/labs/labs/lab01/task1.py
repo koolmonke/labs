@@ -44,7 +44,7 @@ def read_test_data(filename: str):
 def main():
     train_images = list(read_train_data("train.csv"))
     db = {digit: [image for image in train_images if image.number == digit] for digit in range(10)}
-    avg_area_db = {digit: (sum(image.area for image in train_images) / len(train_images)) for (digit, train_images) in
+    avg_area_db = {digit: sum(image.area for image in train_images) / len(train_images) for (digit, train_images) in
                    db.items()}
     pprint(avg_area_db)
     for image in read_test_data("test.csv"):

@@ -7,13 +7,14 @@ IMAGE_WEIGHT = 28
 
 
 def main():
-    with open(docs / "train.csv") as csv_file:
+    with open(docs / "test.csv") as csv_file:
         csv_reader = csv.reader(csv_file)
+        next(csv_reader)
         for row in csv_reader:
-            print("n =", row[0])
-            image = row[1:]
+            image = row
             for line in (image[i:i + IMAGE_WEIGHT] for i in range(0, len(image), IMAGE_WEIGHT)):
                 print("\t".join(line))
+            print()
 
 
 if __name__ == '__main__':

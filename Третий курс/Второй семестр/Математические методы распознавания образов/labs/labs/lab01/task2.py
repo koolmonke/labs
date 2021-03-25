@@ -1,7 +1,9 @@
 from typing import Sequence, Callable
 
-from labs.lab01.task1 import docs, Image, KnownImage, read_test_data, read_train_data, TrainImage
+from labs.Image import Image, KnownImage, read_test_data, read_train_data, TrainImage
 import matplotlib.pyplot as plt
+
+from labs.lab01 import docs
 
 
 def distance(some: Image, other: Image) -> int:

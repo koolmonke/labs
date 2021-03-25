@@ -1,4 +1,6 @@
-from labs.lab01.task1 import docs, Image, read_train_data, read_test_data
+
+from labs.Image import Image, read_test_data, read_train_data
+from labs.lab01 import docs
 from labs.lab01.task2 import best_distance
 import matplotlib.pyplot as plt
 

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 
-from labs.lab01.task1 import Image, read_test_data
+from labs.Image import Image, read_test_data
 
 docs = Path("..") / "docs"
 
@@ -14,8 +14,8 @@ def visualize(image: Image):
 
 
 def main():
-    for i in read_test_data(docs / "test.csv"):
-        ax = visualize(i)
+    for image in read_test_data(docs / "train.csv"):
+        ax = visualize(image)
         plt.show()
 
 

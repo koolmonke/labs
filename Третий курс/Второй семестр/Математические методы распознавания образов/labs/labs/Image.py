@@ -1,6 +1,8 @@
 import csv
 from dataclasses import dataclass
 from functools import cached_property
+from pathlib import Path
+from typing import Union
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -33,17 +35,20 @@ class KnownImage(TrainImage):
     distance: int
 
 
-def read_train_data(filename: str):
-    with open(filename) as csv_file:
+PathLike = Union[str, Path]
+
+
+def read_train_data(file_path: PathLike):
+    with open(file_path) as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)
         for row in csv_reader:
-            image = row[1:]
-            yield TrainImage(np.array([int(i) for i in image]), int(row[0]))
+            number, *image = [int(i) for i in row]
+            yield TrainImage(np.array(image), number)
 
 
-def read_test_data(filename: str):
-    with open(filename) as csv_file:
+def read_test_data(file_path: PathLike):
+    with open(file_path) as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)
         for row in csv_reader:

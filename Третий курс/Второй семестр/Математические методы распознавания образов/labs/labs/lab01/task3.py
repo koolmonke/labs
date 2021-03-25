@@ -1,5 +1,6 @@
-from labs.lab01.task1 import Image, read_train_data, read_test_data
+from labs.lab01.task1 import docs, Image, read_train_data, read_test_data
 from labs.lab01.task2 import best_distance
+import matplotlib.pyplot as plt
 
 
 def distance(some: Image, other: Image) -> int:
@@ -9,9 +10,11 @@ def distance(some: Image, other: Image) -> int:
 
 
 def main():
-    db = list(read_train_data("train.csv"))
-    for image in read_test_data("test.csv"):
-        print(best_distance(db, image, distance))
+    db = list(read_train_data(docs / "train.csv"))
+    for image in read_test_data(docs / "test.csv"):
+        f, ax = best_distance(db, image, distance).visualize()
+        plt.axes(ax)
+        plt.show()
 
 
 if __name__ == '__main__':

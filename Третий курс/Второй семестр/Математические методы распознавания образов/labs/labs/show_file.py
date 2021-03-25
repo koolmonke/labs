@@ -14,7 +14,7 @@ def visualize(image: Image):
 
 
 def main():
-    for image in read_test_data(docs / "train.csv"):
+    for image in read_test_data(docs / "test.csv"):
         ax = visualize(image)
         plt.show()
 

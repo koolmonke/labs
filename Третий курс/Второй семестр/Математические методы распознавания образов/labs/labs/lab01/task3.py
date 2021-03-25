@@ -1,4 +1,3 @@
-
 from labs.Image import Image, read_test_data, read_train_data
 from labs.lab01 import docs
 from labs.lab01.task2 import best_distance

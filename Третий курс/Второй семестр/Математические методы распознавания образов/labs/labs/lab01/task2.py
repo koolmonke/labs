@@ -1,8 +1,8 @@
-from typing import Sequence, Callable
+from typing import Callable, Sequence
 
-from labs.Image import Image, KnownImage, read_test_data, read_train_data, TrainImage
 import matplotlib.pyplot as plt
 
+from labs.Image import Image, KnownImage, read_test_data, read_train_data, TrainImage
 from labs.lab01 import docs
 
 

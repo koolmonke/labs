@@ -25,7 +25,7 @@ class TrainImage(Image):
 
 
 def read_train_data(filename: str):
-    with open(docs / filename) as csv_file:
+    with open(filename) as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)
         for row in csv_reader:
@@ -34,7 +34,7 @@ def read_train_data(filename: str):
 
 
 def read_test_data(filename: str):
-    with open(docs / filename) as csv_file:
+    with open(filename) as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)
         for row in csv_reader:
@@ -42,12 +42,12 @@ def read_test_data(filename: str):
 
 
 def main():
-    train_images = list(read_train_data("train.csv"))
+    train_images = list(read_train_data(docs / "train.csv"))
     db = {digit: [image for image in train_images if image.number == digit] for digit in range(10)}
     avg_area_db = {digit: sum(image.area for image in train_images) / len(train_images) for (digit, train_images) in
                    db.items()}
     pprint(avg_area_db)
-    for image in read_test_data("test.csv"):
+    for image in read_test_data(docs / "test.csv"):
         possible_top_3_digits = sorted([(digit, image.area - avg_area) for (digit, avg_area) in avg_area_db.items()],
                                        key=lambda x: abs(x[1]))[:3]
         print(possible_top_3_digits)

@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
 from pprint import pprint
+import matplotlib.pyplot as plt
 
 import numpy as np
 
@@ -22,6 +23,17 @@ class Image:
 @dataclass(frozen=True)
 class TrainImage(Image):
     number: int
+
+
+@dataclass(frozen=True)
+class KnownImage(TrainImage):
+    distance: int
+
+    def visualize(self):
+        f, ax = plt.subplots()
+        ax.imshow(self.data.reshape(28, 28))
+        ax.set_title(self.number)
+        return f, ax
 
 
 def read_train_data(filename: str):

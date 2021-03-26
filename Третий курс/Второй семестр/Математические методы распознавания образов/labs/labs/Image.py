@@ -18,6 +18,11 @@ class Image:
     def area(self):
         return np.count_nonzero(self.data > THRESHOLD)
 
+    @cached_property
+    def feature_vector(self) -> np.ndarray:
+        image = self.data.reshape(28, 28)
+        return np.array([sum(image[:, i] > 0 for i in range(28)), sum(image[i] > 0 for i in range(28))]).flatten()
+
 
 @dataclass(frozen=True)
 class TrainImage(Image):
@@ -32,7 +37,7 @@ class TrainImage(Image):
 
 @dataclass(frozen=True)
 class KnownImage(TrainImage):
-    distance: int
+    distance: float
 
 
 PathLike = Union[str, Path]

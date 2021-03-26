@@ -7,6 +7,8 @@ from typing import Union
 import numpy as np
 from matplotlib import pyplot as plt
 
+IMAGE_SIZE = 28 ** 2
+
 THRESHOLD = 0
 
 
@@ -49,6 +51,7 @@ def read_train_data(file_path: PathLike):
         next(csv_reader)
         for row in csv_reader:
             number, *image = [int(i) for i in row]
+            assert len(image) == IMAGE_SIZE, "Image should be 784 vector"
             yield TrainImage(np.array(image), number)
 
 
@@ -57,4 +60,6 @@ def read_test_data(file_path: PathLike):
         csv_reader = csv.reader(csv_file)
         next(csv_reader)
         for row in csv_reader:
-            yield Image(np.array([int(i) for i in row]))
+            image = [int(i) for i in row]
+            assert len(image) == IMAGE_SIZE, "Image should be 784 vector"
+            yield Image(np.array(image))

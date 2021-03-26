@@ -1,14 +1,20 @@
+from typing import Callable, Sequence
+
 import matplotlib.pyplot as plt
 
-from labs.Image import Image, read_test_data, read_train_data
+from labs.Image import Image, KnownImage, read_test_data, read_train_data, TrainImage
 from labs.lab01 import docs
-from labs.lab01.task2 import best_distance
 
 
 def distance(some: Image, other: Image) -> int:
     some_data = (some.data != 0).reshape((28, 28))
     other_data = (other.data != 0).reshape((28, 28))
     return (some_data ^ other_data).sum()
+
+
+def best_distance(db: Sequence[TrainImage], some: Image, distance_f: Callable[[Image, Image], int]):
+    return min((KnownImage(some.data, trained.number, distance_f(some, trained)) for trained in db),
+               key=lambda known_image: known_image.distance)
 
 
 def main():

@@ -1,24 +1,23 @@
-from typing import Callable, Sequence
-
 import matplotlib.pyplot as plt
+import numpy as np
 
-from labs.Image import Image, KnownImage, read_test_data, read_train_data, TrainImage
+from labs.Image import KnownImage, read_test_data, read_train_data
 from labs.lab01 import docs
 
 
-def distance(some: Image, other: Image) -> int:
-    return ((some.data - other.data) ** 2).sum()
-
-
-def best_distance(db: Sequence[TrainImage], some: Image, distance_f: Callable[[Image, Image], int]):
-    return min((KnownImage(some.data, trained.number, distance_f(some, trained)) for trained in db),
-               key=lambda known_image: known_image.distance)
+def distance(some: np.ndarray, other: np.ndarray) -> float:
+    return ((some - other) ** 2).sum()
 
 
 def main():
-    db = list(read_train_data(docs / "train.csv"))
+    train_images = list(read_train_data(docs / "train.csv"))
+    db = {digit: [image for image in train_images if image.number == digit] for digit in range(10)}
+    avg_vector_feature = {digit: np.mean(np.array([image.feature_vector for image in train_images]), axis=0) for
+                          (digit, train_images)
+                          in db.items()}
     for image in read_test_data(docs / "test.csv"):
-        f, ax = best_distance(db, image, distance).visualize()
+        f, ax = min((KnownImage(image.data, digit, distance(image.feature_vector, avg_feature)) for (digit, avg_feature)
+                     in avg_vector_feature.items()), key=lambda x: x.distance).visualize()
         plt.axes(ax)
         plt.show()
 

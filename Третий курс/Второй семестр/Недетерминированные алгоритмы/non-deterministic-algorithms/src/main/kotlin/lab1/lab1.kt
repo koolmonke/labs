@@ -12,24 +12,21 @@ data class Item(val price: Int, val weight: Weight)
 
 typealias Items = List<Item>
 
+fun Items.currentSize() = this.map { it.weight }.sum()
+
 data class Backpack(val sizeOfBackpack: Weight) {
-    fun fill(items: Items): Pair<Items, Int> {
-        var currentSize = 0
-        val currentItems = mutableListOf<Item>()
-        for (item in items.sortedByDescending { it.weight / it.price }) {
-            if ((currentSize + item.weight) <= sizeOfBackpack) {
-                currentItems.add(item)
-                currentSize += item.weight
-            }
-        }
-        return Pair(currentItems as List<Item>, currentSize)
+    fun fill(items: Items): Items = items.sortedByDescending { it.weight / it.price }.fold(listOf()) { backpack, item ->
+        if (backpack.currentSize() + item.weight <= sizeOfBackpack)
+            backpack + listOf(item)
+        else
+            backpack
     }
 }
 
 fun main() {
     val filename = "docs/lab1/example.json"
     val backpack = Backpack(50).also { println(it) }
-    val (optimalItemsInBackpack, optimalSize) = backpack.fill(
+    val backpackItems = backpack.fill(
         Json.decodeFromString<Items>(File(filename).readText()).also { println(it) })
-    println("Предметы: $optimalItemsInBackpack, их вес $optimalSize")
+    println("Предметы: $backpackItems, их вес ${backpackItems.currentSize()}")
 }

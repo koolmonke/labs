@@ -23,7 +23,8 @@ class Image:
     @cached_property
     def feature_vector(self) -> np.ndarray:
         image = self.data.reshape(28, 28)
-        return np.array([sum(image[:, i] > 0 for i in range(28)), sum(image[i] > 0 for i in range(28))]).flatten()
+        return np.array([sum(image[:, i] > THRESHOLD for i in range(28)),
+                         sum(image[i] > THRESHOLD for i in range(28))]).flatten()
 
 
 @dataclass(frozen=True)

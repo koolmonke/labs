@@ -17,7 +17,7 @@ fun Items.currentSize() = this.map { it.weight }.sum()
 data class Backpack(val sizeOfBackpack: Weight) {
     fun fill(items: Items): Items = items.sortedByDescending { it.weight / it.price }.fold(listOf()) { backpack, item ->
         if (backpack.currentSize() + item.weight <= sizeOfBackpack)
-            backpack + listOf(item)
+            backpack + item
         else
             backpack
     }

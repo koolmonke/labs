@@ -52,7 +52,8 @@ def read_train_data(file_path: PathLike):
         next(csv_reader)
         for row in csv_reader:
             number, *image = [int(i) for i in row]
-            assert len(image) == IMAGE_SIZE, "Image should be 784 vector"
+            if len(image) != IMAGE_SIZE:
+                raise ValueError("Image should be 784 vector")
             yield TrainImage(np.array(image), number)
 
 
@@ -62,5 +63,6 @@ def read_test_data(file_path: PathLike):
         next(csv_reader)
         for row in csv_reader:
             image = [int(i) for i in row]
-            assert len(image) == IMAGE_SIZE, "Image should be 784 vector"
+            if len(image) != IMAGE_SIZE:
+                raise ValueError("Image should be 784 vector")
             yield Image(np.array(image))

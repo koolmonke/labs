@@ -1,7 +1,8 @@
 from pprint import pprint
 
-from labs.Image import read_test_data, read_train_data
+from labs.Image import read_test_data, read_train_data, KnownImage
 from labs.lab01 import docs
+import matplotlib.pyplot as plt
 
 
 def main():
@@ -11,9 +12,13 @@ def main():
                    db.items()}
     pprint(avg_area_db)
     for image in read_test_data(docs / "test.csv"):
-        possible_top_3_digits = sorted([(digit, image.area - avg_area) for (digit, avg_area) in avg_area_db.items()],
-                                       key=lambda x: abs(x[1]))[:3]
-        print(possible_top_3_digits)
+        possible_digit = min(
+            (KnownImage(image.data, digit, abs(image.area - avg_area)) for (digit, avg_area) in avg_area_db.items()),
+            key=lambda x: x.distance)
+
+        f, ax = possible_digit.visualize()
+        plt.axes(ax)
+        plt.show()
 
 
 if __name__ == '__main__':

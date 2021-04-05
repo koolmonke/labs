@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 
-from labs.lab02 import TrainDataSet, TestDataSet, CNN, num_epochs, batch_size, learning_rate
+from labs.lab03 import TrainDataSet, TestDataSet, CNN, num_epochs, batch_size, learning_rate
 
 
 def main():
@@ -55,7 +55,7 @@ def main():
     aa.columns = ['Label']
     aa.insert(0, 'ImageId', range(1, aa.size + 1))
 
-    aa.to_csv('../../docs/result_lab02.csv', index=False)
+    aa.to_csv('../../docs/result_lab03.csv', index=False)
     if input('save? ') == 'y':
         torch.save(cnn, "../../docs/model.pt")
 

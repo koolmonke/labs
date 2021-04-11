@@ -16,6 +16,10 @@ THRESHOLD = 0
 class Image:
     data: np.ndarray
 
+    def __post_init__(self):
+        if self.data.shape != (IMAGE_SIZE,):
+            raise ValueError("Image should be 784d vector")
+
     @cached_property
     def area(self):
         return np.count_nonzero(self.data > THRESHOLD)
@@ -52,8 +56,6 @@ def read_train_data(file_path: PathLike):
         next(csv_reader)
         for row in csv_reader:
             number, *image = [int(i) for i in row]
-            if len(image) != IMAGE_SIZE:
-                raise ValueError("Image should be 784 vector")
             yield TrainImage(np.array(image), number)
 
 
@@ -63,6 +65,4 @@ def read_test_data(file_path: PathLike):
         next(csv_reader)
         for row in csv_reader:
             image = [int(i) for i in row]
-            if len(image) != IMAGE_SIZE:
-                raise ValueError("Image should be 784 vector")
             yield Image(np.array(image))

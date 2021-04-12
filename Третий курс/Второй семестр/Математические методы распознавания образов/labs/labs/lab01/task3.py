@@ -12,15 +12,15 @@ def distance(some: Image, other: Image) -> int:
     return (some_data ^ other_data).sum()
 
 
-def best_distance(db: Sequence[TrainImage], some: Image, distance_f: Callable[[Image, Image], int]):
-    return min((KnownImage(some.data, trained.number, distance_f(some, trained)) for trained in db),
+def best_distance(db: Sequence[TrainImage], some: Image):
+    return min((KnownImage(some.data, trained.number, distance(some, trained)) for trained in db),
                key=lambda known_image: known_image.distance)
 
 
 def main():
     db = list(read_train_data(docs / "train.csv"))
     for image in read_test_data(docs / "test.csv"):
-        f, ax = best_distance(db, image, distance).visualize()
+        f, ax = best_distance(db, image).visualize()
         plt.axes(ax)
         plt.show()
 

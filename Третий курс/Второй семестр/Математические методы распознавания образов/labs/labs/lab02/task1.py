@@ -11,7 +11,7 @@ def main():
     avg_area_db = {digit: np.mean(np.array([image.area for image in train_images]), axis=0) for (digit, train_images) in
                    db.items()}
 
-    cov_vec = np.zeros(10)
+    cov_vec = np.zeros(10, dtype=float)
     for digit_all, images_all in db.items():
         cov_vec[digit_all] += sum((item.area - avg_area_db[digit_all]) ** 2 for item in images_all) / len(images_all)
 

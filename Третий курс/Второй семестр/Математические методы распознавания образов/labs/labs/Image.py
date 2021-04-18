@@ -30,6 +30,23 @@ class Image:
         return np.append(image.sum(axis=0),
                          image.sum(axis=1))
 
+    def get_squares(self):
+        image = self.data.reshape(28, 28)
+        for i in range(4):
+            for j in range(4):
+                index = (i * 4) + j
+                if i == j == 0:
+                    # 1 element
+                    yield np.count_nonzero(image[0:7, 0:7] > 0), index
+                elif i != 0 and j == 0:
+                    # 1 row
+                    yield np.count_nonzero(image[i * 7 + 1:(i + 1) * 7, 0:7] > 0), index
+                elif i == 0 and j != 0:
+                    # 1 column
+                    yield np.count_nonzero(image[0:7, j * 7 + 1:(j + 1) * 7] > 0), index
+                else:
+                    yield np.count_nonzero(image[i * 7 + 1:(i + 1) * 7, j * 7 + 1:(j + 1) * 7] > 0), index
+
 
 @dataclass(frozen=True)
 class TrainImage(Image):

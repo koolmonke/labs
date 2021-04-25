@@ -6,7 +6,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.io.File
 
-fun <T> Collection<T>.choice() = this.shuffled().take(1)[0]
+fun <T> Iterable<T>.choice() = this.shuffled().take(1)[0]
 
 
 fun solve(graph: Graph): List<Node> {
@@ -18,7 +18,7 @@ fun solve(graph: Graph): List<Node> {
                 randomVert
             else
                 anotherVert
-        inner(graph.filterAssociated(betterChoice), answer + listOf(betterChoice))
+        inner(graph.filterAssociated(betterChoice), answer + betterChoice)
     } else answer
     return inner(graph, listOf())
 }

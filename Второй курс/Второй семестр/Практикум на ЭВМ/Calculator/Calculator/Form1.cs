@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace Calculator
 {
@@ -138,63 +131,48 @@ namespace Calculator
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.D0)
+            switch (keyData)
             {
-                Zero.PerformClick();
-                return true;
+                case Keys.D0:
+                    Zero.PerformClick();
+                    return true;
+                case Keys.D1:
+                    One.PerformClick();
+                    return true;
+                case Keys.D2:
+                    Two.PerformClick();
+                    return true;
+                case Keys.D3:
+                    Three.PerformClick();
+                    return true;
+                case Keys.D4:
+                    Four.PerformClick();
+                    return true;
+                case Keys.D5:
+                    Five.PerformClick();
+                    return true;
+                case Keys.D6:
+                    Six.PerformClick();
+                    return true;
+                case Keys.D7:
+                    Seven.PerformClick();
+                    return true;
+                case Keys.D8:
+                    Eight.PerformClick();
+                    return true;
+                case Keys.D9:
+                    Nine.PerformClick();
+                    return true;
+                default:
+                {
+                    if (keyData == Keys.Shift)
+                    {
+                        Add.PerformClick();
+                        return true;
+                    }
+                    return base.ProcessCmdKey(ref msg, keyData);
+                }
             }
-            else if (keyData == Keys.D1)
-            {
-                One.PerformClick();
-                return true;
-            }
-            else if (keyData == Keys.D2)
-            {
-                Two.PerformClick();
-                return true;
-            }
-            else if (keyData == Keys.D3)
-            {
-                Three.PerformClick();
-                return true;
-            }
-            else if (keyData == Keys.D4)
-            {
-                Four.PerformClick();
-                return true;
-            }
-            else if (keyData == Keys.D5)
-            {
-                Five.PerformClick();
-                return true;
-            }
-            else if (keyData == Keys.D6)
-            {
-                Six.PerformClick();
-                return true;
-            }
-            else if (keyData == Keys.D7)
-            {
-                Seven.PerformClick();
-                return true;
-            }
-            else if (keyData == Keys.D8)
-            {
-                Eight.PerformClick();
-                return true;
-            }
-            else if(keyData == Keys.D9)
-            {
-                Nine.PerformClick();
-                return true;
-            }
-            else if (keyData == (Keys.Shift))
-            {
-                Add.PerformClick();
-                return true;
-            }
-            else
-            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void ChangeSign(object sender, EventArgs e)
@@ -241,9 +219,6 @@ namespace Calculator
                 case PrevClick.Pow:
                     b = Math.Pow(a, double.Parse(textBox1.Text));
                     textBox1.Text = b.ToString();
-                    break;
-
-                default:
                     break;
             }
 
@@ -328,15 +303,15 @@ namespace Calculator
 
         private void ИнженерныйToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            var Nigro = new Form2 { };
-            Nigro.Show();
+            Hide();
+            var nigro = new Form2();
+            nigro.Show();
         }
 
         private void обычныйToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            var normal = new Form1 { };
+            Hide();
+            var normal = new Form1();
             normal.Show();
         }
 

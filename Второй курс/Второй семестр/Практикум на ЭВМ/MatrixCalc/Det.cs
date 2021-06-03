@@ -15,15 +15,15 @@ namespace MatrixCalc
             return det(matrix.GetLength(0), matrix);
         }
 
-        public static double det(int n, double[,] Mat)
+        public static double det(int n, double[,] mat)
         {
             double d = 0;
             int k, i, j, subi, subj;
-            double[,] SUBMat = new double[n, n];
+            double[,] subMat = new double[n, n];
 
             if (n == 2)
             {
-                return ((Mat[0, 0] * Mat[1, 1]) - (Mat[1, 0] * Mat[0, 1]));
+                return ((mat[0, 0] * mat[1, 1]) - (mat[1, 0] * mat[0, 1]));
             }
 
             else
@@ -40,12 +40,12 @@ namespace MatrixCalc
                             {
                                 continue;
                             }
-                            SUBMat[subi, subj] = Mat[i, j];
+                            subMat[subi, subj] = mat[i, j];
                             subj++;
                         }
                         subi++;
                     }
-                    d = d + (Math.Pow(-1, k) * Mat[0, k] * det(n - 1, SUBMat));
+                    d = d + (Math.Pow(-1, k) * mat[0, k] * det(n - 1, subMat));
                 }
             }
             return d;

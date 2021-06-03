@@ -13,33 +13,13 @@ namespace MatrixCalc
             b = new double[rows];
         }
 
-        internal Vector(double[] initArray)
-        {
-            b = (double[])initArray.Clone();
-            rows = b.Length;
-        }
-
-        internal Vector Clone()
-        {
-            Vector v = new Vector(b);
-            return v;
-        }
-
         internal double this[int row]
         {
-            get { return b[row]; }
-            set { b[row] = value; }
+            get => b[row];
+            set => b[row] = value;
         }
 
-        internal void SwapRows(int r1, int r2)
-        {
-            if (r1 == r2) return;
-            double tmp = b[r1];
-            b[r1] = b[r2];
-            b[r2] = tmp;
-        }
-
-        internal double norm(double[] weights)
+        internal double Norm(double[] weights)
         {
             double sum = 0;
             for (int i = 0; i < rows; i++)
@@ -48,13 +28,6 @@ namespace MatrixCalc
                 sum += d * d;
             }
             return Math.Sqrt(sum);
-        }
-
-        internal void print()
-        {
-            for (int i = 0; i < rows; i++)
-                Console.WriteLine(b[i]);
-            Console.WriteLine();
         }
 
         public static Vector operator -(Vector lhs, Vector rhs)
@@ -175,16 +148,6 @@ namespace MatrixCalc
             }
             b = M.b;
             return true;
-        }
-
-        internal void print()
-        {
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                    Console.Write(this[i, j].ToString() + "  ");
-                Console.WriteLine();
-            }
         }
     }
 }

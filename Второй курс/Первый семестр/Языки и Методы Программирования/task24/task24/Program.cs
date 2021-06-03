@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+
 namespace task24
 {
     class MainClass
@@ -8,9 +10,9 @@ namespace task24
         public static void Main(string[] args)
         {
             const string alpha = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-            var UserInput = File.OpenText("userinput.txt");
-            var CharList = new List<string> { };
-            Dictionary<string, int> dict = new Dictionary<string, int> {{ "а", 0 }, { "б", 0 }, { "в", 0 },
+            var userInput = File.OpenText("userinput.txt");
+            var charList = new List<string>();
+            var dict = new Dictionary<string, int> {{ "а", 0 }, { "б", 0 }, { "в", 0 },
                   { "г", 0 }, { "д", 0 }, { "е", 0 }, { "ё", 0 }, { "ж", 0 },
                   { "з", 0 }, { "и", 0 }, { "й", 0 }, { "к", 0 }, { "л", 0 },
                   { "м", 0 }, { "н", 0 }, { "о", 0 }, { "п", 0 }, { "р", 0 },
@@ -18,24 +20,24 @@ namespace task24
                   { "ц", 0 }, { "ч", 0 }, { "ш", 0 }, { "щ", 0 }, { "ъ", 0 },
                   { "ы", 0 }, { "ь", 0 }, { "э", 0 }, { "ю", 0 }, { "я", 0 } };
 
-            while (UserInput.EndOfStream != true)
+            while (userInput.EndOfStream != true)
             {
-                string item = ((char)UserInput.Read()).ToString().ToLower();
+                var item = ((char)userInput.Read()).ToString().ToLower();
                 if (alpha.Contains(item))
                 {
                     dict[item]++;
-                    if (!CharList.Contains(item))
+                    if (!charList.Contains(item))
                     {
-                        CharList.Add(item);
+                        charList.Add(item);
                     }
                 }
             }
             Console.WriteLine("Буквы, которые встречаются в файле только один раз по порядку появляения");
-            foreach (var item in CharList)
+            foreach (var item in charList.Where(item => dict[item] == 1))
             {
-                if (dict[item] == 1) Console.WriteLine(item);
+                Console.WriteLine(item);
             }
-            UserInput.Close();
+            userInput.Close();
         }
     }
 }

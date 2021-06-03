@@ -4,21 +4,6 @@ namespace task6
 {
     class MainClass
     {
-        static bool CompareArrays(Char[] a, Char[] b)
-        {
-            if (a.Length != b.Length)
-            {
-                return false;
-            }
-            for (int i = 0; i < a.Length; i++)
-            {
-                if (a[i] != b[i])
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
         public static void Main(string[] args)
         {
             int n = 0;
@@ -42,7 +27,7 @@ namespace task6
             {
                for (int j = 0; j != ar.GetLength(1); j++)
                {
-                   Console.Write(ar[i, j] + " ");
+                   Console.Write($"{ar[i, j]} ");
                }
                Console.WriteLine();
             }

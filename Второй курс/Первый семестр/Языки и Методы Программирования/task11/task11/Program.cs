@@ -30,12 +30,12 @@ namespace task11
 
             }
             var arr = new int[n];
-            var var = 0;
+            var temp = 0;
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine("Введите элемент " + i);
-                if (int.TryParse(Console.ReadLine(), out var) == true) {
-                    arr[i] = var;
+                Console.WriteLine($"Введите элемент {i}");
+                if (int.TryParse(Console.ReadLine(), out temp)) {
+                    arr[i] = temp;
                 }
                 else
                 {
@@ -43,10 +43,10 @@ namespace task11
                     i--;
                 };
             }
-            Array.ForEach<int>(arr, item => Console.Write(item + " "));
+            Array.ForEach(arr, item => Console.Write($"{item} "));
             Console.WriteLine();
             FindAndReplace(arr);
-            Array.ForEach<int>(arr, item => Console.Write(item+ " "));
+            Array.ForEach(arr, item => Console.Write($"{item} "));
             Console.WriteLine();
         }
     }

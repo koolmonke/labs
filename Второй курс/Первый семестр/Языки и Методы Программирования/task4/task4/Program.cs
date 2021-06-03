@@ -26,7 +26,7 @@ namespace task4
                     res += arth;
                     n++;
                 }
-                Console.WriteLine(String.Format("arth {0} = {1}", x, res));
+                Console.WriteLine($"arth {x} = {res}");
             }
             else
             {

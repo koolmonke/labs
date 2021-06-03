@@ -11,7 +11,7 @@ namespace task18
             {
                 fact *= i;
             }
-            Console.WriteLine(string.Format("100! + 2^100 = {0}", fact + BigInteger.Pow(2, 100)));
+            Console.WriteLine($"100! + 2^100 = {fact + BigInteger.Pow(2, 100)}");
         }
     }
 }

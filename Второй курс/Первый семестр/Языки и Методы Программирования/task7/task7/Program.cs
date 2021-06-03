@@ -26,7 +26,7 @@ namespace task7
                 a[i] = new int[m];
                 for (int j = 0; j < a[i].Length; j++)
                 {
-                    Console.WriteLine(String.Format("Введите {0}, {1} элемент", i+1, j+1));
+                    Console.WriteLine($"Введите {i + 1}, {j + 1} элемент");
                     if (int.TryParse(Console.ReadLine(), out a[i][j]) != true)
                     {
                         Console.WriteLine("Неверный ввод");
@@ -39,32 +39,31 @@ namespace task7
             {
                 for (int j = 0; j < a[i].Length; j++)
                 {
-                    Console.Write(a[i][j] + "\t");
+                    Console.Write($"{a[i][j]}\t");
                 }
                 Console.WriteLine();
             }
-            int i_max = 0, j_max = 0;
+            int iMax = 0, jMax = 0;
             for (int i = 0; i < a.Length; i++)
             {
                 for (int j = 0; j < a[i].Length; j++)
                 {
-                    if (Math.Abs(a[i][j]) > Math.Abs(a[i_max][j_max]))
+                    if (Math.Abs(a[i][j]) > Math.Abs(a[iMax][jMax]))
                     {
-                        i_max = i;
-                        j_max = j;
+                        iMax = i;
+                        jMax = j;
                     }
                 }
             }
-            Console.WriteLine(String.Format("Максимальное значение a[{0}][{1}] = {2}", 
-                                            i_max + 1, j_max + 1, a[i_max][j_max]));
+            Console.WriteLine($"Максимальное значение a[{iMax + 1}][{jMax + 1}] = {a[iMax][jMax]}");
 
             Console.WriteLine("Enter k");
             int k = int.Parse(Console.ReadLine()) - 1;
             for (int i = 0; i < a.Length; i++)
             {
                 int t = a[i][k];
-                a[i][k] = a[i][j_max];
-                a[i][j_max] = t;
+                a[i][k] = a[i][jMax];
+                a[i][jMax] = t;
             }
             //for (int j = 0; j < m; j++)
             //{
@@ -74,8 +73,8 @@ namespace task7
             //}
             {
                 int[] t_arr = a[k];
-                a[k] = a[i_max];
-                a[i_max] = t_arr;
+                a[k] = a[iMax];
+                a[iMax] = t_arr;
             }
 
             Console.WriteLine("Новая матрица:");
@@ -83,7 +82,7 @@ namespace task7
             {
                 for (int j = 0; j < a[i].Length; j++)
                 {
-                    Console.Write(a[i][j] + "\t");
+                    Console.Write($"{a[i][j]}\t");
                 }
                 Console.WriteLine();
             }

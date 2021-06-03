@@ -6,10 +6,10 @@ namespace task8
     {
         public static void Main(string[] args)
         {
-            string userinput = Console.ReadLine();
+            string userInput = Console.ReadLine() ?? "";
             var count = 0;
             Console.WriteLine("Слова в строке, содержащие букву K");
-            foreach (var item in userinput.Split()) 
+            foreach (var item in userInput.Split())
             {
                 if (item.Contains("k") || item.Contains("K"))
                 {
@@ -17,7 +17,8 @@ namespace task8
                     count++;
                 }
             }
-            Console.WriteLine(String.Format("Всего их {0} ", count));
+
+            Console.WriteLine($"Всего их {count}");
         }
     }
 }

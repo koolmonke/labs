@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using static System.Math;
 namespace MatrixArithmetic
 {
     public class Vector : IEnumerable<double>
@@ -21,7 +21,7 @@ namespace MatrixArithmetic
 
         public Vector this[Range i] => new Vector(Repr[i]);
 
-        public double Det() => Repr.Aggregate((acc, value) => acc * value);
+        public double Det() => Sqrt(Repr.Select(value => value * value).Sum());
 
         public static Vector WithSize(int n) => new Vector(n);
 
@@ -29,14 +29,14 @@ namespace MatrixArithmetic
 
         public Vector Copy() => From(Repr);
 
-        public static Vector operator *(Vector self, Vector other)
+        public static double operator *(Vector self, Vector other)
         {
             if (self.N != other.N)
             {
                 throw new VectorDifferentDimException();
             }
 
-            return self.Zip(other).Select(pair => pair.First * pair.Second).ToVector();
+            return self.Zip(other).Select(pair => pair.First * pair.Second).Sum();
         }
 
         public static Vector operator *(Vector self, double other) => self.Select(value => other * value).ToVector();

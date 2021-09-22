@@ -141,6 +141,8 @@ namespace MatrixArithmetic
             return result;
         }
 
+        public Matrix T => Transpose();
+
         public bool IsSingular()
         {
             for (int i = 0; i < N; i++)

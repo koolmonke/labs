@@ -126,6 +126,21 @@ namespace MatrixArithmetic
             return det;
         }
 
+        public Matrix Transpose()
+        {
+            var result = Matrix.WithSize(M, N);
+
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < M; j++)
+                {
+                    result[j, i] = Repr[i][j];
+                }
+            }
+
+            return result;
+        }
+
         public bool IsSingular()
         {
             for (int i = 0; i < N; i++)

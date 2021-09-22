@@ -2,7 +2,7 @@
 using System.Linq;
 using static System.Math;
 
-namespace Matrix
+namespace MatrixArithmetic
 {
     public class Matrix
     {
@@ -87,6 +87,8 @@ namespace Matrix
 
         public static Matrix WithSize(int n, int m) => new Matrix(n, m);
 
+        public static Matrix From(double[][] values) => new Matrix(values);
+
         private void BubbleMaxRow(int col)
         {
             var maxElement = Repr[col][col];
@@ -111,7 +113,7 @@ namespace Matrix
 
         private Matrix(double[][] values)
         {
-            this.Repr = values;
+            this.Repr = values.Select(array => array.ToArray()).ToArray();
         }
 
         private Matrix(int n, int m)

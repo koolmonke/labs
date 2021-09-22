@@ -70,7 +70,7 @@ namespace Matrix
             return x;
         }
 
-        private bool IsSingular()
+        public bool IsSingular()
         {
             for (int i = 0; i < N; i++)
             {

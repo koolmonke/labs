@@ -21,6 +21,8 @@ namespace MatrixArithmetic
 
         public double[] this[Range i] => Repr[i];
 
+        public double Det() => Repr.Aggregate((acc, value) => acc * value);
+
         public static Vector WithSize(int n) => new Vector(n);
 
         public static Vector From(double[] values) => new Vector(values);

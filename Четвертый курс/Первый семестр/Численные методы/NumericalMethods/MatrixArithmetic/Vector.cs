@@ -19,7 +19,7 @@ namespace MatrixArithmetic
             set => Repr[i] = value;
         }
 
-        public double[] this[Range i] => Repr[i];
+        public Vector this[Range i] => new Vector(Repr[i]);
 
         public double Det() => Repr.Aggregate((acc, value) => acc * value);
 

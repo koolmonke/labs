@@ -22,8 +22,8 @@ namespace MatrixArithmetic
             set => Repr[i] = value;
         }
 
-        public double[][] this[Range i, Range j] => Repr[i][j];
-        public double[][] this[Range i] => Repr[i];
+        public Matrix this[Range i, Range j] => new Matrix(Repr[i][j]);
+        public Matrix this[Range i] => new Matrix(Repr[i]);
 
         public static Matrix operator *(Matrix self, Matrix other)
         {

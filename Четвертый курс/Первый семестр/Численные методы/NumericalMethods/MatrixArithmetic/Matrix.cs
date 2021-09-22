@@ -136,7 +136,7 @@ namespace MatrixArithmetic
             return true;
         }
 
-        public Matrix Copy() => new Matrix(Repr.Select(array => array.ToArray()).ToArray());
+        public Matrix Copy() => new Matrix(Repr);
 
         public static Matrix WithSize(int n, int m) => new Matrix(n, m);
 

@@ -19,6 +19,8 @@ namespace MatrixArithmetic
             set => Repr[i] = value;
         }
 
+        public double[] this[Range i] => Repr[i];
+
         public static Vector WithSize(int n) => new Vector(n);
 
         public static Vector From(double[] values) => new Vector(values);

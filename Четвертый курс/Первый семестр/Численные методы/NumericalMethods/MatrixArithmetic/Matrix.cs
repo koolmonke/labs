@@ -22,6 +22,9 @@ namespace MatrixArithmetic
             set => Repr[i] = value;
         }
 
+        public double[][] this[Range i, Range j] => Repr[i][j];
+        public double[][] this[Range i] => Repr[i];
+
         public static Matrix operator *(Matrix self, Matrix other)
         {
             var result = Matrix.WithSize(self.N, other.M);

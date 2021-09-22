@@ -36,6 +36,7 @@ namespace MatrixArithmetic
         }
 
         public static Vector operator *(Vector self, double other) => self.Select(value => other * value).ToVector();
+        public static Vector operator *(double self, Vector other) => other * self;
 
         public static Vector operator +(Vector self, Vector other)
         {

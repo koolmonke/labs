@@ -16,6 +16,12 @@ namespace MatrixArithmetic
             set => Repr[i][j] = value;
         }
 
+        public double[] this[Index i]
+        {
+            get => Repr[i];
+            set => Repr[i] = value;
+        }
+
         public static Matrix operator *(Matrix self, Matrix other)
         {
             var result = Matrix.WithSize(self.N, other.M);
@@ -34,7 +40,7 @@ namespace MatrixArithmetic
             return result;
         }
 
-        public double[]? Gauss()
+        public double[]? GaussSole()
         {
             var m = this.Copy();
 
@@ -68,6 +74,53 @@ namespace MatrixArithmetic
             }
 
             return x;
+        }
+
+        public double DetGauss()
+        {
+            var matrix = this.Copy();
+            var det = 1d;
+            var lenCol = matrix.N;
+
+            for (int i = 0; i < lenCol; i++)
+            {
+                var t = i;
+
+                for (int j = i + 1; j < lenCol; j++)
+                {
+                    if (Abs(matrix[j, i]) > Abs(matrix[t, i]))
+                    {
+                        t = j;
+                    }
+                }
+
+                (matrix[i], matrix[t]) = (matrix[t], matrix[i]);
+
+                if (i != t)
+                {
+                    det = -det;
+                }
+
+                det *= matrix[i][i];
+
+                for (int j = 0; j < lenCol; j++)
+                {
+                    matrix[i, j] /= matrix[i, i];
+                }
+
+                for (int j = 0; j < lenCol; j++)
+                {
+                    if (j != i)
+                    {
+                        for (int k = 0; k < lenCol; k++)
+                        {
+                            matrix[j, k] /= matrix[i, k] * matrix[j, i];
+                        }
+                    }
+                }
+            }
+
+            return det;
         }
 
         public bool IsSingular()

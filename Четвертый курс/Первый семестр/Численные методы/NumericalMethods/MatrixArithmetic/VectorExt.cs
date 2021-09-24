@@ -7,11 +7,18 @@ namespace MatrixArithmetic
     {
         public static Vector ToVector(this IEnumerable<double> enumerable) => Vector.From(enumerable.ToArray());
 
-        public static Matrix ToMatrix(this IEnumerable<double> enumerable)
+        public static Matrix ToMatrix(this Vector vector)
         {
-            var vector = enumerable.ToArray();
+            var n = vector.N;
+            var result = new double[n, 1];
 
-            return Matrix.From(new[] { vector });
+
+            for (int i = 0; i < n; i++)
+            {
+                result[i, 0] = vector[i];
+            }
+
+            return Matrix.From(result);
         }
     }
 }

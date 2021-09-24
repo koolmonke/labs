@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using static System.Math;
+
 namespace MatrixArithmetic
 {
     public class Vector : IEnumerable<double>
@@ -63,6 +64,8 @@ namespace MatrixArithmetic
         }
 
         public static Vector operator -(Vector self) => self.Select(value => -value).ToVector();
+
+        public override string ToString() => string.Join(' ', Repr);
 
 
         private double[] Repr;

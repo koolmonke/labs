@@ -92,7 +92,7 @@ namespace MatrixArithmetic
             {
                 for (int j = 0; j < M; j++)
                 {
-                    builder.Append($"{Repr[i, j].ToString("+#00.000;-#00.000;00.000", CultureInfo.InvariantCulture)} ");
+                    builder.Append($"{Repr[i, j].ToString("+#00.000;-#00.000;000.000", CultureInfo.InvariantCulture)} ");
                 }
 
                 if (i < N - 1)

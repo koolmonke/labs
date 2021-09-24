@@ -68,7 +68,7 @@ namespace MatrixArithmetic
 
         public Vector ToVector()
         {
-            if (M!=1)
+            if (M != 1)
             {
                 throw new VectorDifferentDimException();
             }
@@ -81,9 +81,8 @@ namespace MatrixArithmetic
             }
 
             return vector;
-
         }
-        
+
         public override string ToString()
         {
             var builder = new StringBuilder();
@@ -96,7 +95,10 @@ namespace MatrixArithmetic
                     builder.Append($"{Repr[i, j].ToString("+#00.000;-#00.000;00.000", CultureInfo.InvariantCulture)} ");
                 }
 
-                builder.Append('\n');
+                if (i < N - 1)
+                {
+                    builder.Append('\n');
+                }
             }
 
             return builder.ToString();

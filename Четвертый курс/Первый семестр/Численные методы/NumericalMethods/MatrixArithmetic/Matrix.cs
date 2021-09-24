@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -51,8 +52,57 @@ namespace MatrixArithmetic
             return result;
         }
 
-        public double Det() => Determinant(Repr);
+        public double Det() => StupidDet(Repr.ToJaggedArray());
 
+        private static double StupidDet(double[][] input)
+        {
+            var n = input.Length;
+            double det = 1;
+            double[][] b = new double[1][];
+            b[0] = new double[n];
+            for (int i = 0; i < n; ++i)
+            {
+                //присваиваем k номер строки
+                int k = i;
+                //идем по строке от i+1 до конца
+                for (int j = i + 1; j < n; ++j)
+                    //проверяем
+                    if (Math.Abs(input[j][i]) > Math.Abs(input[k][i]))
+                        //если равенство выполняется то k присваиваем j
+                        k = j;
+                //если равенство выполняется то определитель приравниваем 0 и выходим из программы
+                var EPS = 0.0001;
+                if (Math.Abs(input[k][i]) < EPS)
+                {
+                    det = 0;
+                    break;
+                }
+
+                //меняем местами a[i] и a[k]
+                b[0] = input[i];
+                input[i] = input[k];
+                input[k] = b[0];
+                //если i не равно k
+                if (i != k)
+                    //то меняем знак определителя
+                    det = -det;
+                //умножаем det на элемент a[i][i]
+                det *= input[i][i];
+                //идем по строке от i+1 до конца
+                for (int j = i + 1; j < n; ++j)
+                    //каждый элемент делим на a[i][i]
+                    input[i][j] /= input[i][i];
+                //идем по столбцам
+                for (int j = 0; j < n; ++j)
+                    //проверяем
+                    if (j != i && Math.Abs(input[j][i]) > EPS)
+                        //если да, то идем по k от i+1
+                        for (k = i + 1; k < n; ++k)
+                            input[j][k] -= input[i][k] * input[j][i];
+            }
+
+            return det;
+        }
 
         public static Matrix Identity(int n)
         {
@@ -74,7 +124,13 @@ namespace MatrixArithmetic
 
         public Matrix Inv()
         {
-            return new Matrix(Invert(Repr));
+            var rowCount = Repr.GetLength(0);
+
+
+            var newMatrix = ConcatHorizontally(Repr, Matrix.Identity(rowCount).Repr);
+
+            var result = Eliminate(newMatrix, MatrixReductionForm.ReducedRowEchelonForm, rowCount);
+            return new Matrix(result.AugmentedColumns);
         }
 
         public Vector ToVector()
@@ -142,86 +198,6 @@ namespace MatrixArithmetic
             return output;
         }
 
-
-        private static double Determinant(double[,] input)
-        {
-            var results = CrossProduct(input);
-
-            return results.Sum();
-        }
-
-        private static double[] CrossProduct(double[,] input)
-        {
-            int rowCount = input.GetLength(0);
-            int colCount = input.GetLength(1);
-
-            if (rowCount == 0)
-                return new double[] { 1 };
-
-            if (rowCount == 1)
-                return new[] { input[0, 0] };
-
-            if (rowCount == 2)
-                return new[] { input[0, 0] * input[1, 1] - input[0, 1] * input[1, 0] };
-
-            double[] results = new double[colCount];
-
-            for (int col = 0; col < colCount; col++)
-            {
-                // checkerboard pattern, even col  = 1, odd col = -1
-                var checkerboardFactor = col % 2.0 == 0 ? 1 : -1;
-                var coefficient = input[0, col];
-
-                var crossMatrix = GetCrossMatrix(input, 0, col);
-                results[col] = checkerboardFactor * (coefficient * Determinant(crossMatrix));
-            }
-
-            return results;
-        }
-
-        private static double[,] GetCrossMatrix(double[,] input, int skipRow, int skipCol)
-        {
-            int rowCount = input.GetLength(0);
-            int colCount = input.GetLength(1);
-
-            var output = new double[rowCount - 1, colCount - 1];
-            int outputRow = 0;
-
-            for (int row = 0; row < rowCount; row++)
-            {
-                if (row == skipRow)
-                    continue;
-
-                int outputCol = 0;
-
-                for (int col = 0; col < colCount; col++)
-                {
-                    if (col == skipCol)
-                        continue;
-
-                    output[outputRow, outputCol] = input[row, col];
-
-                    outputCol++;
-                }
-
-                outputRow++;
-            }
-
-            return output;
-        }
-
-
-        private static double[,] Invert(double[,] matrix)
-        {
-            var rowCount = matrix.GetLength(0);
-
-
-            var newMatrix = ConcatHorizontally(matrix, Matrix.Identity(rowCount).Repr);
-
-            var result = Eliminate(newMatrix, MatrixReductionForm.ReducedRowEchelonForm, rowCount);
-
-            return result.AugmentedColumns;
-        }
 
         private static double[,] CreateCopy(double[,] input)
         {

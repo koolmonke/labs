@@ -7,16 +7,6 @@ namespace Lab1
     {
         private static void Main()
         {
-            var aF = Matrix.From(new[,]
-            {
-                { 0.34, 1.17, 0.2, 8.13, 4.15 },
-                { 3.52, 4.73, 4.37, 5.89, 2.92 },
-                { -6.25, 2.54, 6.91, -5.43, -3.14 },
-                { -2.13, 2.21, 4.17, 6.11, 7.65 }
-            });
-
-            var f = Vector.From(new[] { 4.15, 2.92, -3.14, 7.65 });
-
             var a = Matrix.From(new[,]
             {
                 { 0.34, 1.17, 0.2, 8.13 },
@@ -25,6 +15,8 @@ namespace Lab1
                 { -2.13, 2.21, 4.17, 6.11 }
             });
 
+            var f = Vector.From(new[] { 4.15, 2.92, -3.14, 7.65 });
+
             Console.WriteLine("Матрица A");
             Console.WriteLine(a);
 
@@ -32,7 +24,7 @@ namespace Lab1
             Console.WriteLine(a.Det());
 
             Console.WriteLine("решение ax=f");
-            var solution = aF.Sole();
+            var solution = a.Sole(f);
             Console.WriteLine(solution);
 
             Console.WriteLine("Вектор невязки");

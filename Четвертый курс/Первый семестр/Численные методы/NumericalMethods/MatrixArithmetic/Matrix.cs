@@ -35,12 +35,23 @@ namespace MatrixArithmetic
             return result;
         }
 
-        public Vector Sole() => Vector.From(GaussSole(Repr));
-
-        public double Det()
+        public Vector Sole(Vector fVector)
         {
-            return Determinant(Repr);
+            var newMatrix = ConcatHorizontally(this.Repr, fVector.ToMatrix().Repr);
+
+            var fullMatrix = Eliminate(newMatrix, MatrixReductionForm.ReducedRowEchelonForm, 1).FullMatrix;
+
+            var result = Vector.WithSize(N);
+
+            for (int i = 0; i < N; i++)
+            {
+                result[i] = fullMatrix[i, N];
+            }
+
+            return result;
         }
+
+        public double Det() => Determinant(Repr);
 
 
         public static Matrix Identity(int n)
@@ -92,7 +103,8 @@ namespace MatrixArithmetic
             {
                 for (int j = 0; j < M; j++)
                 {
-                    builder.Append($"{Repr[i, j].ToString("+#00.000;-#00.000;000.000", CultureInfo.InvariantCulture)} ");
+                    builder.Append(
+                        $"{Repr[i, j].ToString("+#00.000;-#00.000;000.000", CultureInfo.InvariantCulture)} ");
                 }
 
                 if (i < N - 1)
@@ -130,74 +142,6 @@ namespace MatrixArithmetic
             return output;
         }
 
-
-        /// <summary>
-        /// Метод Гаусса (Решение СЛАУ)
-        /// </summary>
-        /// <param name="matrix">Начальная матрица</param>
-        /// <returns></returns>
-        private static double[] GaussSole(double[,] matrix)
-        {
-            int n = matrix.GetLength(0); //Размерность начальной матрицы (строки)
-            double[,] matrixClone = new double[n, n + 1]; //Матрица-дублер
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n + 1; j++)
-                {
-                    matrixClone[i, j] = matrix[i, j];
-                }
-            }
-
-            //Прямой ход (Зануление нижнего левого угла)
-            for (int k = 0; k < n; k++) //k-номер строки
-            {
-                for (int i = 0; i < n + 1; i++) //i-номер столбца
-                    matrixClone[k, i] /=
-                        matrix[k, k]; //Деление k-строки на первый член !=0 для преобразования его в единицу
-                for (int i = k + 1; i < n; i++) //i-номер следующей строки после k
-                {
-                    double div = matrixClone[i, k] / matrixClone[k, k]; //Коэффициент
-                    for (int j = 0; j < n + 1; j++) //j-номер столбца следующей строки после k
-                    {
-                        matrixClone[i, j] -= matrixClone[k, j] *
-                                             div; //Зануление элементов матрицы ниже первого члена, преобразованного в единицу
-                    }
-                }
-
-                for (int i = 0; i < n; i++) //Обновление, внесение изменений в начальную матрицу
-                {
-                    for (int j = 0; j < n + 1; j++)
-                    {
-                        matrix[i, j] = matrixClone[i, j];
-                    }
-                }
-            }
-
-            //Обратный ход (Зануление верхнего правого угла)
-            for (int k = n - 1; k > -1; k--) //k-номер строки
-            {
-                for (int i = n; i > -1; i--) //i-номер столбца
-                {
-                    matrixClone[k, i] /= matrix[k, k];
-                }
-
-                for (int i = k - 1; i > -1; i--) //i-номер следующей строки после k
-                {
-                    double div = matrixClone[i, k] / matrixClone[k, k];
-                    for (int j = n; j > -1; j--) //j-номер столбца следующей строки после k
-                    {
-                        matrixClone[i, j] -= matrixClone[k, j] * div;
-                    }
-                }
-            }
-
-            //Отделяем от общей матрицы ответы
-            double[] answer = new double[n];
-            for (int i = 0; i < n; i++)
-                answer[i] = matrixClone[i, n];
-
-            return answer;
-        }
 
         private static double Determinant(double[,] input)
         {
@@ -391,7 +335,7 @@ namespace MatrixArithmetic
             }
 
             result.FullMatrix = output;
-            result.UnknownsCount = totalColCount / 2;
+            result.UnknownsCount = augmentedCols;
             result.TotalRowCount = totalRowCount;
             result.TotalColumnCount = totalColCount;
             result.AugmentedColumnCount = augmentedCols;

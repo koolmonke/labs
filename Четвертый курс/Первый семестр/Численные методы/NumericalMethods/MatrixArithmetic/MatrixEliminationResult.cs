@@ -7,8 +7,6 @@
         /// </summary>
         public double[,] FullMatrix { get; internal set; }
 
-        public int Rank { get; internal set; }
-
         // Augmentation
         public int AugmentedColumnCount { get; internal set; }
         public double[,] AugmentedColumns { get; internal set; }
@@ -21,8 +19,6 @@
         /// <summary>
         /// Solution matrix. Free columns are denoted by NULL.
         /// </summary>
-        public double?[] Solution { get; internal set; }
-
-        public MatrixSolutionState SolutionState { get; internal set; }
+        public double?[]? Solution { get; internal set; }
     }
 }

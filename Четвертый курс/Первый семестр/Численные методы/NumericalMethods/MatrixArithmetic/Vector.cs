@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using static System.Math;
 
@@ -65,7 +66,8 @@ namespace MatrixArithmetic
 
         public static Vector operator -(Vector self) => self.Select(value => -value).ToVector();
 
-        public override string ToString() => string.Join(' ', Repr);
+        public override string ToString() => string.Join(' ',
+            Repr.Select(value => value.ToString("+#00.000;-#00.000;00.000", CultureInfo.InvariantCulture)));
 
 
         private double[] Repr;

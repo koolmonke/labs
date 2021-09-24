@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace MatrixArithmetic
@@ -60,7 +61,29 @@ namespace MatrixArithmetic
 
         public static Matrix From(double[,] values) => new Matrix(values);
 
+        public Matrix Inv()
+        {
+            return new Matrix(Invert(Repr));
+        }
 
+        public Vector ToVector()
+        {
+            if (M!=1)
+            {
+                throw new VectorDifferentDimException();
+            }
+
+            var vector = Vector.WithSize(N);
+
+            for (int i = 0; i < N; i++)
+            {
+                vector[i] = Repr[i, 0];
+            }
+
+            return vector;
+
+        }
+        
         public override string ToString()
         {
             var builder = new StringBuilder();
@@ -70,7 +93,7 @@ namespace MatrixArithmetic
             {
                 for (int j = 0; j < M; j++)
                 {
-                    builder.Append($"{Repr[i, j]:0.000} ");
+                    builder.Append($"{Repr[i, j].ToString("+#00.000;-#00.000;00.000", CultureInfo.InvariantCulture)} ");
                 }
 
                 builder.Append('\n');
@@ -82,7 +105,7 @@ namespace MatrixArithmetic
         /// <summary>
         /// Concats two matrices horizontally.
         /// </summary>
-        public static double[,] ConcatHorizontally(double[,] matrix1, double[,] matrix2)
+        private static double[,] ConcatHorizontally(double[,] matrix1, double[,] matrix2)
         {
             var rowCount = matrix1.GetLength(0);
 
@@ -131,11 +154,11 @@ namespace MatrixArithmetic
                         matrix[k, k]; //Деление k-строки на первый член !=0 для преобразования его в единицу
                 for (int i = k + 1; i < n; i++) //i-номер следующей строки после k
                 {
-                    double K = matrixClone[i, k] / matrixClone[k, k]; //Коэффициент
+                    double div = matrixClone[i, k] / matrixClone[k, k]; //Коэффициент
                     for (int j = 0; j < n + 1; j++) //j-номер столбца следующей строки после k
                     {
                         matrixClone[i, j] -= matrixClone[k, j] *
-                                             K; //Зануление элементов матрицы ниже первого члена, преобразованного в единицу
+                                             div; //Зануление элементов матрицы ниже первого члена, преобразованного в единицу
                     }
                 }
 
@@ -158,10 +181,10 @@ namespace MatrixArithmetic
 
                 for (int i = k - 1; i > -1; i--) //i-номер следующей строки после k
                 {
-                    double K = matrixClone[i, k] / matrixClone[k, k];
+                    double div = matrixClone[i, k] / matrixClone[k, k];
                     for (int j = n; j > -1; j--) //j-номер столбца следующей строки после k
                     {
-                        matrixClone[i, j] -= matrixClone[k, j] * K;
+                        matrixClone[i, j] -= matrixClone[k, j] * div;
                     }
                 }
             }
@@ -241,79 +264,82 @@ namespace MatrixArithmetic
             return output;
         }
 
-        public Matrix Inv()
-        {
-            return new Matrix(Invert(Repr));
-        }
 
         private static double[,] Invert(double[,] matrix)
         {
             var rowCount = matrix.GetLength(0);
-            var colCount = matrix.GetLength(1);
 
 
             var newMatrix = ConcatHorizontally(matrix, Matrix.Identity(rowCount).Repr);
 
             var result = Eliminate(newMatrix, MatrixReductionForm.ReducedRowEchelonForm, rowCount);
-            if (result.Rank != colCount)
-                return null;
 
             return result.AugmentedColumns;
         }
-        
-        public static double[,] CreateCopy(double[,] input) {
+
+        private static double[,] CreateCopy(double[,] input)
+        {
             var rowCount = input.GetLength(0);
             var colCount = input.GetLength(1);
 
-            double[,] output = new double[rowCount,colCount ];
-      
-            for (int row = 0; row < rowCount ; row++) {
-                for (int col = 0; col < colCount; col++) {
+            double[,] output = new double[rowCount, colCount];
+
+            for (int row = 0; row < rowCount; row++)
+            {
+                for (int col = 0; col < colCount; col++)
+                {
                     output[row, col] = input[row, col];
                 }
             }
 
             return output;
         }
-        
-        private static int? FindPivot(double[,] input, int startRow, int col, int rowCount) {
-            for (int i = startRow; i < rowCount; i++) {
+
+        private static int? FindPivot(double[,] input, int startRow, int col, int rowCount)
+        {
+            for (int i = startRow; i < rowCount; i++)
+            {
                 if (input[i, col] != 0)
                     return i;
             }
 
             return null;
         }
-        
-        private static void ReduceRow(double[,] input, int row, int col, int colCount) {
-            var coeffecient = 1.0 / input[row, col];
 
-            if (coeffecient == 1)
+        private static void ReduceRow(double[,] input, int row, int col, int colCount)
+        {
+            var coefficient = 1.0 / input[row, col];
+
+            if (coefficient == 1)
                 return;
 
             for (; col < colCount; col++)
-                input[row, col] *= coeffecient;
+                input[row, col] *= coefficient;
         }
-        
-        private static void EliminateRow(double[,] input, int row, int pivotRow, int pivotCol, int colCount) {
+
+        private static void EliminateRow(double[,] input, int row, int pivotRow, int pivotCol, int colCount)
+        {
             if (pivotRow == row)
                 return;
 
             if (input[row, pivotCol] == 0)
                 return;
 
-            double coeffecient = input[row, pivotCol];
+            double coefficient = input[row, pivotCol];
 
-            for (int col = pivotCol; col < colCount; col++) {
-                input[row, col] -= input[pivotRow, col] * coeffecient;
+            for (int col = pivotCol; col < colCount; col++)
+            {
+                input[row, col] -= input[pivotRow, col] * coefficient;
             }
         }
-        
-        private static void SwitchRows(double[,] input, int row1, int row2, int colCount) {
+
+        private static void SwitchRows(double[,] input, int row1, int row2, int colCount)
+        {
             if (row1 == row2)
                 return;
 
-            for (int col = 0; col < colCount; col++) {
+            for (int col = 0; col < colCount; col++)
+            {
                 (input[row1, col], input[row2, col]) = (input[row2, col], input[row1, col]);
             }
         }
@@ -321,12 +347,12 @@ namespace MatrixArithmetic
         /// <summary>
         /// Reduces matrix to row-echelon (REF/Gauss) or reduced row-echelon (RREF/Gauss-Jordan) form and solves for augmented columns (if any.)
         /// </summary>
-        public static MatrixEliminationResult Eliminate(double[,] input, MatrixReductionForm form,
+        private static MatrixEliminationResult Eliminate(double[,] input, MatrixReductionForm form,
             int augmentedCols = 0)
         {
             int totalRowCount = input.GetLength(0);
             int totalColCount = input.GetLength(1);
-            
+
 
             MatrixEliminationResult result = new MatrixEliminationResult();
 
@@ -377,70 +403,74 @@ namespace MatrixArithmetic
 
             return result;
         }
-        
-        private static MatrixEliminationResult FindSolution(MatrixEliminationResult result) {
 
-            double?[] solution = null;
-            MatrixSolutionState solutionState = MatrixSolutionState.None;
+        private static MatrixEliminationResult FindSolution(MatrixEliminationResult result)
+        {
+            double?[]? solution = null;
 
 
-            if (result.AugmentedColumnCount == 1) {
-                if (result.UnknownsCount > result.TotalRowCount)
-                    solutionState = MatrixSolutionState.Infinite;
-                else
-                    solutionState = MatrixSolutionState.Unique; // default value
+            if (result.AugmentedColumnCount == 1)
+            {
+                var solutionState = result.UnknownsCount > result.TotalRowCount
+                    ? MatrixSolutionState.Infinite
+                    : MatrixSolutionState.Unique;
 
                 solution = new double?[result.UnknownsCount];
 
                 int pivotRow = 0;
-                for (int col = 0; col < result.UnknownsCount; col++) {
+                for (int col = 0; col < result.UnknownsCount; col++)
+                {
                     double unknownValue = result.FullMatrix[pivotRow, col];
                     double solutionValue = result.FullMatrix[pivotRow, result.TotalColumnCount - 1];
 
-                    if (unknownValue == 1) {
+                    if (unknownValue == 1)
+                    {
                         solution[col] = solutionValue;
 
                         pivotRow++;
-                    } else {
-                        if (solutionState == MatrixSolutionState.Unique) { // still on default value
-                            if (solutionValue == 0)
-                                solutionState = MatrixSolutionState.Infinite;
-                            else
-                                solutionState = MatrixSolutionState.None;
+                    }
+                    else
+                    {
+                        if (solutionState == MatrixSolutionState.Unique)
+                        {
+                            // still on default value
+                            solutionState = solutionValue == 0
+                                ? MatrixSolutionState.Infinite
+                                : MatrixSolutionState.None;
                         }
                     }
                 }
             }
 
-            if (solution != null)
-                result.Rank = solution.Where(s => s != null).Count();
-            else
-                result.Rank = result.TotalColumnCount - result.AugmentedColumnCount;
-
             result.Solution = solution;
-            result.SolutionState = solutionState;
 
             return result;
         }
-        public static double[,] ExtractColumns(double[,] input, int startCol, int endCol) {
+
+        private static double[,] ExtractColumns(double[,] input, int startCol, int endCol)
+        {
             return ExtractColumns(input, Enumerable.Range(startCol, endCol - startCol + 1).ToArray());
         }
-        
-        public static double[,] ExtractColumns(double[,] input, int[] cols) {
-            // cols = cols.Distinct().ToArray();
+
+        private static double[,] ExtractColumns(double[,] input, int[] cols)
+        {
+            cols = cols.Distinct().ToArray();
             int rowCount = input.GetLength(0);
             int colCount = input.GetLength(1);
             double[,] output = new double[rowCount, cols.Length];
 
-            for (int row = 0; row < rowCount; row++) {
+            for (int row = 0; row < rowCount; row++)
+            {
                 int i = 0;
-                for (int col = 0; col < colCount; col++) {
+                for (int col = 0; col < colCount; col++)
+                {
                     if (cols.Contains(col) == false)
                         continue;
                     output[row, i] = input[row, col];
                     i++;
                 }
             }
+
             return output;
         }
 
@@ -448,7 +478,7 @@ namespace MatrixArithmetic
 
         private Matrix(double[,] values)
         {
-            this.Repr = (double[,])values.Clone();
+            this.Repr = CreateCopy(values);
         }
 
         private Matrix(int n, int m)

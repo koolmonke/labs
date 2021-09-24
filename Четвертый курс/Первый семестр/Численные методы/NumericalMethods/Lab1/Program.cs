@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using MatrixArithmetic;
 
 namespace Lab1
@@ -21,7 +22,7 @@ namespace Lab1
             Console.WriteLine(a);
 
             Console.WriteLine("её детерминант");
-            Console.WriteLine(a.Det());
+            Console.WriteLine(a.Det().ToString(CultureInfo.InvariantCulture));
 
             Console.WriteLine("решение ax=f");
             var solution = a.Sole(f);

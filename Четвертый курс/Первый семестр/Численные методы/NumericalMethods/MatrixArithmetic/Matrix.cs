@@ -54,55 +54,6 @@ namespace MatrixArithmetic
 
         public double Det() => StupidDet(Repr.ToJaggedArray());
 
-        private static double StupidDet(double[][] input)
-        {
-            var n = input.Length;
-            double det = 1;
-            double[][] b = new double[1][];
-            b[0] = new double[n];
-            for (int i = 0; i < n; ++i)
-            {
-                //присваиваем k номер строки
-                int k = i;
-                //идем по строке от i+1 до конца
-                for (int j = i + 1; j < n; ++j)
-                    //проверяем
-                    if (Math.Abs(input[j][i]) > Math.Abs(input[k][i]))
-                        //если равенство выполняется то k присваиваем j
-                        k = j;
-                //если равенство выполняется то определитель приравниваем 0 и выходим из программы
-                var EPS = 0.0001;
-                if (Math.Abs(input[k][i]) < EPS)
-                {
-                    det = 0;
-                    break;
-                }
-
-                //меняем местами a[i] и a[k]
-                b[0] = input[i];
-                input[i] = input[k];
-                input[k] = b[0];
-                //если i не равно k
-                if (i != k)
-                    //то меняем знак определителя
-                    det = -det;
-                //умножаем det на элемент a[i][i]
-                det *= input[i][i];
-                //идем по строке от i+1 до конца
-                for (int j = i + 1; j < n; ++j)
-                    //каждый элемент делим на a[i][i]
-                    input[i][j] /= input[i][i];
-                //идем по столбцам
-                for (int j = 0; j < n; ++j)
-                    //проверяем
-                    if (j != i && Math.Abs(input[j][i]) > EPS)
-                        //если да, то идем по k от i+1
-                        for (k = i + 1; k < n; ++k)
-                            input[j][k] -= input[i][k] * input[j][i];
-            }
-
-            return det;
-        }
 
         public static Matrix Identity(int n)
         {
@@ -172,9 +123,56 @@ namespace MatrixArithmetic
             return builder.ToString();
         }
 
-        /// <summary>
-        /// Concats two matrices horizontally.
-        /// </summary>
+        private static double StupidDet(double[][] input)
+        {
+            var n = input.Length;
+            double det = 1;
+            double[][] b = new double[1][];
+            b[0] = new double[n];
+            for (int i = 0; i < n; ++i)
+            {
+                //присваиваем k номер строки
+                int k = i;
+                //идем по строке от i+1 до конца
+                for (int j = i + 1; j < n; ++j)
+                    //проверяем
+                    if (Math.Abs(input[j][i]) > Math.Abs(input[k][i]))
+                        //если равенство выполняется то k присваиваем j
+                        k = j;
+                //если равенство выполняется то определитель приравниваем 0 и выходим из программы
+                var EPS = 0.0001;
+                if (Math.Abs(input[k][i]) < EPS)
+                {
+                    det = 0;
+                    break;
+                }
+
+                //меняем местами a[i] и a[k]
+                b[0] = input[i];
+                input[i] = input[k];
+                input[k] = b[0];
+                //если i не равно k
+                if (i != k)
+                    //то меняем знак определителя
+                    det = -det;
+                //умножаем det на элемент a[i][i]
+                det *= input[i][i];
+                //идем по строке от i+1 до конца
+                for (int j = i + 1; j < n; ++j)
+                    //каждый элемент делим на a[i][i]
+                    input[i][j] /= input[i][i];
+                //идем по столбцам
+                for (int j = 0; j < n; ++j)
+                    //проверяем
+                    if (j != i && Math.Abs(input[j][i]) > EPS)
+                        //если да, то идем по k от i+1
+                        for (k = i + 1; k < n; ++k)
+                            input[j][k] -= input[i][k] * input[j][i];
+            }
+
+            return det;
+        }
+
         private static double[,] ConcatHorizontally(double[,] matrix1, double[,] matrix2)
         {
             var rowCount = matrix1.GetLength(0);

@@ -23,12 +23,18 @@ namespace Lab1
                 { -2.13, 2.21, 4.17, 6.11 }
             });
 
+            Console.WriteLine("Матрица A");
+            
             Console.WriteLine(a);
+            Console.WriteLine("её детерминант");
+
             Console.WriteLine(a.Det());
+            Console.WriteLine("решение ax=f");
             Console.WriteLine(aF.Sole());
             var matrixInv = a.Inv();
-            
+            Console.WriteLine("обратная матрица a");
             Console.WriteLine(matrixInv);
+            Console.WriteLine("матрица а умнож на её обратную");
             Console.WriteLine(matrixInv*a);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using static System.Math;
 
@@ -124,6 +125,89 @@ namespace MatrixArithmetic
             }
 
             return det;
+        }
+
+        public Matrix InverseGauss()
+        {
+            if (this.N != this.M)
+            {
+                throw new MatrixDifferentDimException();
+            }
+
+            var order = this.N;
+
+
+            // Create the augmented matrix
+            // Add the identity matrix
+            // of order at the end of original matrix.
+            var matrix = this.AugmentMatrixWith(Matrix.Identity(order));
+
+            // Interchange the row of matrix,
+            // interchanging of row will start from the last row
+            for (int i = order - 1; i > 0; i--)
+            {
+                if (matrix[i - 1][0] < matrix[i][0])
+                {
+                    (matrix[i], matrix[i - 1]) = (matrix[i - 1], matrix[i]);
+                }
+            }
+
+            // Print matrix after interchange operations.
+
+            // Replace a row by sum of itself and a
+            // constant multiple of another row of the matrix
+            for (int i = 0; i < order; i++)
+            {
+                for (int j = 0; j < order; j++)
+                {
+                    if (j != i)
+                    {
+                        double temp = matrix[j][i] / matrix[i][i];
+                        for (int k = 0; k < 2 * order; k++)
+                        {
+                            matrix[j][k] -= matrix[i][k] * temp;
+                        }
+                    }
+                }
+            }
+
+            // Multiply each row by a nonzero integer.
+            // Divide row element by the diagonal element
+            for (int i = 0; i < order; i++)
+            {
+                double temp = matrix[i][i];
+                for (int j = 0; j < 2 * order; j++)
+                {
+                    matrix[i][j] /= temp;
+                }
+            }
+
+            return matrix;
+        }
+
+        public Matrix AugmentMatrixWith(Matrix other)
+        {
+            IEnumerable<double[]> Iter(Matrix matrix)
+            {
+                for (int i = 0; i < matrix.N; i++)
+                {
+                    yield return matrix[i];
+                }
+            }
+
+            return new Matrix(this.Repr.Concat(Iter(other)).ToArray()).Transpose();
+        }
+
+        public static Matrix Identity(int n)
+        {
+            var matrix = Matrix.WithSize(n, n);
+
+            for (int i = 0; i < n; i++)
+            {
+                matrix[i, i] = 1;
+            }
+
+            return matrix;
         }
 
         public Matrix Transpose()

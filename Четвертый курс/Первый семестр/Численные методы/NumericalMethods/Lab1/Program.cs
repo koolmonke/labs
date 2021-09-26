@@ -16,7 +16,13 @@ namespace Lab1
                 { 3.01, .42, -.27, .15 }
             });
 
-            var f = Vector.From(new[] { 4.13, 3.46, 2.79, 1.01 });
+            var f = Vector.From(new[]
+            {
+                4.13,
+                3.46,
+                2.79,
+                1.01
+            });
 
             Console.WriteLine("Матрица A");
             Console.WriteLine(a);

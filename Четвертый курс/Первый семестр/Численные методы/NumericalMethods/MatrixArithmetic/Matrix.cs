@@ -131,15 +131,10 @@ namespace MatrixArithmetic
             b[0] = new double[n];
             for (int i = 0; i < n; ++i)
             {
-                //присваиваем k номер строки
                 int k = i;
-                //идем по строке от i+1 до конца
                 for (int j = i + 1; j < n; ++j)
-                    //проверяем
                     if (Math.Abs(input[j][i]) > Math.Abs(input[k][i]))
-                        //если равенство выполняется то k присваиваем j
                         k = j;
-                //если равенство выполняется то определитель приравниваем 0 и выходим из программы
                 var EPS = 0.0001;
                 if (Math.Abs(input[k][i]) < EPS)
                 {
@@ -147,25 +142,16 @@ namespace MatrixArithmetic
                     break;
                 }
 
-                //меняем местами a[i] и a[k]
                 b[0] = input[i];
                 input[i] = input[k];
                 input[k] = b[0];
-                //если i не равно k
                 if (i != k)
-                    //то меняем знак определителя
                     det = -det;
-                //умножаем det на элемент a[i][i]
                 det *= input[i][i];
-                //идем по строке от i+1 до конца
                 for (int j = i + 1; j < n; ++j)
-                    //каждый элемент делим на a[i][i]
                     input[i][j] /= input[i][i];
-                //идем по столбцам
                 for (int j = 0; j < n; ++j)
-                    //проверяем
                     if (j != i && Math.Abs(input[j][i]) > EPS)
-                        //если да, то идем по k от i+1
                         for (k = i + 1; k < n; ++k)
                             input[j][k] -= input[i][k] * input[j][i];
             }
@@ -278,16 +264,14 @@ namespace MatrixArithmetic
 
             double[,] output = CreateCopy(input);
 
-            // number of pivots found
             int numPivots = 0;
 
-            // loop through columns, exclude augmented columns
             for (int col = 0; col < totalColCount - augmentedCols; col++)
             {
                 int? pivotRow = FindPivot(output, numPivots, col, totalRowCount);
 
                 if (pivotRow == null)
-                    continue; // no pivots, go to another column
+                    continue;
 
                 ReduceRow(output, pivotRow.Value, col, totalColCount);
 
@@ -296,14 +280,12 @@ namespace MatrixArithmetic
                 pivotRow = numPivots;
                 numPivots++;
 
-                // Eliminate Previous Rows
                 if (form == MatrixReductionForm.ReducedRowEchelonForm)
                 {
                     for (int tmpRow = 0; tmpRow < pivotRow; tmpRow++)
                         EliminateRow(output, tmpRow, pivotRow.Value, col, totalColCount);
                 }
 
-                // Eliminate Next Rows
                 for (int tmpRow = pivotRow.Value; tmpRow < totalRowCount; tmpRow++)
                     EliminateRow(output, tmpRow, pivotRow.Value, col, totalColCount);
             }

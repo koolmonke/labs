@@ -1,6 +1,6 @@
 ﻿namespace MatrixArithmetic
 {
-    internal static class ExtensionMethods
+    internal static class CommonExtensionMethods
     {
         internal static T[][] ToJaggedArray<T>(this T[,] twoDimensionalArray)
         {
@@ -22,6 +22,7 @@
                     jaggedArray[i][j] = twoDimensionalArray[i, j];
                 }
             }
+
             return jaggedArray;
         }
     }

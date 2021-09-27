@@ -10,15 +10,14 @@ namespace MatrixArithmetic
         public static Matrix ToMatrix(this Vector vector)
         {
             var n = vector.N;
-            var result = new double[n, 1];
-
-
+            var result = Matrix.WithSize(n, 1);
+            
             for (int i = 0; i < n; i++)
             {
                 result[i, 0] = vector[i];
             }
 
-            return Matrix.From(result);
+            return result;
         }
     }
 }

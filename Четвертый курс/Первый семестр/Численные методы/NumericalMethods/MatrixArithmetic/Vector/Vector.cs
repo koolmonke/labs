@@ -23,7 +23,7 @@ namespace MatrixArithmetic
 
         public Vector this[Range i] => new Vector(Repr[i]);
 
-        public double Det() => Sqrt(Repr.Select(value => value * value).Sum());
+        public double Norm() => Sqrt(Repr.Select(value => value * value).Sum());
 
         public static Vector WithSize(int n) => new Vector(n);
 
@@ -66,8 +66,13 @@ namespace MatrixArithmetic
 
         public static Vector operator -(Vector self) => self.Select(value => -value).ToVector();
 
-        public override string ToString() => string.Join(' ',
-            Repr.Select(value => value.ToString("+#00.000;-#00.000;00.000", CultureInfo.InvariantCulture)));
+        public override string ToString()
+        {
+            return ToString("+#0.0000;-#0.000;0.0000");
+        }
+
+        public string ToString(string format) => string.Join('\n',
+            Repr.Select(value => value.ToString(format, CultureInfo.InvariantCulture)));
 
 
         private double[] Repr;

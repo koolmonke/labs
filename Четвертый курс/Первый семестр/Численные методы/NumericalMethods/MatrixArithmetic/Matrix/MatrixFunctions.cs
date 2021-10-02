@@ -67,13 +67,13 @@ namespace MatrixArithmetic
                     EliminateRow(output, tmpRow, pivotRow.Value, col, totalColCount);
             }
 
-            result.FullMatrix = output;
+            result.FullMatrix = Matrix.From(output);
             result.UnknownsCount = augmentedCols;
             result.TotalRowCount = totalRowCount;
             result.TotalColumnCount = totalColCount;
             result.AugmentedColumnCount = augmentedCols;
 
-            result.AugmentedColumns = ExtractColumns(output, result.UnknownsCount, totalColCount - 1);
+            result.AugmentedColumns = Matrix.From(ExtractColumns(output, result.UnknownsCount, totalColCount - 1));
             if (augmentedCols > 0 && form == MatrixReductionForm.ReducedRowEchelonForm)
             {
                 // matrix has solution 

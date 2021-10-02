@@ -35,9 +35,9 @@ namespace Lab1
             Console.WriteLine(solution);
 
             Console.WriteLine("Вектор невязки");
-            Console.WriteLine(((a * solution.ToMatrix()).ToVectorByColumn() - f).ToString(" #0.0000000000;-#0.0000000000;0.0000000000"));
+            Console.WriteLine(((a * solution.ToMatrix()).ToVectorByColumn() - f).ToString(" #0.000000000000;-#0.000000000000;0.000000000000"));
 
-            var matrixInv = a.Inv();
+            var matrixInv = a.Inv() ?? throw new Exception("Матрица не квадратная");
             Console.WriteLine("обратная матрица a");
             Console.WriteLine(matrixInv);
 

@@ -7,9 +7,9 @@ namespace MatrixArithmetic
 {
     public class Matrix
     {
-        public int N => Repr.GetLength(0);
+        public int N => this.Repr.GetLength(0);
 
-        public int M => Repr.GetLength(1);
+        public int M => this.Repr.GetLength(1);
 
         public double this[int i, int j]
         {
@@ -74,14 +74,14 @@ namespace MatrixArithmetic
 
         public static Matrix From(double[,] values) => new Matrix(values);
 
-        public Matrix Inv()
+        public Matrix? Inv()
         {
-            var rowCount = Repr.GetLength(0);
+            var rowCount = this.N;
 
             var newMatrix = this.Repr.ConcatHorizontally(Matrix.Identity(rowCount).Repr);
 
             var result = newMatrix.Eliminate(MatrixReductionForm.ReducedRowEchelonForm, rowCount);
-            return new Matrix(result.AugmentedColumns!);
+            return result.AugmentedColumns;
         }
 
 
@@ -97,7 +97,7 @@ namespace MatrixArithmetic
                 for (int j = 0; j < M; j++)
                 {
                     builder.Append(
-                        $"{Repr[i, j].ToString(format, CultureInfo.InvariantCulture)} ");
+                        $"{this[i, j].ToString(format, CultureInfo.InvariantCulture)} ");
                 }
 
                 if (i < N - 1)
@@ -111,7 +111,7 @@ namespace MatrixArithmetic
 
         private static double StupidDet(double[][] input)
         {
-            var EPS = 0.0001;
+            const double eps = 0.0001;
             var n = input.Length;
             double det = 1;
             double[][] b = new double[1][];
@@ -122,10 +122,9 @@ namespace MatrixArithmetic
                 for (int j = i + 1; j < n; ++j)
                     if (Math.Abs(input[j][i]) > Math.Abs(input[k][i]))
                         k = j;
-                if (Math.Abs(input[k][i]) < EPS)
+                if (Math.Abs(input[k][i]) < eps)
                 {
-                    det = 0;
-                    break;
+                    return 0;
                 }
 
                 b[0] = input[i];
@@ -137,7 +136,7 @@ namespace MatrixArithmetic
                 for (int j = i + 1; j < n; ++j)
                     input[i][j] /= input[i][i];
                 for (int j = 0; j < n; ++j)
-                    if (j != i && Math.Abs(input[j][i]) > EPS)
+                    if (j != i && Math.Abs(input[j][i]) > eps)
                         for (k = i + 1; k < n; ++k)
                             input[j][k] -= input[i][k] * input[j][i];
             }

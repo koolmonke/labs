@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using static MatrixArithmetic.MatrixFunctions;
 
@@ -74,14 +75,18 @@ namespace MatrixArithmetic
 
         public static Matrix From(double[,] values) => new Matrix(values);
 
-        public Matrix? Inv()
+        public Matrix Inv()
         {
-            var rowCount = this.N;
+            var vectors = Enumerable.Range(0, N).AsParallel().AsOrdered().Select(i =>
+            {
+                var tmpVector = Vector.WithSize(N);
 
-            var newMatrix = this.Repr.ConcatHorizontally(Matrix.Identity(rowCount).Repr);
+                tmpVector[i] = 1;
 
-            var result = newMatrix.Eliminate(MatrixReductionForm.ReducedRowEchelonForm, rowCount);
-            return result.AugmentedColumns;
+                return this.Solve(tmpVector);
+            }).ToArray();
+
+            return vectors.ToMatrix();
         }
 
 

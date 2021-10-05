@@ -1,7 +1,31 @@
-﻿namespace MatrixArithmetic
+﻿using System;
+using System.Linq;
+
+namespace MatrixArithmetic
 {
     internal static class CommonExtensionMethods
     {
+        internal static Matrix ToMatrix(this Vector[] vectors)
+        {
+            var firstVectorN = vectors[0].N;
+            if (vectors.Skip(1).Any(vector => vector.N != firstVectorN))
+            {
+                throw new Exception("Vectors have different sizes");
+            }
+
+            var result = Matrix.WithSize(firstVectorN, vectors.Length);
+
+            for (int i = 0; i < vectors.Length; i++)
+            {
+                for (int j = 0; j < firstVectorN; j++)
+                {
+                    result[j, i] = vectors[i][j];
+                }
+            }
+
+            return result;
+        }
+
         internal static T[][] ToJaggedArray<T>(this T[,] twoDimensionalArray)
         {
             int rowsFirstIndex = twoDimensionalArray.GetLowerBound(0);

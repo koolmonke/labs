@@ -94,7 +94,7 @@ namespace MatrixArithmetic
 
         public string ToString(string format)
         {
-            var builder = new StringBuilder();
+            var builder = new StringBuilder(N*M+N);
 
 
             for (int i = 0; i < N; i++)
@@ -107,7 +107,7 @@ namespace MatrixArithmetic
 
                 if (i < N - 1)
                 {
-                    builder.Append('\n');
+                    builder.AppendLine();
                 }
             }
 

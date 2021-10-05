@@ -27,6 +27,9 @@ namespace Lab1
             Console.WriteLine("Матрица A");
             Console.WriteLine(a);
 
+            Console.WriteLine("Вектор f");
+            Console.WriteLine(f);
+
             Console.WriteLine("её детерминант");
             Console.WriteLine(a.Det().ToString(CultureInfo.InvariantCulture));
 

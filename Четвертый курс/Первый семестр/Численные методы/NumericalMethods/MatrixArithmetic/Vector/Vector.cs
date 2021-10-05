@@ -69,7 +69,7 @@ namespace MatrixArithmetic
 
         public override string ToString()
         {
-            return ToString("+#0.0000;-#0.000;0.0000");
+            return ToString(" #0.0000;-#0.000;0.0000");
         }
 
         public string ToString(string format) => string.Join('\n',

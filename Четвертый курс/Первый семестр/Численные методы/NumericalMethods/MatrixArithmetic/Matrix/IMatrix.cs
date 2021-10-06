@@ -2,17 +2,17 @@
 
 namespace MatrixArithmetic
 {
-    public interface IMatrix<T>: IOperable<T>
+    public interface IMatrix<T>
     {
         int N { get; }
         int M { get; }
 
         T this[int i, int j] { get; set; }
 
-        public static T operator +(IMatrix<T> left, IMatrix<T> right)
-        {
-            throw new NotImplementedException();
-        }
+        IVector<T> ToVectorByColumn(int column = 0);
+        IVector<T> ToVectorByRow(int row = 0);
+
+        IMatrix<T> Multiply(IMatrix<T> right);
 
         IVector<T> Solve(IVector<T> fVector);
         T Det();

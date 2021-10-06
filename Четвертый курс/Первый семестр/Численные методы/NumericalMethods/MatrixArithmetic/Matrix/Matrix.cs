@@ -18,18 +18,51 @@ namespace MatrixArithmetic
             set => Repr[i, j] = value;
         }
 
-
-        public static Matrix operator *(Matrix self, Matrix other)
+        public IVector<double> ToVectorByColumn(int column = 0)
         {
-            var result = Matrix.WithSize(self.N, other.M);
-
-            for (int i = 0; i < self.N; i++)
+            if (this.M != 1)
             {
-                for (int j = 0; j < other.M; j++)
+                throw new VectorDifferentDimException();
+            }
+
+            var vector = Vector.WithSize(this.N);
+
+            for (int i = 0; i < this.N; i++)
+            {
+                vector[i] = this[i, column];
+            }
+
+            return vector;
+        }
+
+        public IVector<double> ToVectorByRow(int row = 0)
+        {
+            if (this.M != 1)
+            {
+                throw new VectorDifferentDimException();
+            }
+
+            var vector = Vector.WithSize(this.M);
+
+            for (int i = 0; i < this.M; i++)
+            {
+                vector[i] = this[row, i];
+            }
+
+            return vector;
+        }
+
+        public IMatrix<double> Multiply(IMatrix<double> right)
+        {
+            var result = Matrix.WithSize(this.N, right.M);
+
+            for (int i = 0; i < this.N; i++)
+            {
+                for (int j = 0; j < right.M; j++)
                 {
-                    for (int k = 0; k < self.N; k++)
+                    for (int k = 0; k < this.N; k++)
                     {
-                        result[i, j] += self[i, k] * other[k, j];
+                        result[i, j] += this[i, k] * right[k, j];
                     }
                 }
             }

@@ -75,6 +75,11 @@ namespace MatrixArithmetic
         public string ToString(string format) => string.Join('\n',
             this.Select(value => value.ToString(format, CultureInfo.InvariantCulture)));
 
+        public IVector<double> Sub(IVector<double> vector)
+        {
+            return this - (vector as Vector)!;
+        }
+
 
         private double[] Repr;
 

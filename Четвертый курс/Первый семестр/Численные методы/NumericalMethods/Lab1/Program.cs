@@ -38,14 +38,16 @@ namespace Lab1
             Console.WriteLine(solution);
 
             Console.WriteLine("Вектор невязки");
-            Console.WriteLine(((a * solution.ToMatrix()).ToVectorByColumn() - f).ToString(" #0.000000000000;-#0.000000000000;0.000000000000"));
+            Console.WriteLine(
+                a.Multiply(solution.ToMatrix()).ToVectorByColumn().Sub(f)
+                    .ToString(" #0.000000000000;-#0.000000000000;0.000000000000"));
 
             var matrixInv = a.Inv();
             Console.WriteLine("обратная матрица a");
             Console.WriteLine(matrixInv);
 
             Console.WriteLine("матрица а умноженный на её обратную матрицу");
-            Console.WriteLine((matrixInv as Matrix)! * a);
+            Console.WriteLine(matrixInv.Multiply(a));
         }
     }
 }

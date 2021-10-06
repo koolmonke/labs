@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MatrixArithmetic
 {
-    public interface IVector<T>: IEnumerable<T>, IOperable<T>
+    public interface IVector<T> : IEnumerable<T>
     {
         int N { get; }
 
@@ -15,5 +15,6 @@ namespace MatrixArithmetic
         IVector<T> Copy();
         string ToString();
         string ToString(string format);
+        IVector<T> Sub(IVector<T> vector);
     }
 }

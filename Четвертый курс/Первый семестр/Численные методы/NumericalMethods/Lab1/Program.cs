@@ -40,12 +40,12 @@ namespace Lab1
             Console.WriteLine("Вектор невязки");
             Console.WriteLine(((a * solution.ToMatrix()).ToVectorByColumn() - f).ToString(" #0.000000000000;-#0.000000000000;0.000000000000"));
 
-            var matrixInv = a.Inv() ?? throw new Exception("Матрица не квадратная");
+            var matrixInv = a.Inv();
             Console.WriteLine("обратная матрица a");
             Console.WriteLine(matrixInv);
 
             Console.WriteLine("матрица а умноженный на её обратную матрицу");
-            Console.WriteLine(matrixInv * a);
+            Console.WriteLine((matrixInv as Matrix)! * a);
         }
     }
 }

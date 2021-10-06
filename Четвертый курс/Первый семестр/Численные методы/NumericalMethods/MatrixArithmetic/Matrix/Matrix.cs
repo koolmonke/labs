@@ -6,7 +6,7 @@ using static MatrixArithmetic.MatrixFunctions;
 
 namespace MatrixArithmetic
 {
-    public class Matrix
+    public class Matrix : IMatrix<double>
     {
         public int N => this.Repr.GetLength(0);
 
@@ -37,7 +37,7 @@ namespace MatrixArithmetic
             return result;
         }
 
-        public Vector Solve(Vector fVector)
+        public IVector<double> Solve(IVector<double> fVector)
         {
             var newMatrix = this.Repr.ConcatHorizontally(fVector.ToMatrix().Repr);
 
@@ -69,13 +69,13 @@ namespace MatrixArithmetic
             return matrix;
         }
 
-        public Matrix Copy() => new Matrix(Repr);
+        public IMatrix<double> Copy() => new Matrix(Repr);
 
         public static Matrix WithSize(int n, int m) => new Matrix(n, m);
 
         public static Matrix From(double[,] values) => new Matrix(values);
 
-        public Matrix Inv()
+        public IMatrix<double> Inv()
         {
             var vectors = ParallelEnumerable.Range(0, N).AsOrdered().Select(i =>
             {
@@ -94,7 +94,7 @@ namespace MatrixArithmetic
 
         public string ToString(string format)
         {
-            var builder = new StringBuilder(N*M+N);
+            var builder = new StringBuilder(N * M + N);
 
 
             for (int i = 0; i < N; i++)

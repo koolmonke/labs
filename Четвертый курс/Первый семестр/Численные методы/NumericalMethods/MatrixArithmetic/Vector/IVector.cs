@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace MatrixArithmetic
+{
+    public interface IVector<T>: IEnumerable<T>, IOperable<T>
+    {
+        int N { get; }
+
+        T this[Index i] { get; set; }
+
+        IVector<T> this[Range i] { get; }
+
+        T Norm();
+        IVector<T> Copy();
+        string ToString();
+        string ToString(string format);
+    }
+}

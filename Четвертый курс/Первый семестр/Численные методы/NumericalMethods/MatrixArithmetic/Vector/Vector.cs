@@ -7,7 +7,7 @@ using static System.Math;
 
 namespace MatrixArithmetic
 {
-    public class Vector : IEnumerable<double>
+    public class Vector : IVector<double>
     {
         IEnumerator<double> IEnumerable<double>.GetEnumerator() => ((IEnumerable<double>)Repr).GetEnumerator();
 
@@ -21,7 +21,7 @@ namespace MatrixArithmetic
             set => Repr[i] = value;
         }
 
-        public Vector this[Range i] => new Vector(Repr[i]);
+        public IVector<double> this[Range i] => new Vector(Repr[i]);
 
         public double Norm() => Sqrt(this * this);
 
@@ -29,7 +29,7 @@ namespace MatrixArithmetic
 
         public static Vector From(double[] values) => new Vector(values);
 
-        public Vector Copy() => From(Repr);
+        public IVector<double> Copy() => From(Repr);
 
         public static double operator *(Vector self, Vector other)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -6,22 +7,22 @@ namespace Lab2
 {
     internal static class Program
     {
-        private static int[] GetPrefix(string s) => Enumerable.Range(1, s.Length - 1)
-            .AsParallel()
-            .AsOrdered()
-            .Select(i =>
+        private static int[] GetPrefix(string s)
+        {
+            int[] result = new int[s.Length];
+            int index = 0;
+
+            for (int i = 1; i < s.Length; i++)
             {
-                int index = 0;
                 while (index >= 0 && s[index] != s[i])
                 {
                     index--;
                 }
-
                 index++;
-
-                return index;
-            })
-            .ToArray();
+                result[i] = index;
+            }
+            return result;
+        }
 
         public static int? FindSubstring(string pattern, string text)
         {
@@ -48,6 +49,8 @@ namespace Lab2
 
             return null;
         }
+
+        public static IEnumerable<string> GetWordsFrom(string text) => text.Replace('\n', ' ').Replace('\r', ' ').Split(' ', StringSplitOptions.RemoveEmptyEntries).OrderByDescending(word => word.Length).Take(1000);
 
         private static void Main(string[] args)
         {

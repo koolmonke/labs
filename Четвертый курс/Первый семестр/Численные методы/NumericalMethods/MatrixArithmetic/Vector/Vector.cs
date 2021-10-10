@@ -30,6 +30,10 @@ namespace MatrixArithmetic
         public static Vector From(double[] values) => new Vector(values);
 
         public IVector<double> Copy() => From(Repr);
+        public double[] ToRepresentation()
+        {
+            return new Vector(this.Repr).Repr;
+        }
 
         public static double operator *(Vector self, Vector other)
         {

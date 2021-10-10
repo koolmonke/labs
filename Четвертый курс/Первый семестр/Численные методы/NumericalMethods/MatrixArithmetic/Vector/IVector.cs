@@ -13,6 +13,8 @@ namespace MatrixArithmetic
 
         T Norm();
         IVector<T> Copy();
+
+        T[] ToRepresentation();
         string ToString();
         string ToString(string format);
         IVector<double> Sub(IVector<double> doubles);

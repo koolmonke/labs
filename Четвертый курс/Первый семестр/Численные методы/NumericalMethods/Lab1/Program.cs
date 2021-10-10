@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using MatrixArithmetic;
+using MatrixArithmetic.Solvers;
 
 namespace Lab1
 {
@@ -34,13 +35,12 @@ namespace Lab1
             Console.WriteLine(a.Det().ToString(CultureInfo.InvariantCulture));
 
             Console.WriteLine("решение ax=f");
-            var solution = a.Solve(f);
-            Console.WriteLine(solution);
+            var solver = new GaussSolver(a, f);
+            Console.WriteLine(solver.SolutionVector);
 
             Console.WriteLine("Вектор невязки");
-            Console.WriteLine(
-                a.Multiply(solution.ToMatrix()).ToVectorByColumn().Sub(f)
-                    .ToString(" #0.000000000000;-#0.000000000000;0.000000000000"));
+            Console.WriteLine(solver.Residual()
+                .ToString(" #0.000000000000;-#0.000000000000;0.000000000000"));
 
             var matrixInv = a.Inv();
             Console.WriteLine("обратная матрица a");

@@ -99,7 +99,7 @@ namespace MatrixArithmetic
                 int pivotRow = 0;
                 for (int col = 0; col < result.UnknownsCount; col++)
                 {
-                    double unknownValue = result.FullMatrix[pivotRow, col];
+                    double unknownValue = result.FullMatrix![pivotRow, col];
                     double solutionValue = result.FullMatrix[pivotRow, result.TotalColumnCount - 1];
 
                     if (unknownValue == 1)

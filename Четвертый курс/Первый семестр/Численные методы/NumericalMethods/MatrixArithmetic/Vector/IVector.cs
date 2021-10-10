@@ -15,6 +15,6 @@ namespace MatrixArithmetic
         IVector<T> Copy();
         string ToString();
         string ToString(string format);
-        IVector<T> Sub(IVector<T> vector);
+        IVector<double> Sub(IVector<double> doubles);
     }
 }

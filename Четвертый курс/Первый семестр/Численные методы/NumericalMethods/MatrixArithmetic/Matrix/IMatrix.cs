@@ -7,6 +7,8 @@ namespace MatrixArithmetic
         int N { get; }
         int M { get; }
 
+        T[,] ToRepresentation();
+
         T this[int i, int j] { get; set; }
 
         IVector<T> ToVectorByColumn(int column = 0);
@@ -15,6 +17,7 @@ namespace MatrixArithmetic
         IMatrix<T> Multiply(IMatrix<T> right);
 
         IVector<T> Solve(IVector<T> fVector);
+
         T Det();
         IMatrix<T> Copy();
         IMatrix<T> Inv();

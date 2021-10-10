@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using MatrixArithmetic.Solvers;
 using static MatrixArithmetic.MatrixFunctions;
 
 namespace MatrixArithmetic
@@ -11,6 +12,8 @@ namespace MatrixArithmetic
         public int N => this.Repr.GetLength(0);
 
         public int M => this.Repr.GetLength(1);
+
+        public double[,] ToRepresentation() => new Matrix(this.Repr).Repr;
 
         public double this[int i, int j]
         {
@@ -70,22 +73,8 @@ namespace MatrixArithmetic
             return result;
         }
 
-        public IVector<double> Solve(IVector<double> fVector)
-        {
-            var newMatrix = this.Repr.ConcatHorizontally(fVector.ToMatrix().Repr);
 
-            var fullMatrix = newMatrix.Eliminate(MatrixReductionForm.ReducedRowEchelonForm, 1)
-                .FullMatrix;
-
-            var result = Vector.WithSize(N);
-
-            for (int i = 0; i < N; i++)
-            {
-                result[i] = fullMatrix![i, N];
-            }
-
-            return result;
-        }
+        public IVector<double> Solve(IVector<double> fVector) => new GaussSolver(this, fVector).SolutionVector;
 
         public double Det() => StupidDet(Repr.ToJaggedArray());
 

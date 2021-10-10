@@ -7,7 +7,7 @@
         
         
         
-        public IVector<double> SolutionVector { get; }
+        public IVector<T> SolutionVector { get; }
 
         IVector<T> Solve();
 

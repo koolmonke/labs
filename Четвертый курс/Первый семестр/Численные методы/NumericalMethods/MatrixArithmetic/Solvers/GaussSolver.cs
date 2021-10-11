@@ -34,6 +34,6 @@
         }
 
 
-        public IVector<double> Residual() => Matrix.Multiply(SolutionVector.ToMatrix()).ToVectorByColumn().Sub(SolutionVector);
+        public IVector<double> Residual() => Matrix.Multiply(SolutionVector.ToMatrix()).ToVectorByColumn().Sub(Vector);
     }
 }

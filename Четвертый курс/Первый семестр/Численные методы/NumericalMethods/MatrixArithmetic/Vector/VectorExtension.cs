@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace MatrixArithmetic
@@ -13,7 +12,7 @@ namespace MatrixArithmetic
             var firstVectorN = vectors[0].N;
             if (vectors.Skip(1).Any(vector => vector.N != firstVectorN))
             {
-                throw new Exception("Vectors have different sizes");
+                throw new VectorDifferentDimException();
             }
 
             var result = Matrix.WithSize(firstVectorN, vectors.Length);

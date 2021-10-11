@@ -18,6 +18,23 @@ namespace MatrixArithmetic
 
         IMatrix<T> Multiply(IMatrix<T> right);
 
+        public void SwitchRows(int row1, int row2)
+        {
+            if (row1 == row2)
+                return;
+
+            for (int col = 0; col < M; col++)
+            {
+                (this[row1, col], this[row2, col]) = (this[row2, col], this[row1, col]);
+            }
+        }
+
+        IMatrix<double> ConcatHorizontally(IMatrix<double> other);
+
+        IMatrix<double> ExtractColumns(int[] cols);
+
+        IMatrix<double> ExtractColumns(int startCol, int endCol);
+
         IMatrix<T> Add(IMatrix<T> right);
 
         IMatrix<T> Sub(IMatrix<T> right);

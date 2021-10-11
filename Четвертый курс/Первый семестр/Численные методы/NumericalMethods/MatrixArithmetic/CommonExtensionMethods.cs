@@ -2,6 +2,25 @@
 {
     internal static class CommonExtensionMethods
     {
+        public static T[,] CreateCopy<T>(this T[,] input)
+        {
+            var rowCount = input.GetLength(0);
+            var colCount = input.GetLength(1);
+
+            var output = new T[rowCount, colCount];
+
+
+            for (int row = 0; row < rowCount; row++)
+            {
+                for (int col = 0; col < colCount; col++)
+                {
+                    output[row, col] = input[row, col];
+                }
+            }
+
+            return output;
+        }
+        
         internal static T[][] ToJaggedArray<T>(this T[,] twoDimensionalArray)
         {
             int rowsFirstIndex = twoDimensionalArray.GetLowerBound(0);

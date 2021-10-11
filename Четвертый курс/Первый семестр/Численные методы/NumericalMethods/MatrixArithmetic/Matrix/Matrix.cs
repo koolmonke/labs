@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using MatrixArithmetic.Solvers;
-using static MatrixArithmetic.MatrixFunctions;
 
 namespace MatrixArithmetic
 {
@@ -117,7 +116,93 @@ namespace MatrixArithmetic
 
         public IVector<double> Solve(IVector<double> fVector) => new GaussSolver(this, fVector).SolutionVector;
 
-        public double Det() => StupidDet(Repr.ToJaggedArray());
+        public IMatrix<double> ExtractColumns(int[] cols)
+        {
+            cols = cols.Distinct().ToArray();
+            IMatrix<double> output = Matrix.WithSize(this.N, cols.Length);
+
+            for (int row = 0; row < this.N; row++)
+            {
+                int i = 0;
+                for (int col = 0; col < this.M; col++)
+                {
+                    if (cols.Contains(col) == false)
+                        continue;
+                    output[row, i] = this[row, col];
+                    i++;
+                }
+            }
+
+            return output;
+        }
+
+        public IMatrix<double> ExtractColumns(int startCol, int endCol) => ExtractColumns(Enumerable.Range(startCol, endCol - startCol + 1).ToArray());
+
+        public IMatrix<double> ConcatHorizontally(IMatrix<double> other)
+        {
+            Matrix output = Matrix.WithSize(this.N, this.M + other.M);
+            for (int row = 0; row < this.N; row++)
+            {
+                for (int col = 0; col < this.M + other.M; col++)
+                {
+                    if (col < this.M)
+                        output[row, col] = this[row, col];
+                    else
+                        output[row, col] = other[row, col - this.M];
+                }
+            }
+
+            return output;
+        }
+
+        public double Det()
+        {
+            IMatrix<double> matrix = this.Copy();
+            var n = matrix.N;
+            double det = 1;
+            for (int i = 0; i < n; i++)
+            {
+                int k = i;
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (Math.Abs(matrix[j, i]) > Math.Abs(matrix[k, i]))
+                    {
+                        k = j;
+                    }
+                }
+
+                if (Math.Abs(matrix[k, i]) < Constants.Epsilon)
+                {
+                    return 0;
+                }
+
+                if (i != k)
+                {
+                    det = -det;
+                }
+
+                matrix.SwitchRows(i, k);
+
+                det *= matrix[i, i];
+                for (int j = i + 1; j < n; j++)
+                {
+                    matrix[i, j] /= matrix[i, i];
+                }
+
+                for (int j = 0; j < n; j++)
+                {
+                    if (j != i && Math.Abs(matrix[j, i]) > Constants.Epsilon)
+                    {
+                        for (k = i + 1; k < n; k++)
+                        {
+                            matrix[j, k] -= matrix[i, k] * matrix[j, i];
+                        }
+                    }
+                }
+            }
+
+            return det;
+        }
 
 
         public static Matrix Identity(int n)
@@ -173,7 +258,7 @@ namespace MatrixArithmetic
 
         public string ToString(string format)
         {
-            var builder = new StringBuilder(N * M + N);
+            var builder = new StringBuilder();
 
 
             for (int i = 0; i < N; i++)
@@ -193,47 +278,12 @@ namespace MatrixArithmetic
             return builder.ToString();
         }
 
-        private static double StupidDet(double[][] input)
-        {
-            const double eps = 0.0001;
-            var n = input.Length;
-            double det = 1;
-            double[][] b = new double[1][];
-            b[0] = new double[n];
-            for (int i = 0; i < n; ++i)
-            {
-                int k = i;
-                for (int j = i + 1; j < n; ++j)
-                    if (Math.Abs(input[j][i]) > Math.Abs(input[k][i]))
-                        k = j;
-                if (Math.Abs(input[k][i]) < eps)
-                {
-                    return 0;
-                }
-
-                b[0] = input[i];
-                input[i] = input[k];
-                input[k] = b[0];
-                if (i != k)
-                    det = -det;
-                det *= input[i][i];
-                for (int j = i + 1; j < n; ++j)
-                    input[i][j] /= input[i][i];
-                for (int j = 0; j < n; ++j)
-                    if (j != i && Math.Abs(input[j][i]) > eps)
-                        for (k = i + 1; k < n; ++k)
-                            input[j][k] -= input[i][k] * input[j][i];
-            }
-
-            return det;
-        }
-
 
         private double[,] Repr;
 
         private Matrix(double[,] values)
         {
-            this.Repr = CreateCopy(values);
+            this.Repr = values.CreateCopy();
         }
 
         private Matrix(int n, int m)

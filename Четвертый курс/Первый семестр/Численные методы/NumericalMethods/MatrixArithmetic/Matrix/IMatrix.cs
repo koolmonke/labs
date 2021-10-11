@@ -16,6 +16,10 @@ namespace MatrixArithmetic
 
         IMatrix<T> Multiply(IMatrix<T> right);
 
+        Matrix Select(Func<double, double> f);
+        
+        Matrix Select(Func<(int I, int J), double, double> f);
+
         IVector<T> Solve(IVector<T> fVector);
 
         T Det();

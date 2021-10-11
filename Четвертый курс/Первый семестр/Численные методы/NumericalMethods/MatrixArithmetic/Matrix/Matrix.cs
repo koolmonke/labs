@@ -111,6 +111,36 @@ namespace MatrixArithmetic
             return vectors.ToMatrix();
         }
 
+        public Matrix Select(Func<(int I, int J), double, double> f)
+        {
+            var result = Matrix.WithSize(N, M);
+
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < M; j++)
+                {
+                    result[i,j] = f((i, j), this[i, j]);
+                }
+            }
+
+            return result;
+        }
+        
+        public Matrix Select(Func<double, double> f)
+        {
+            var result = Matrix.WithSize(N, M);
+
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < M; j++)
+                {
+                    result[i,j] = f(this[i, j]);
+                }
+            }
+
+            return result;
+        }
+
 
         public override string ToString() => this.ToString(" #0.0000;-#0.0000; 0.0000");
 

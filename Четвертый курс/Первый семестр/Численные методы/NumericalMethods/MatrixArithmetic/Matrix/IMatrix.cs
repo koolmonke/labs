@@ -1,8 +1,8 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace MatrixArithmetic
 {
-    public interface IMatrix<T>
+    public interface IMatrix<T> : IEnumerable<T>
     {
         int N { get; }
         int M { get; }
@@ -11,14 +11,17 @@ namespace MatrixArithmetic
 
         T this[int i, int j] { get; set; }
 
+        IMatrix<T> From(IEnumerable<T> values);
+
         IVector<T> ToVectorByColumn(int column = 0);
         IVector<T> ToVectorByRow(int row = 0);
 
         IMatrix<T> Multiply(IMatrix<T> right);
 
-        Matrix Select(Func<double, double> f);
-        
-        Matrix Select(Func<(int I, int J), double, double> f);
+        IMatrix<T> Add(IMatrix<T> right);
+
+        IMatrix<T> Sub(IMatrix<T> right);
+
 
         IVector<T> Solve(IVector<T> fVector);
 

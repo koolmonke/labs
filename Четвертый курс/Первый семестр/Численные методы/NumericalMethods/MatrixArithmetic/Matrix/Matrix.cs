@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,25 @@ namespace MatrixArithmetic
         {
             get => Repr[i, j];
             set => Repr[i, j] = value;
+        }
+
+        public IMatrix<double> From(IEnumerable<double> values)
+        {
+            using var enumerator = values.GetEnumerator();
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < M; j++)
+                {
+                    if (!enumerator.MoveNext())
+                    {
+                        throw new MatrixDifferentDimException("Enumerable имеет другую размерность чем эта матрица");
+                    }
+
+                    this[i, j] = enumerator.Current;
+                }
+            }
+
+            return this;
         }
 
         public IVector<double> ToVectorByColumn(int column = 0)
@@ -73,6 +94,26 @@ namespace MatrixArithmetic
             return result;
         }
 
+        public IMatrix<double> Add(IMatrix<double> right)
+        {
+            if ((this.N, this.M) != (right.N, right.M))
+            {
+                throw new MatrixDifferentDimException();
+            }
+
+            return Matrix.WithSize(this.N, this.M).From(this.Zip(right).Select(item => item.First + item.Second));
+        }
+
+        public IMatrix<double> Sub(IMatrix<double> right)
+        {
+            if ((this.N, this.M) != (right.N, right.M))
+            {
+                throw new MatrixDifferentDimException();
+            }
+
+            return Matrix.WithSize(this.N, this.M).From(this.Zip(right).Select(item => item.First - item.Second));
+        }
+
 
         public IVector<double> Solve(IVector<double> fVector) => new GaussSolver(this, fVector).SolutionVector;
 
@@ -111,38 +152,24 @@ namespace MatrixArithmetic
             return vectors.ToMatrix();
         }
 
-        public Matrix Select(Func<(int I, int J), double, double> f)
-        {
-            var result = Matrix.WithSize(N, M);
 
+        public IEnumerator<double> GetEnumerator()
+        {
             for (int i = 0; i < N; i++)
             {
                 for (int j = 0; j < M; j++)
                 {
-                    result[i,j] = f((i, j), this[i, j]);
+                    yield return this[i, j];
                 }
             }
-
-            return result;
         }
-        
-        public Matrix Select(Func<double, double> f)
-        {
-            var result = Matrix.WithSize(N, M);
-
-            for (int i = 0; i < N; i++)
-            {
-                for (int j = 0; j < M; j++)
-                {
-                    result[i,j] = f(this[i, j]);
-                }
-            }
-
-            return result;
-        }
-
 
         public override string ToString() => this.ToString(" #0.0000;-#0.0000; 0.0000");
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
         public string ToString(string format)
         {

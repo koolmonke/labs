@@ -9,6 +9,7 @@ namespace Lab1
     {
         private static void Main()
         {
+            Console.WriteLine("Матрица A");
             var a = Matrix.From(new[,]
             {
                 { -2, 3.01, .12, -.11 },
@@ -16,7 +17,9 @@ namespace Lab1
                 { .66, .52, 3.17, 2.11 },
                 { 3.01, .42, -.27, .15 }
             });
+            Console.WriteLine(a);
 
+            Console.WriteLine("Вектор f");
             var f = Vector.From(new[]
             {
                 4.13,
@@ -24,15 +27,11 @@ namespace Lab1
                 2.79,
                 1.01
             });
-
-            Console.WriteLine("Матрица A");
-            Console.WriteLine(a);
-
-            Console.WriteLine("Вектор f");
             Console.WriteLine(f);
 
             Console.WriteLine("её детерминант");
-            Console.WriteLine(a.Det().ToString(CultureInfo.InvariantCulture));
+            var det = a.Det();
+            Console.WriteLine(det.ToString(CultureInfo.InvariantCulture));
 
             Console.WriteLine("решение ax=f");
             var solver = new GaussSolver(a, f);
@@ -42,12 +41,13 @@ namespace Lab1
             Console.WriteLine(solver.Residual()
                 .ToString(" #0.000000000000;-#0.000000000000;0.000000000000"));
 
-            var matrixInv = a.Inv();
             Console.WriteLine("обратная матрица a");
+            var matrixInv = a.Inv();
             Console.WriteLine(matrixInv);
 
             Console.WriteLine("матрица а умноженный на её обратную матрицу");
-            Console.WriteLine(matrixInv.Multiply(a));
+            var multiplyResult = matrixInv.Multiply(a);
+            Console.WriteLine(multiplyResult);
         }
     }
 }

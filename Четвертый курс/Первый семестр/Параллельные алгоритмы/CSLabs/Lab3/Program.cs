@@ -40,7 +40,6 @@ namespace Lab3
                 .Select(item => item.IndexInInnerArray + item.ArrayIndex * batchSize)
                 .First();
 
-            Console.WriteLine($"Индекс в изначальном массиве: {(found)}");
             Console.WriteLine($"Нашло: {data[found]}");
         }
     }

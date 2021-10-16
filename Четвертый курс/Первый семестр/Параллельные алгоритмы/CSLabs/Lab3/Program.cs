@@ -32,14 +32,17 @@ namespace Lab3
 
             Array.Sort(data);
 
-            var chunks = data.Batch(batchSize).Select(item => item.ToArray()).Select((array, index) => (array, index))
+            var chunks = data.Batch(batchSize)
+                .Select(item => item.ToArray())
+                .Select((array, index) => (array, index))
                 .ToArray();
+
             var foundBinary = chunks.AsParallel()
                 .Select(item => (IndexInInnerArray: item.array.MyBinarySearch(itemToFind), ArrayIndex: item.index))
                 .Where(item => item.IndexInInnerArray != -1)
                 .Select(item => item.IndexInInnerArray + item.ArrayIndex * batchSize)
                 .First();
-            
+
             var foundLinear = chunks.AsParallel()
                 .Select(item => (IndexInInnerArray: item.array.MyLinearSearch(itemToFind), ArrayIndex: item.index))
                 .Where(item => item.IndexInInnerArray != -1)

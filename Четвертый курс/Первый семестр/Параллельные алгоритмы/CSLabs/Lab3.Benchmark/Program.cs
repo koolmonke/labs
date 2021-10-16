@@ -31,23 +31,27 @@ namespace Lab3.Benchmark
         }
 
         [Benchmark]
-        public int ParallelLinear() => BatchedData.AsParallel()
-            .Select(item => (IndexInInnerArray: item.array.MyLinearSearch(ItemToFind), ArrayIndex: item.index))
-            .Where(item => item.IndexInInnerArray != -1)
-            .Select(item => item.IndexInInnerArray + item.ArrayIndex * BatchSize)
-            .First();
+        public int ParallelLinear()
+        {
+            var (indexInInnerArray, arrayIndex) = BatchedData.AsParallel()
+                .Select(item => (IndexInInnerArray: item.array.MyLinearSearch(ItemToFind), ArrayIndex: item.index))
+                .First(item => item.IndexInInnerArray != -1);
+            return indexInInnerArray + arrayIndex * BatchSize;
+        }
 
         [Benchmark]
-        public int ParallelBinary() => BatchedData.AsParallel()
-            .Select(item => (IndexInInnerArray: item.array.MyBinarySearch(ItemToFind), ArrayIndex: item.index))
-            .Where(item => item.IndexInInnerArray != -1)
-            .Select(item => item.IndexInInnerArray + item.ArrayIndex * BatchSize)
-            .First();
+        public int ParallelBinary()
+        {
+            var (indexInInnerArray, arrayIndex) = BatchedData.AsParallel()
+                .Select(item => (IndexInInnerArray: item.array.MyBinarySearch(ItemToFind), ArrayIndex: item.index))
+                .First(item => item.IndexInInnerArray != -1);
+            return indexInInnerArray + arrayIndex * BatchSize;
+        }
 
         [Benchmark]
         public int SequentialLinear() => Data.MyLinearSearch(ItemToFind);
 
-        [Benchmark] 
+        [Benchmark]
         public int SequentialBinary() => Data.MyBinarySearch(ItemToFind);
     }
 

@@ -25,12 +25,12 @@ namespace Lab3
                 int k = i + (j - i) / 2;
                 switch (array[k].CompareTo(value))
                 {
-                    case 1:
+                    case > 0:
                         j = k - 1;
                         break;
                     case 0:
                         return k;
-                    case -1:
+                    case < 0:
                         i = k + 1;
                         break;
                 }

@@ -18,9 +18,11 @@ namespace Lab2
                 {
                     index--;
                 }
+
                 index++;
                 result[i] = index;
             }
+
             return result;
         }
 
@@ -50,7 +52,8 @@ namespace Lab2
             return null;
         }
 
-        public static IEnumerable<string> GetWordsFrom(string text) => text.Replace('\n', ' ').Replace('\r', ' ').Split(' ', StringSplitOptions.RemoveEmptyEntries).OrderByDescending(word => word.Length).Take(1000);
+        public static IEnumerable<string> GetWordsFrom(string text) => text.Replace('\n', ' ').Replace('\r', ' ')
+            .Split(' ', StringSplitOptions.RemoveEmptyEntries).OrderByDescending(word => word.Length).Take(1000);
 
         private static void Main(string[] args)
         {

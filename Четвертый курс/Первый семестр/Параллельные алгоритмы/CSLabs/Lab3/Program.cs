@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using MoreLinq;
 
 namespace Lab3
 {
@@ -23,7 +21,6 @@ namespace Lab3
         private static void Main()
         {
             const int n = 10000;
-            const int batchSize = 100;
             Random random = new Random();
 
             var data = GenData(n);
@@ -32,22 +29,9 @@ namespace Lab3
 
             Array.Sort(data);
 
-            var chunks = data.Batch(batchSize)
-                .Select(item => item.ToArray())
-                .Select((array, index) => (array, index))
-                .ToArray();
+            var foundBinary = Search.ParallelBinary(data, itemToFind);
 
-            var foundBinary = chunks.AsParallel()
-                .Select(item => (IndexInInnerArray: item.array.MyBinarySearch(itemToFind), ArrayIndex: item.index))
-                .Where(item => item.IndexInInnerArray != -1)
-                .Select(item => item.IndexInInnerArray + item.ArrayIndex * batchSize)
-                .First();
-
-            var foundLinear = chunks.AsParallel()
-                .Select(item => (IndexInInnerArray: item.array.MyLinearSearch(itemToFind), ArrayIndex: item.index))
-                .Where(item => item.IndexInInnerArray != -1)
-                .Select(item => item.IndexInInnerArray + item.ArrayIndex * batchSize)
-                .First();
+            var foundLinear = Search.ParallelLinear(data, itemToFind);
 
             Console.WriteLine($"Нашло бинарно: {data[foundBinary]}");
             Console.WriteLine($"Нашло линейно: {data[foundLinear]}");

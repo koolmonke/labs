@@ -2,16 +2,14 @@
 using System.Linq;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using MoreLinq;
 
 namespace Lab3.Benchmark
 {
     public class LinearVsBinary
     {
-        private const int N = 100_000_000;
-        private const int BatchSize = 100_000;
+        private const int N = 100_000;
+        private const int BatchSize = 1000;
 
-        private (int[] array, int index)[] BatchedData { get; }
 
         private int ItemToFind { get; }
 
@@ -21,38 +19,22 @@ namespace Lab3.Benchmark
         public LinearVsBinary()
         {
             var random = new Random();
-            Data = Lab3.Program.GenData(N);
+            Data = Lab3.Program.GenData(N).OrderBy(x => x).ToArray();
             ItemToFind = Data[random.Next(Data.Length)];
-            BatchedData = Data.OrderBy(x => x)
-                .Batch(BatchSize)
-                .Select(item => item.ToArray())
-                .Select((array, index) => (array, index))
-                .ToArray();
         }
 
         [Benchmark]
-        public int ParallelLinear()
-        {
-            var (indexInInnerArray, arrayIndex) = BatchedData.AsParallel()
-                .Select(item => (IndexInInnerArray: item.array.MyLinearSearch(ItemToFind), ArrayIndex: item.index))
-                .First(item => item.IndexInInnerArray != -1);
-            return indexInInnerArray + arrayIndex * BatchSize;
-        }
+        public int ParallelLinear() => Search.ParallelLinear(Data, ItemToFind, BatchSize);
+
 
         [Benchmark]
-        public int ParallelBinary()
-        {
-            var (indexInInnerArray, arrayIndex) = BatchedData.AsParallel()
-                .Select(item => (IndexInInnerArray: item.array.MyBinarySearch(ItemToFind), ArrayIndex: item.index))
-                .First(item => item.IndexInInnerArray != -1);
-            return indexInInnerArray + arrayIndex * BatchSize;
-        }
+        public int ParallelBinary() => Search.ParallelBinary(Data, ItemToFind, BatchSize);
 
         [Benchmark]
-        public int SequentialLinear() => Data.MyLinearSearch(ItemToFind);
+        public int SequentialLinear() => Search.Linear(Data, ItemToFind);
 
         [Benchmark]
-        public int SequentialBinary() => Data.MyBinarySearch(ItemToFind);
+        public int SequentialBinary() => Search.Binary(Data, ItemToFind);
     }
 
     public static class Program

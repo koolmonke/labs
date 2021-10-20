@@ -1,3 +1,9 @@
 [submodule "Четвертый курс/Первый семестр/Методы Оптимизации/optimum"]
 	path = Четвертый курс/Первый семестр/Методы Оптимизации/optimum
 	url = https://github.com/koolmonkey/optimum
+[submodule "Четвертый курс/Первый семестр/Физика/physics"]
+	path = Четвертый курс/Первый семестр/Физика/physics
+	url = https://github.com/koolmonkey/physics
+[submodule "Четвертый курс/Первый семестр/Численные методы/NumericalMethods"]
+	path = Четвертый курс/Первый семестр/Численные методы/NumericalMethods
+	url = https://github.com/koolmonkey/NumericalMethods

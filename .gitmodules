@@ -7,3 +7,6 @@
 [submodule "Четвертый курс/Первый семестр/Численные методы/NumericalMethods"]
 	path = Четвертый курс/Первый семестр/Численные методы/NumericalMethods
 	url = https://github.com/koolmonkey/NumericalMethods
+[submodule "Четвертый курс/Первый семестр/Параллельные алгоритмы/CSLabs"]
+	path = Четвертый курс/Первый семестр/Параллельные алгоритмы/CSLabs
+	url = https://github.com/koolmonkey/CSLabs

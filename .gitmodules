@@ -1,0 +1,4 @@
+[submodule "Четвертый курс/Первый семестр/Численные методы/NumericalMethods"]
+	path = Четвертый курс/Первый семестр/Численные методы/NumericalMethods
+	url = https://github.com/koolmonkey/NumericalMethods
+	branch = master

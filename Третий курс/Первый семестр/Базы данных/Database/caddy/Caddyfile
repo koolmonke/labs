@@ -1,4 +1,4 @@
-kinos.nicethingsdonehere.tk
+example.com
 encode gzip
 
 reverse_proxy web:80
